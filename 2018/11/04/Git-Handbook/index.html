@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>Git 手册 | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Git">
+    <meta name="description" content="穿越过去和未来！">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 手册">
+<meta property="og:url" content="http://yvanzh.top/2018/11/04/Git-Handbook/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:description" content="穿越过去和未来！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4kjd5j31hc0tch5w.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscvcez2yj30m8096jrg.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 手册">
+<meta name="twitter:description" content="穿越过去和未来！">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4kjd5j31hc0tch5w.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git 手册</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git 手册</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-04T14:33:33.000Z" itemprop="datePublished" class="page-time">
+  2018-11-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Git/">Git</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-前言"><span class="post-toc-text">1 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-基本操作"><span class="post-toc-text">2 基本操作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-回到从前"><span class="post-toc-text">3 回到从前</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-针对整个版本库"><span class="post-toc-text">3.1 针对整个版本库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-针对单个文件"><span class="post-toc-text">3.2 针对单个文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-分支管理"><span class="post-toc-text">4 分支管理</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git-Handbook" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git 手册</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-04 22:33:33" datetime="2018-11-04T14:33:33.000Z" itemprop="datePublished">2018-11-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Git/">Git</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><strong><em>穿越过去和未来！</em></strong></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4kjd5j31hc0tch5w.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><blockquote>
+<p>Git一款强大且应用广泛的分布式版本控制软件。</p>
+</blockquote>
+<p>本手册参考的是<a href="https://morvanzhou.github.io/tutorials/others/git/" target="_blank" rel="noopener">莫烦教学</a>和<a href="https://backlog.com/git-tutorial/cn/" target="_blank" rel="noopener">Git-Tutrial</a>。笔者边学习边做笔记加深印象，也方便以后查阅。</p>
+<h1 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2 基本操作"></a>2 基本操作</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscvcez2yj30m8096jrg.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>查看提交(<code>commit</code>)记录：<ul>
+<li>详细：<code>git log</code>。</li>
+<li>简洁：<code>git log --oneline</code>。</li>
+</ul>
+</li>
+<li>查看文件状态：<ul>
+<li>详细：<code>git status</code>。</li>
+<li>简洁：<code>git status -s</code>。</li>
+</ul>
+</li>
+<li>添加修改：<ul>
+<li>对所有文件：<code>add .</code>。</li>
+<li>对单个文件：<code>add file_name</code>。</li>
+</ul>
+</li>
+<li>提交修改：<code>git commit -m &quot;comments&quot;</code>。</li>
+<li>添加并提交修改：<code>git commit -am &quot;comments&quot;</code>。(仅对已被添加到管理库的文件有效)</li>
+<li>查看文件的不同：<ul>
+<li><code>$ git diff</code>：查看这次还没<code>add</code>(<code>unstaged</code>)的修改部分。</li>
+<li><code>$ git diff --cached</code>：如果已经<code>add</code>了这次修改,文件变成了可提交状态<code>(staged)</code>,我们可以在<code>diff</code>中添加参数<code>--cached</code>来查看修改。</li>
+<li><code>$ git diff head</code>：查看<code>add</code>过(<code>staged</code>)和没<code>add</code>(<code>unstaged</code>)的修改。</li>
+</ul>
+</li>
+<li>将本地记录发布：<code>git push</code>。</li>
+</ol>
+<h1 id="3-回到从前"><a href="#3-回到从前" class="headerlink" title="3 回到从前"></a>3 回到从前</h1><h2 id="3-1-针对整个版本库"><a href="#3-1-针对整个版本库" class="headerlink" title="3.1 针对整个版本库"></a>3.1 针对整个版本库</h2><ol>
+<li>把这次的修改加入添加到上次的<code>commit</code>中，而不产生新的<code>commit</code>(但版本号会改变)：<ul>
+<li>不修改<code>comment</code>：<code>git commit --amend -no-edit</code>。</li>
+<li>修改<code>comment</code>：<code>git commit --amend -m &quot;commets&quot;</code>。</li>
+</ul>
+</li>
+<li>把经过<code>add</code>后(<code>staged</code>)文件回退到<code>add</code>之前(<code>modified</code>)：<code>git reset file_name</code>。</li>
+<li>版本跳跃：<ul>
+<li>当前版本的第前n个版本：<ul>
+<li>每个上角标代表回退一个版本：<code>git reset --hard HEAD^</code>。</li>
+<li>回退n个版本：<code>git reset --hard HEAD~n</code>。(当n取0时可回退到当前版本最初的<code>unmodified</code>状态)</li>
+</ul>
+</li>
+<li>指定版本号的版本：<code>git reset --hard HEAD 3f33f33</code>。<ul>
+<li>通过<code>git log</code>获取当前版本及之前的版本号。</li>
+<li>通过<code>git reflog</code>获取<code>HEAD</code>的指向记录，包含了所有版本的版本号。</li>
+</ul>
+</li>
+<li>指定<code>HEAD</code>记录的版本：<code>git reset --hard HEAD@{1}</code>。(需先在<code>git reflog</code>中找到所求版本的<code>HEAD</code>记录)</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-2-针对单个文件"><a href="#3-2-针对单个文件" class="headerlink" title="3.2 针对单个文件"></a>3.2 针对单个文件</h2><p>回退单个文件到指定版本号：<code>git checkout 3f33f33 -- file</code>。</p>
+<h1 id="4-分支管理"><a href="#4-分支管理" class="headerlink" title="4 分支管理"></a>4 分支管理</h1><ol>
+<li>新建分支：<ul>
+<li>新建不切换到该分支：<code>git branch branch_name</code>。</li>
+<li>新建且切换到该分支：<code>git checkout -b branch_name</code>。</li>
+</ul>
+</li>
+<li>删除指定分支：<code>git branch -d branch_name</code></li>
+<li>查看所有分支：<code>git branch</code>。(<code>*</code>号表示当前所处分支)</li>
+<li>切换分支：<code>git checkout branch_name</code>。(<code>HEAD</code>指向该分支)</li>
+<li>合并分支：<ul>
+<li><code>merge</code>：<ul>
+<li>fast-forward：<code>git merge branch_name</code>。</li>
+<li>no-fast-forward：<code>git merge --no-ff &quot;comments&quot; branch_name</code>。</li>
+</ul>
+</li>
+<li><code>rebase</code>:<code>git rebase branch_name</code>。</li>
+</ul>
+</li>
+<li><code>merge</code>冲突：通过人工修改来解决冲突，之后可使用<code>git commit -am &quot;comments&quot;</code>添加并提交。</li>
+<li><code>rebase</code>冲突：通过人工修改来解决冲突，之后可使用<code>git add file_name</code>和<code>git rebase --continue</code>添加并提交。</li>
+<li>临时修改：<ul>
+<li>暂存修改：<code>git stash</code>。</li>
+<li>其他任务：一般新建分支来完成其他任务，然后合并。</li>
+<li>恢复暂存：<ul>
+<li>查看缓存：<code>git stash list</code>。</li>
+<li>恢复缓存：<code>git stash pop</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.480Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2018/11/04/Git-Handbook/" target="_blank" rel="external">http://yvanzh.top/2018/11/04/Git-Handbook/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/11/04/Git-Handbook/&title=《Git 手册》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/11/04/Git-Handbook/&title=《Git 手册》 — YvanZh's Blog&source=
+穿越过去和未来！
+
+
+                
+                    
+                    
+      ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/11/04/Git-Handbook/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git 手册》 — YvanZh's Blog&url=http://yvanzh.top/2018/11/04/Git-Handbook/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/11/04/Git-Handbook/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/08/ML-Math/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器学习数学基础</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/10/29/PyTorch-QuickStart/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PyTorch 快速入门</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/11/04/Git-Handbook/&title=《Git 手册》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/11/04/Git-Handbook/&title=《Git 手册》 — YvanZh's Blog&source=
+穿越过去和未来！
+
+
+                
+                    
+                    
+      ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/11/04/Git-Handbook/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Git 手册》 — YvanZh's Blog&url=http://yvanzh.top/2018/11/04/Git-Handbook/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/11/04/Git-Handbook/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3ay46DMAwF0P7/T3ek2c4Qrm1IqXSyqipIDiwsP3i94vX+XX//Wa/1butrRgsXF3fMTY7Mf0/2iR4bFxd3I3cdvI5uXv+zvuuIfmLDxcV9GLeXhyRpEy4u7vdy1wf0HgkXF/fJ3KRo6ZUuSXp0S62Gi4s74E6CzlW/b+zv4uLiFrnv4spLnXnw+ud0XFzcLdxqGZOkOPme1R1wcXH3cPPw1Ctjym/u4FxcXNyd3LwIqSYxE/RJEMTFxd3CrR6TDFOTdKd6DS4u7h5u9Zg8EZl8yHW4Dy4u7kZudZiaP8y8eVrOs3BxccfcqxqavcQoyrxwcXEfwK2OPPM2R/XKaKyCi4t7G3fSDJ18YNFsmuDi4t7M7YWhq4qc8g64uLhbuNVSpBoje7jCQAUXF/cGbpJ89AJZNfWJki1cXNyN3Oph1WbKpDGKi4v7Ke6kSZq3R3uB8uKeLi4ubnFqmY9gk5CXHJ+0TZMXhIuLewd3MvCYf5iVBDhcXNxPcSfBqzeCvSB9wcXFfQC3lytVH+Dk1eDi4j6Sm5Q61ZCXh0JcXNyd3N7AtTc67X2ogYuLu5PbqziuHZDg4uI+hvsDsUlN1DYkYo0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

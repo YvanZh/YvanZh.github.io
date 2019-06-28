@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>Generalized Zero-Shot Learning via Synthesized Examples | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Transfer Learning,Deep Learning,Zero-Shot">
+    <meta name="keywords" content="Transfer Learning,Deep Learning,Zero-Shot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generalized Zero-Shot Learning via Synthesized Examples">
+<meta property="og:url" content="http://yvanzh.top/2019/03/29/Paper-Notes-3/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1n1ma1eofj31hc0zkk9m.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1n1nqlja8j30vp0dgabk.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generalized Zero-Shot Learning via Synthesized Examples">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1n1ma1eofj31hc0zkk9m.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Generalized Zero-Shot Learning via Synthesized Examples</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Generalized Zero-Shot Learning via Synthesized Examples</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-29T09:01:33.000Z" itemprop="datePublished" class="page-time">
+  2019-03-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-简介"><span class="post-toc-text">1 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-详情"><span class="post-toc-text">2 详情</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-思考"><span class="post-toc-text">3 思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Paper-Notes-3" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Generalized Zero-Shot Learning via Synthesized Examples</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-29 17:01:33" datetime="2019-03-29T09:01:33.000Z" itemprop="datePublished">2019-03-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1n1ma1eofj31hc0zkk9m.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p><a href="https://arxiv.org/abs/1712.03878" target="_blank" rel="noopener">文章来源</a>：2018-CVPR</p>
+<p>Tips：</p>
+<ul>
+<li>Normal Zero-Shot：测试集只有目标域数据（训练集与测试集不相交）。</li>
+<li>Generalize Zero-Shot：测试集既有源域数据又有目标域数据（训练集与测试集相交）。</li>
+</ul>
+<p>文章主旨：</p>
+<ul>
+<li>在CVAE模型基础上加入一个针对生成样本的回归器，其将生成的样本映射到其对应的类属性上去。当模型优化完毕后，把不可见类的样本并纳入最终分类器的训练中，以平衡在GZSL中对可见类和不可见类的预测偏差。</li>
+</ul>
+<h1 id="2-详情"><a href="#2-详情" class="headerlink" title="2 详情"></a>2 详情</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1n1nqlja8j30vp0dgabk.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>模型分析：<ul>
+<li>假设隐变量与类属性是分离的(隐变量$z<em>n$表示$x_n$的非结构化部分，类属性向量$a</em>{y_n}$表示类特定的判别信息)，也就是说$x_n$受到这两者的共同影响；并且在类属性向量的指导下，有助于生成本质上具有更好区分度的样本。</li>
+<li>包含一个多元回归器，其利用解码器的输出$\hat{x}<em>n$作为输入，映射到类属性向量$a</em>{y_n}$。它有两点重要作用：<ul>
+<li>可以对生成器产生反馈，使其生成更好可区分性的样本。</li>
+<li>可以通过计算类属性向量上的概率分布$p(a | x)$来使用无标签的样本进行训练(即进行半监督学习)。</li>
+</ul>
+</li>
+<li>确保生成器的输出$\hat{x}$与实际输入$x$相似，比如可以用$p(z | \hat{x})$来近似$p(z | x)$。</li>
+</ul>
+</li>
+<li>最终分类器：<ul>
+<li>当生成模型训练好之后，就可以生成带标签的各类样本。首先，需要按照先验分布$p(z)$(一般对于二值型数据采用伯努利分布，对于连续型数据采用高斯分布)来随机生成非结构化部分即隐变量$z$，并指定需生成的类别$c$(通过类属性向量$a_c$)。然后就可以通过生成器来生成样本$x$。</li>
+<li>当每个类别都生成了固定数量的样本之后，就可以利用它们来训练分类器(比如，SVM或softmax分类器)。由于这个阶段使用了来自可见类和不可见类的带标签样本，所以结果具有鲁棒性，可以减少对可见类的偏见。需要注意的是：训练分类器时，可以只使用来自可见类的原始标签样本，也可以用模型生成的可见类的附加样本进行扩展。</li>
+</ul>
+</li>
+<li>多元回归器：<ul>
+<li>对于可见类的样本${x<em>n,a</em>{y<em>n}}</em>{n=1}^{N_s}$，定义监督损失：<script type="math/tex; mode=display">\mathcal{L}_{Sup}(\theta_R) = -\mathbb{E}_{ \{x_n,{a_{y_n}}\} } [p_R(a_{y_n} | x_n)] \tag{1}</script></li>
+<li>对于由生成器生成的样本$\hat{x}$，定义非监督损失：<script type="math/tex; mode=display">\mathcal{L}_{Unsup}(\theta_R) = -\mathbb{E}_{p_{ {\theta}_G} (\hat{\mathbf{x}}| \mathbf{z,a})p(\mathbf{z})p(\mathbf{a})}[p_R(\mathbf{a} | \mathbf{\hat{x}})]\tag{2}</script></li>
+<li>由(1)(2)式，得到损失函数：<script type="math/tex; mode=display">\underset{\theta_R} \ \mathcal{L}_R = \mathcal{L}_{Sup} + \lambda_R  \centerdot \mathcal{L}_{Unsup}\tag{3}</script></li>
+<li>Tips：使用回归器通过反向传播来改进生成器。优化$\theta_R$时需固定生成器的分布（即固定$\theta_G$）。</li>
+</ul>
+</li>
+<li>编码器和条件生成器：<ul>
+<li>对于编码器$p_E(z|x)$和条件生成器$p_G(x|z,a)$，VAE损失函数为：<script type="math/tex; mode=display">\mathcal{L}_{VAE}(\theta_E,\theta_G) = -\mathbb{E}_{p_E(\mathbf{z}|\mathbf{x}),p(\mathbf{a}|\mathbf{x}))}[\log p_G(\mathbf{x}|\mathbf{z,a})] + \mathrm{KL}(p_E(\mathbf{z}|\mathbf{x}) || p(\mathbf{z}))\tag{4}</script>  其中第一项表示在希尔伯特再生空间中生成器的重构误差；第二项表示后验分布(编码器)需要与先验分布一致。</li>
+</ul>
+</li>
+<li>设编码器$p_E(z|x)$、生成器$p_G(x|z,a)$和回归器$p_R(a|x)$都服从高斯分布。</li>
+<li>回归器驱动的学习：<ul>
+<li>确保$\mathbf{\hat{x}}$映射到$\mathbf{a}$，即保证回归的正确性（生成器要报警了！回归结果不好，回归器不背锅居然怪我？其实这是个$\theta_R$和$\theta_G$交替优化的过程，你一拳我一拳让模型变得更加漂亮~）：<script type="math/tex; mode=display">\mathcal{L}_c(\theta_G) = -\mathbb{E}_{p_G(\mathbf{\hat{x}}|\mathbf{z,a})p(\mathbf{z})p(\mathbf{a})}[\log p_R(\mathbf{a}|\mathbf{\hat{x}})] \tag{5}</script></li>
+<li>确保$z$和$a$结合可以通过生成器得到对应样本（作为正则化项）：<script type="math/tex; mode=display">\mathcal{L}_{Reg}(\theta_G) = -\mathbb{E}_{p(\mathbf{z})p(\mathbf{a})}[\log p_G(\mathbf{\hat{x}}|\mathbf{z,a})] \tag{6}</script></li>
+<li>$(5)(6)$式共同作用让$\hat{x}\backsim p_G(\mathbf{\hat{x}}|\mathbf{z,a})$。但还有一个最重要的点是确保$z$和$a$的独立性。为此，使用编码器来确保样本抽样分布和从生成的样本中得到的抽样分布遵循相同的分布：<script type="math/tex; mode=display">\mathcal{L}_E(\theta_G) = -\mathbb{E}_{\hat{x}\backsim p_G(\mathbf{\hat{x}}|\mathbf{z,a})}\mathrm{KL}[(p_E(\mathbf{z}|\mathbf{\hat{x}})||q\mathbf{(z)})] \tag{7}</script></li>
+<li>由$(4)(5)(6)(7)$式，得到损失函数：<script type="math/tex; mode=display">\underset{\theta_G,\theta_E}{\mathrm{min}} \ \mathcal{L}_{VAE} + \lambda_c \centerdot \mathcal{L}_c + \lambda_{reg} \centerdot \mathcal{L}_{Reg} + \lambda_E \centerdot \mathcal{L}_E \tag{8}</script></li>
+</ul>
+</li>
+<li>综上，通过$(3)(8)$式交替优化$\theta_R$和$\theta_G$，得到最终的生成模型后，利用其生成的样本来训练最终的分类器。</li>
+</ol>
+<h1 id="3-思考"><a href="#3-思考" class="headerlink" title="3 思考"></a>3 思考</h1><ol>
+<li><p>笔者之前就认为VAE框架本身的局限之处在于隐变量的先验分布，为了简单方便计算一般采用伯努利分布或标准正太分布。然而这无疑限制了模型的表达能力。在本文章中通过分离隐变量$z$和类属性向量$a$，并引入一个将生成的样本$\hat{x}$映射到类属性向量$a$的多元回归器。既利用了VAE的生成能力，又增加了一个学习诱导，这样不失为一种好办法。</p>
+</li>
+<li><p>那么我们能不能从本质上改进VAE呢？VAE框架的根源其实说到底就是KL散度。KL散度可以度量两个概率分布的差异，但是我们甚至不能称其为距离，因为它不满足对称性。然而它的优势在于可以写成期望的形式，也就是可直接进行采样计算。$\mathrm{KL}(p(x)||q(x))$有一个比较明显的问题，就是当$q(x)$在某个区域等于0，而$p(x)$在该区域不等于0，那么KL散度就出现无穷大。这是KL散度的固有问题，我们只能想办法规避它，比如隐变量的先验分布用高斯分布而不是均匀分布。Idea is cheap，留待实践。 </p>
+</li>
+<li><p>VAE理论框架：</p>
+<script type="math/tex; mode=display">
+ \begin{array}{c|c} 
+ \hline 
+ x_k, z_k & \text{表示随机变量}x,z\text{的第}k\text{个样本}\\ 
+ \hline 
+ x_{(k)}, z_{(k)} & \text{表示多元变量}x,z\text{的第}k\text{个分量}\\ 
+ \hline 
+ \mathbb{E}_{x\sim p(x)}[f(x)] & \text{表示对}f(x)\text{算期望，其中}x\text{的分布为}p(x)\\ 
+ \hline 
+ \mathrm{KL}(p(x)\Vert q(x))& \text{两个分布的}KL\text{散度}\\ 
+ \hline 
+ \Vert x\Vert^2& \text{向量}x\text{的}l^2\text{范数}\\ 
+ \hline 
+ \mathcal{L}& \text{本文的损失函数的符号}\\ 
+ \hline 
+ D,d & D\text{是输入}x\text{的维度，}d\text{是隐变量}z\text{的维度}\\ 
+ \hline 
+ \end{array}</script><p> 数据样本${x_1,\dots,x_n}$，其整体用$x$来描述，我们希望借助隐变量$z$描述$x$的分布$\tilde{p}(x)$：</p>
+<script type="math/tex; mode=display">q(x)=\int q(x|z)q(z)dz,\quad q(x,z) = q(x|z)q(z)\tag{9}</script><p> 其中$q(z)$是先验分布（标准正态分布），目的是希望$q(x)$能逼近$\tilde{p}(x)$。这样（理论上）我们既描述了$p~(x)$，又得到了生成模型$q(x|z)$，一举两得。</p>
+<p> 接下来就是利用KL散度进行近似。很多教程推导都是聚焦于后验分布$p(z|x)$。但事实上，直接来对$p(x,z)$进行近似是最为干脆的。具体来说，定义$p(x,z) = \tilde{p}(x)p(z|x)$，设想用一个联合概率分布$q(x,z)$来逼近$p(x,z)$，那么用KL散度来看它们的距离：</p>
+<script type="math/tex; mode=display">KL\Big(p(x,z)\Big\Vert q(x,z)\Big) = \iint p(x,z)\ln \frac{p(x,z)}{q(x,z)} dzdx  \tag{10}</script><p> KL散度是我们的终极目标，因为我们希望两个分布越接近越好，所以KL散度越小越好。于是有：</p>
+<script type="math/tex; mode=display">\begin{aligned}KL\Big(p(x,z)\Big\Vert q(x,z)\Big) =& \int \tilde{p}(x) \left[\int p(z|x)\ln \frac{\tilde{p}(x)p(z|x)}{q(x,z)} dz\right]dx\\ 
+ =& \mathbb{E}_{x\sim \tilde{p}(x)} \left[\int p(z|x)\ln \frac{\tilde{p}(x)p(z|x)}{q(x,z)} dz\right] 
+ \end{aligned} \tag{11}</script><p> 由$\ln \frac{\tilde{p}(x)p(z|x)}{q(x,z)}=\ln \tilde{p}(x) + \ln \frac{p(z|x)}{q(x,z)}$，我们进一步对$(11)$进行简化：</p>
+<script type="math/tex; mode=display">\begin{aligned}\mathbb{E}_{x\sim \tilde{p}(x)} \left[\int p(z|x)\ln \tilde{p}(x)dz\right] =& \mathbb{E}_{x\sim \tilde{p}(x)} \left[\ln \tilde{p}(x)\int p(z|x)dz\right]\\ 
+ =&\mathbb{E}_{x\sim \tilde{p}(x)} \big[\ln \tilde{p}(x)\big] 
+ \end{aligned}\tag{12}</script><p> 其中的$\tilde{p}(x)$是根据样本$x_1,x_2,\dots,x_n$确定的关于x的先验分布，尽管我们不一定能准确写出它的形式，但它是确定的、存在的，因此这一项只是一个常数，所以可以写出：</p>
+<script type="math/tex; mode=display">\mathcal{L}=KL\Big(p(x,z)\Big\Vert q(x,z)\Big) - \text{常数}= \mathbb{E}_{x\sim \tilde{p}(x)} \left[\int p(z|x)\ln \frac{p(z|x)}{q(x,z)} dz\right]\tag{13}</script><p> 最后为了得到生成模型，所以我们把$q(x,z)$写成$q(x|z)q(z)$，于是就有:</p>
+<script type="math/tex; mode=display">\begin{aligned}\mathcal{L} =& \mathbb{E}_{x\sim \tilde{p}(x)} \left[\int p(z|x)\ln \frac{p(z|x)}{q(x|z)q(z)} dz\right]\\ 
+ =&\mathbb{E}_{x\sim \tilde{p}(x)} \left[-\int p(z|x)\ln q(x|z)dz+\int p(z|x)\ln \frac{p(z|x)}{q(z)}dz\right]\end{aligned}\tag{14}</script><p> 简化后就是：</p>
+<script type="math/tex; mode=display">\begin{aligned}\mathcal{L} = &\mathbb{E}_{x\sim \tilde{p}(x)} \left[\mathbb{E}_{z\sim p(z|x)}\big[-\ln q(x|z)\big]+\mathbb{E}_{z\sim p(z|x)}\Big[\ln \frac{p(z|x)}{q(z)}\Big]\right]\\ 
+ = &\mathbb{E}_{x\sim \tilde{p}(x)} \Bigg[\mathbb{E}_{z\sim p(z|x)}\big[-\ln q(x|z)\big]+KL\Big(p(z|x)\Big\Vert q(z)\Big)\Bigg] 
+ \end{aligned}\tag{15}</script><p> 中括号内的即为VAE的损失函数。</p>
+</li>
+</ol>
+<blockquote>
+<p>参考：<br><a href="https://spaces.ac.cn/archives/5343" target="_blank" rel="noopener">变分自编码器（二）：从贝叶斯观点出发</a> </p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.490Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2019/03/29/Paper-Notes-3/" target="_blank" rel="external">http://yvanzh.top/2019/03/29/Paper-Notes-3/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Transfer-Learning/">Transfer Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zero-Shot/">Zero-Shot</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&title=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&title=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/03/29/Paper-Notes-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/01/HuaWei-CodeCraft2019/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">2019华为软件精英挑战赛</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/03/Advanced-Computer-Architecture/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">高级计算机体系结构</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&title=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&title=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/03/29/Paper-Notes-3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Generalized Zero-Shot Learning via Synthesized Examples》 — YvanZh's Blog&url=http://yvanzh.top/2019/03/29/Paper-Notes-3/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/03/29/Paper-Notes-3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQQ7DMAhE0dz/0um2Ump7BpxKhp9VFTWuXxYUA9clX/fjmt8fPft95/l5dGfbBQMGjGMZ9/Sab2V+R9/0HDnfGwwYMPowRhEs9h1lK+46iz3DgAEDhhw0Y4E78/pgwIABI5bexY6yChIGDBidGUqgdGtc80RQf32bz+IwYMA4kKFX3f//+ZX+BgwYMI5i3OblrrM3vA5/BQYMGKUZeoBTCvqxY61+f7E+DBgwGjDcwS/lgOoiY4U8GDBg1GboZTV3o7GX5e7tR4YLAwaMcgy9uBYb5NLHMvYmlzBgwKjH0BfNNAxiAVr/RRgwYPRhKAFXT/L0hE8f5ggeZWHAgHEsIzNo5Y5KZLa7eGUwYMBowNAL/e5pWBmS0BPK4W5hwIDRgJEPtfo6eqHfaI7CgAGjNCOzdH6k1U0rF4EeBgwYjRlu69EtrrmDaIsWJgwYMMoxlPCqD7DGmgd2YJ2fxWHAgFGU4YZO5XLDa6pJAAMGjNIMt+lol8DMVM8d9bjs2AwDBoyzGe5wmBuO84fbRSoJAwaMBow3imVKC8Ftc0qPwYABoygjMzbxxuCF/X0YMGAUZcSKaHobQE80Yy1MGDBgdGC46VpmoUy5zW1wwoABox4jFi5jW1ReTWq6DQYMGKUZ+cAXayq4/wDBYQsYMGA0Y2QGI2IJopSkwoABA8bWdNBdRyoCwoABowFDOcQq5Xv352OlfxgwYHRj6I8pgA2hc2uIhwEDxuGMD7GKk2FUvomQAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script> -->
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>高级计算机体系结构 | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Advanced Computer Architecture">
+    <meta name="description" content="计算机的设计思想、设计原理、设计技术。">
+<meta name="keywords" content="Advanced Computer Architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级计算机体系结构">
+<meta property="og:url" content="http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:description" content="计算机的设计思想、设计原理、设计技术。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwrdfxyoj31hc0zgws0.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwl9q77pj30h5083dgr.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwlonrywj30go08oglt.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwk2qbklj30es05rjrj.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwkqgu7oj30e009pt96.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级计算机体系结构">
+<meta name="twitter:description" content="计算机的设计思想、设计原理、设计技术。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwrdfxyoj31hc0zgws0.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">高级计算机体系结构</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">高级计算机体系结构</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-03T13:11:11.000Z" itemprop="datePublished" class="page-time">
+  2018-12-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Courses/">Courses</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-知识要点"><span class="post-toc-text">1 知识要点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-冯式结构的五个组成部分"><span class="post-toc-text">1.1 冯式结构的五个组成部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-CPU-发展趋势"><span class="post-toc-text">1.2 CPU 发展趋势</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-Flynn’s-分类"><span class="post-toc-text">1.3 Flynn’s 分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-网络和存储技术"><span class="post-toc-text">1.4 网络和存储技术</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-内存系统"><span class="post-toc-text">1.5 内存系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-6-Cache的使用问题"><span class="post-toc-text">1.6 Cache的使用问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-7-Cache的优化方法"><span class="post-toc-text">1.7 Cache的优化方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-8-存储访问模型"><span class="post-toc-text">1.8 存储访问模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-9-单CPU上常见的提升性能的方法和并行计算"><span class="post-toc-text">1.9 单CPU上常见的提升性能的方法和并行计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-10-多线程的好处"><span class="post-toc-text">1.10 多线程的好处</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-11-Tomasulo’s-算法"><span class="post-toc-text">1.11 Tomasulo’s 算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-12-仓库级计算机-WSC"><span class="post-toc-text">1.12 仓库级计算机(WSC)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-13-批处理框架：MapReduce"><span class="post-toc-text">1.13 批处理框架：MapReduce</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-14-MESI协议图"><span class="post-toc-text">1.14 MESI协议图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-15-基准程序的类别"><span class="post-toc-text">1.15 基准程序的类别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-16-性能评测方法"><span class="post-toc-text">1.16 性能评测方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-17-三种流水线冲突-冒险-Hazard"><span class="post-toc-text">1.17 三种流水线冲突/冒险(Hazard)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-18-数据冒险-Data-Hazards"><span class="post-toc-text">1.18 数据冒险(Data Hazards)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-19-Load指令的5个阶段-MIPS结构为例"><span class="post-toc-text">1.19 Load指令的5个阶段(MIPS结构为例)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-20-动态分支预测"><span class="post-toc-text">1.20 动态分支预测</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-后记"><span class="post-toc-text">2 后记</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Advanced-Computer-Architecture" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">高级计算机体系结构</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-03 21:11:11" datetime="2018-12-03T13:11:11.000Z" itemprop="datePublished">2018-12-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Courses/">Courses</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><strong><em>计算机的设计思想、设计原理、设计技术。</em></strong></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwrdfxyoj31hc0zgws0.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-知识要点"><a href="#1-知识要点" class="headerlink" title="1 知识要点"></a>1 知识要点</h1><h2 id="1-1-冯式结构的五个组成部分"><a href="#1-1-冯式结构的五个组成部分" class="headerlink" title="1.1 冯式结构的五个组成部分"></a>1.1 冯式结构的五个组成部分</h2><p>运算器、控制器、存储器、输入设备、输出设备。</p>
+<h2 id="1-2-CPU-发展趋势"><a href="#1-2-CPU-发展趋势" class="headerlink" title="1.2 CPU 发展趋势"></a>1.2 CPU 发展趋势</h2><p>性能计算：</p>
+<p>$CPUTime = \frac{Seconds}{Program} = \frac{Instruction}{Program} \cdot \frac{Cycles}{Instruction} \cdot \frac{Seconds}{Cycles}$</p>
+<p>性能提升：</p>
+<ol>
+<li>半导体技术：<ul>
+<li>特征尺寸。</li>
+<li>时钟频率。</li>
+</ul>
+</li>
+<li>计算机体系结构：<ul>
+<li>高级语言编译器、标准化的操作系统。</li>
+<li>指令更为简单的RISC(精简指令集)结构。</li>
+</ul>
+</li>
+<li>多核技术出现的原因<ul>
+<li>通过堆积晶体管密度提高性能遇到瓶颈</li>
+<li>硬件多线程的并发已经存在一段时间了。虽然可以减少内存延迟，但是只有30%的提升</li>
+<li>如今将多个处理内核封装在一个芯片中来提升性能</li>
+</ul>
+</li>
+<li>两个1G多核处理器 VS 一个2G单核处理器<ul>
+<li>前者在同时处理两个小于1G的任务时比后者要快</li>
+<li>后者在处理一个大于1G小于2G的任务时比前者要快</li>
+<li>后者成本要低</li>
+</ul>
+</li>
+<li>编程模型：SIMD VS MIMD。<ul>
+<li>SIMD发掘数据级并行<ul>
+<li>矩阵运算</li>
+<li>图像和声音处理</li>
+</ul>
+</li>
+<li>SIMD比MIMD能耗效率高</li>
+<li>SIMD数据操作只需要取一条指令</li>
+<li>SIMD对个人移动设备(PMD)具有吸引力；MIMD一般用于商用计算机和大型服务器。</li>
+<li>SIMD编程者对并行思维要求较低；MIMD反之</li>
+</ul>
+</li>
+<li>虚拟化技术的意义<ul>
+<li>CPU的虚拟化技术可以单CPU模拟多CPU并行，允许一个平台同时运行多个操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-3-Flynn’s-分类"><a href="#1-3-Flynn’s-分类" class="headerlink" title="1.3 Flynn’s 分类"></a>1.3 Flynn’s 分类</h2><ol>
+<li>单指令流、单数据流(SISD)—{指令级并行(ILP)}<ul>
+<li>解释：传统的顺序执行的单处理器计算机，其指令部件每次只对一条指令进行译码，并且只对一个操作部分分配数据。</li>
+<li>例子：Intel Pentium4</li>
+</ul>
+</li>
+<li>单指令流、多数据流(SIMD)—{数据级并行(DLP)}<ul>
+<li>解释：以同步方式，在同一时间执行同一条指令。</li>
+<li>例子：向量体系结构、多媒体指令扩展、GPU</li>
+</ul>
+</li>
+<li>多指令流、多数据流(MIMD)<ul>
+<li>解释：使用多个控制器来异步地控制多个处理器，从而实现空间上的并行性。</li>
+<li>例子：Intel Xeon e5345(Clovertown)</li>
+<li>紧耦合：MIMD；松耦合：MIPD</li>
+</ul>
+</li>
+<li>多指令流、单数据流(MISD)<ul>
+<li>没有实现商业化(why?)：显然多条指令处理同一数据可能频繁出现冲突，处理效率非常低。</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-4-网络和存储技术"><a href="#1-4-网络和存储技术" class="headerlink" title="1.4 网络和存储技术"></a>1.4 网络和存储技术</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>网络技术</th>
+<th>速度</th>
+<th>存储接口</th>
+<th>速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WAN T1</td>
+<td>56K/s</td>
+<td>SCSI</td>
+<td>5MB/s</td>
+</tr>
+<tr>
+<td>以太网</td>
+<td>10Mb/s</td>
+<td>Fast SCSI</td>
+<td>10MB/s</td>
+</tr>
+<tr>
+<td>快速以太网</td>
+<td>100Mb/s</td>
+<td>WideSCSI</td>
+<td>20MB/s</td>
+</tr>
+<tr>
+<td>ATM/OC-3</td>
+<td>155Mb/s</td>
+<td>Ultra SCSI</td>
+<td>40MB/s</td>
+</tr>
+<tr>
+<td>千兆以太网</td>
+<td>1Gb/s</td>
+<td>光纤路径</td>
+<td>2Gb/s</td>
+</tr>
+<tr>
+<td>Infiniband</td>
+<td>40Gb/s</td>
+<td>光纤路径</td>
+<td>4 or 8Gb/s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>网络比存储发展快！</p>
+<h2 id="1-5-内存系统"><a href="#1-5-内存系统" class="headerlink" title="1.5 内存系统"></a>1.5 内存系统</h2><p>存储技术的目标：最大，最快，最便宜。</p>
+<p>技术趋势：</p>
+<ul>
+<li>集成电路<ul>
+<li>晶体管密度：25% year</li>
+<li>晶片尺寸：10-20% year</li>
+<li>晶体管数目：40-55% year</li>
+</ul>
+</li>
+<li>DRAM容量：单个25-40% year (slowing)</li>
+<li>闪存容量：50-60% year<ul>
+<li>15-20X cheaper/bit than DRAM</li>
+</ul>
+</li>
+<li>磁盘技术：40% year<ul>
+<li>15-25X cheaper/bit than Flash</li>
+<li>300-500X cheaper/bit than DRAM</li>
+</ul>
+</li>
+</ul>
+<p>局部性原理：</p>
+<ul>
+<li>时间局部性：程序结构中的循环</li>
+<li>空间局部性：数组或记录</li>
+</ul>
+<p>层次：SRAM，DRAM，DISK，FLASH MEMORY</p>
+<ul>
+<li>顶层{CPU内}：寄存器、Cache</li>
+<li>二层{主板内}：主存、Cache</li>
+<li>三层{主板外}：磁盘、光盘</li>
+<li>底层{离线}：磁带</li>
+</ul>
+<h2 id="1-6-Cache的使用问题"><a href="#1-6-Cache的使用问题" class="headerlink" title="1.6 Cache的使用问题"></a>1.6 Cache的使用问题</h2><p>Cache：</p>
+<ul>
+<li>高速缓存，也指基于局部性原理来管理的存储器。</li>
+</ul>
+<p>使用Cache的问题：</p>
+<ol>
+<li>如果要访问的数据不在Cache中怎么办？<ul>
+<li>要访问的数据不在Cache中会导致缺失，缺失则将需要的数据装入Cache中。</li>
+</ul>
+</li>
+<li>从主存中装入数据时装到Cache中的什么位置？<ul>
+<li>直接映射<ul>
+<li>每个主存地址对应到Cache的确定的位置</li>
+</ul>
+</li>
+<li>全相联映射<ul>
+<li>一个块可以放在Cache中的任何位置</li>
+<li>需要检索Cache中的所有项：并行比较器</li>
+</ul>
+</li>
+<li>组相联映射<ul>
+<li>每个块有n个位置可放的Cache称为n路组相联Cache;</li>
+<li>存储器中的一个块对应到Cache中唯一的组，但是可以放在组内的任意位置上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从主存中装入数据时一次装入多少数据？<ul>
+<li>从cache到处理器：以字为单位；</li>
+<li>从主存到cache：以块为单位；块设为多大？<ul>
+<li>4K &amp; 64块；16K &amp; 64块；64K &amp; 256块；256K &amp; 256块。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何判断Cache中对应的位置是否为有效的数据？<ul>
+<li>有效位，有效位设置时表示一个块是有效的</li>
+</ul>
+</li>
+<li>如果Cache装满了怎么办？<ul>
+<li>先入先出法(FIFO)</li>
+<li>随机替换法(RAND)</li>
+<li>最近最少使用法(LRU)<ul>
+<li>LRU算法实现：使用链表和hashmap。当需要插入新的数据项的时候，如果新数据项在链表中存在（一般称为命中），则把该节点移到链表头部，如果不存在，则新建一个节点，放到链表头部，若缓存满了，则把链表最后一个节点删除即可。在访问数据的时候，如果数据项在链表中存在，则把该节点移到链表头部，否则返回-1。这样一来在链表尾部的节点就是最近最久未访问的数据项。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>写Cache时会有什么问题？<ul>
+<li>写命中和写不命中</li>
+</ul>
+<ol>
+<li>写回法<ul>
+<li>写命中：只修改Cache内容，不立即写入主存，当被替换时才写入主存。</li>
+<li>写不命中：将内存中包含欲写块的内容装入Cache中并修改。</li>
+</ul>
+</li>
+<li>写直达法<ul>
+<li>写命中：同时修改Cache和主存。</li>
+<li>写不命中：直接写入主存。</li>
+</ul>
+</li>
+<li>写一次法<ul>
+<li>与写回法基本相同，只是第一次写命中时同时修改Cache和主存。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="1-7-Cache的优化方法"><a href="#1-7-Cache的优化方法" class="headerlink" title="1.7 Cache的优化方法"></a>1.7 Cache的优化方法</h2><p>访问缺失：</p>
+<ul>
+<li>强制缺失(第一次访问)</li>
+<li>容量缺失(因容量不够，块被移除，又被访问)</li>
+<li>冲突失效(重复访问的多个地址映射在Cache中的同一位置)</li>
+</ul>
+<p>$AMAT = \text{命中时间} + \text{缺失率} * \text{缺失代价}$</p>
+<ol>
+<li><strong>更大的块</strong><ul>
+<li>强制缺失减少</li>
+<li>容量和冲突缺失增加，缺失代价增加</li>
+</ul>
+</li>
+<li><strong>更大的Cache容量</strong><ul>
+<li>缺失率降低</li>
+<li>命中时间，功耗增加</li>
+</ul>
+</li>
+<li><strong>更高的相关度</strong><ul>
+<li>冲突缺失减少</li>
+<li>命中时间增加，功耗增加</li>
+</ul>
+</li>
+<li><strong>更多级Cache</strong><ul>
+<li>内存访问时间减少</li>
+</ul>
+</li>
+<li><strong>读缺失优先级更高</strong><ul>
+<li>缺失代价降低</li>
+</ul>
+</li>
+<li><strong>缓存索引避免地址转移</strong><ul>
+<li>减少命中时间</li>
+</ul>
+</li>
+</ol>
+<p>优化度量：命中时间，缺失率，缺失代价，缓存带宽和功耗。</p>
+<h2 id="1-8-存储访问模型"><a href="#1-8-存储访问模型" class="headerlink" title="1.8 存储访问模型"></a>1.8 存储访问模型</h2><ul>
+<li><strong>UMA</strong>(uniform memory access)模型<ul>
+<li>物理存储器被所有节点共享</li>
+<li>所有节点访问任意存储单元的访问时间相同</li>
+<li>发生访存竞争时，仲裁策略平等对待每个节点</li>
+<li>每个节点的CPU可带有局部私有的高速缓存</li>
+<li>外围I/O设备也可以共享，且每个节点有平等的访问权力</li>
+</ul>
+</li>
+<li><strong>NUMA</strong>(Non-Uniform Memory Access)模型<ul>
+<li>物理存储器被所有节点共享，任意节点可以直接访问任意内存模块</li>
+<li>节点访问内存模块的速度不同，访问本地存储模块的速度一般是访问其他节点内存模块的3倍以上</li>
+<li>发生访存竞争时，仲裁策略对节点可能是不平等的</li>
+<li>各节点的CPU可带有局部私有高速缓存cache</li>
+<li>外围I/O设备也可以共享，但对各节点是不平等的</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-9-单CPU上常见的提升性能的方法和并行计算"><a href="#1-9-单CPU上常见的提升性能的方法和并行计算" class="headerlink" title="1.9 单CPU上常见的提升性能的方法和并行计算"></a>1.9 单CPU上常见的提升性能的方法和并行计算</h2><p>提升性能方法：</p>
+<ul>
+<li>提高单个处理器的工作频率</li>
+<li>Locality：L1/L2/L3 Cache</li>
+<li>多级流水线(提高CPU频率的利器)</li>
+<li>超标量执行(多条流水线并同时发送多条指令)</li>
+<li>乱序执行(指令重排)</li>
+<li>单指令流多数据SIMD</li>
+<li>超长指令字处理器(依赖于编译器分析)</li>
+</ul>
+<p>单CPU主要的并行：指令级并行(ILP)</p>
+<h2 id="1-10-多线程的好处"><a href="#1-10-多线程的好处" class="headerlink" title="1.10 多线程的好处"></a>1.10 多线程的好处</h2><ul>
+<li>创建一个线程比创建一个进程的代价小</li>
+<li>线程的切换比进程间切换的代价小</li>
+<li>充分利用多处理器</li>
+<li>数据共享</li>
+<li>快速响应特性</li>
+</ul>
+<h2 id="1-11-Tomasulo’s-算法"><a href="#1-11-Tomasulo’s-算法" class="headerlink" title="1.11 Tomasulo’s 算法"></a>1.11 Tomasulo’s 算法</h2><p>三步骤:</p>
+<ul>
+<li><strong>发射</strong><ul>
+<li>从指令队列中获取指令，如果RS(Registers)可用，则发射指令到RS；</li>
+<li>如果操作数可用，则发送数据至RS；</li>
+<li>发射级完成了重命名。</li>
+</ul>
+</li>
+<li><strong>执行</strong><ul>
+<li>若有一个或几个操作数未就绪，等待该操作数，并同时监控CDB(CommonDataBus)；</li>
+<li>当操作数可用，则存储至保留站；当所有操作数可用，则执行命令；</li>
+<li>执行级检查了是否存在RAM竞争。</li>
+</ul>
+</li>
+<li><strong>写结果</strong><ul>
+<li>将结果写入CDB，并从CDB写入目的寄存器及等待此结果的保留站；</li>
+<li>连续写入同一寄存器时，只有最后一次才能写入；</li>
+<li>消除了WAW(Write After Write)竞争。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-12-仓库级计算机-WSC"><a href="#1-12-仓库级计算机-WSC" class="headerlink" title="1.12 仓库级计算机(WSC)"></a>1.12 仓库级计算机(WSC)</h2><ul>
+<li><strong>提供互联网服务</strong><ul>
+<li>搜索、社交网络、在线地图、视频分享、在线购物、电子邮件、云计算、etc.</li>
+</ul>
+</li>
+<li><strong>不同于HPC“集群”</strong><ul>
+<li>HPC集群有更高性能的处理器和互联网络</li>
+<li>HPC集群强调线程级并行，WSC强调请求级并行</li>
+</ul>
+</li>
+<li><strong>不同于数据中心</strong><ul>
+<li>数据中心集中运行不同的机器和软件</li>
+<li>数据中心强调虚拟机，具有硬件异构型，为不同客户提供服务</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-13-批处理框架：MapReduce"><a href="#1-13-批处理框架：MapReduce" class="headerlink" title="1.13 批处理框架：MapReduce"></a>1.13 批处理框架：MapReduce</h2><ul>
+<li><strong>Map</strong>：<ul>
+<li>将程序员提供的函数应用于每条记录</li>
+<li>在数千台计算机上运行</li>
+<li>生成由键值对组成的中间结果</li>
+</ul>
+</li>
+<li><strong>Reduce</strong>：<ul>
+<li>收集上述分布式任务的输出，使用另一个函数应用于中间结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-14-MESI协议图"><a href="#1-14-MESI协议图" class="headerlink" title="1.14 MESI协议图"></a>1.14 MESI协议图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwl9q77pj30h5083dgr.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwlonrywj30go08oglt.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="1-15-基准程序的类别"><a href="#1-15-基准程序的类别" class="headerlink" title="1.15 基准程序的类别"></a>1.15 基准程序的类别</h2><p>基准程序(Benchmarks)：</p>
+<ul>
+<li>衡量一个系统，可通过运行一个或一组真实应用<ul>
+<li>应用程序要有代表性，覆盖现实世界中常见的情况</li>
+<li>应用程序负载(workload)也要有代表性，与实际情况比较吻合</li>
+</ul>
+</li>
+<li>好的基准程序可以加速计算机的发展<ul>
+<li>改进基准程序的性能应该对大多数程序有益</li>
+</ul>
+</li>
+<li>好基准程序可以加速计算机的发展进程<ul>
+<li>是有益于运行真实程序, 还是销售机器/发表论文?</li>
+</ul>
+</li>
+<li>创造真正有益于真实程序的基准程序，而不是有益于基准程序的基准程序</li>
+</ul>
+<p>类别：</p>
+<ul>
+<li>玩具(Toy)基准程序<ul>
+<li>10-100行</li>
+<li>例如：sieve，puzzle，quicksort</li>
+</ul>
+</li>
+<li>合成(Synthetic)基准程序<ul>
+<li>试图匹配真正工作负载的平均频度</li>
+<li>例如：Whetstone，Dhrystone</li>
+</ul>
+</li>
+<li>内核(Kernels)程序<ul>
+<li>时间密集(Time critical excerpts)</li>
+<li>例如：Livemore loops，FFT，tree search</li>
+</ul>
+</li>
+<li>真实程序(Actual workloads)<ul>
+<li>例如：gcc，spice</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-16-性能评测方法"><a href="#1-16-性能评测方法" class="headerlink" title="1.16 性能评测方法"></a>1.16 性能评测方法</h2><ol>
+<li><strong>经验</strong>：使用系统的现有实例执行性能测试。<ul>
+<li>前提条件：<ul>
+<li>真实系统的存在</li>
+<li>不同程度的可测性设计</li>
+</ul>
+</li>
+<li>针对对象：<ul>
+<li>系统用户(应用需求)</li>
+<li>系统设计者(设计验证)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分析</strong>：对系统进行数学抽象，推导出描述系统性能的公式。</li>
+<li><strong>仿真</strong>：开发一个实现系统模型的计算机程序。通过运行计算机程序进行性能测试。</li>
+<li><strong>统计</strong>：开发系统的统计抽象，并通过分析或模拟得出统计性能。</li>
+</ol>
+<h2 id="1-17-三种流水线冲突-冒险-Hazard"><a href="#1-17-三种流水线冲突-冒险-Hazard" class="headerlink" title="1.17 三种流水线冲突/冒险(Hazard)"></a>1.17 三种流水线冲突/冒险(Hazard)</h2><p>Hazard:指流水线遇到无法正确执行后续指令或执行了不该执行的指令</p>
+<ul>
+<li>Structural Hazards(hardware resource conflicts)<ul>
+<li>现象：同一部件同时被不同指令所使用</li>
+<li>解决方案：<ul>
+<li>一个部件每条指令只能使用一次，且只能在特定周期使用</li>
+<li>设置多个部件，以避免冲突，如指令寄存器IM和数据寄存器DM分开，或寄存器读口和寄存器写口分开。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Data Hazards(data dependencies)<ul>
+<li>现象：后面指令用到前面指令结果时，前面指令结果还没产生</li>
+<li>解决方案：<ul>
+<li>采用转发(Forwarding/Bypassing)技术</li>
+<li>load use 冒险需要一次阻塞(stall)</li>
+<li>编译程序优化指令顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Control(Branch) Hazards(changes in program flow)<ul>
+<li>现象：转移或异常改变执行流程，顺序执行指令在目标地址产生前已被取出</li>
+<li>解决方案：<ul>
+<li>采用静态或动态分支预测</li>
+<li>编译程序优化指令顺序(实现分支延迟)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-18-数据冒险-Data-Hazards"><a href="#1-18-数据冒险-Data-Hazards" class="headerlink" title="1.18 数据冒险(Data Hazards)"></a>1.18 数据冒险(Data Hazards)</h2><p>解决方法：</p>
+<ol>
+<li>硬件阻塞(stall)</li>
+<li>软件插入“NOP”指令</li>
+<li>合理实现寄存器堆的读/写操作<ul>
+<li>前半时钟周期写，后半时钟周期读。若在同一个时钟内前面指令写入的数据正好是后面指令所读数据，则不会发生数据冒险</li>
+</ul>
+</li>
+<li>转发技术(Forwarding或Bypassing旁路)<ul>
+<li>load use 问题(需要一次阻塞stall)</li>
+</ul>
+</li>
+<li>编译优化：调整指令顺序</li>
+</ol>
+<h2 id="1-19-Load指令的5个阶段-MIPS结构为例"><a href="#1-19-Load指令的5个阶段-MIPS结构为例" class="headerlink" title="1.19 Load指令的5个阶段(MIPS结构为例)"></a>1.19 Load指令的5个阶段(MIPS结构为例)</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">第一阶段</th>
+<th style="text-align:center">第二阶段</th>
+<th style="text-align:center">第三阶段</th>
+<th style="text-align:center">第四阶段</th>
+<th style="text-align:center">第五阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Ifetch</td>
+<td style="text-align:center">Reg/Dec</td>
+<td style="text-align:center">Exec</td>
+<td style="text-align:center">Mem</td>
+<td style="text-align:center">Wr</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Ifetch(取指)：从指令存储器取指令并计算PC+4<ul>
+<li>指令存储器、Addr</li>
+</ul>
+</li>
+<li>Reg/Dec(取数和译码)：寄存器取数，同时对指令进行译码<ul>
+<li>寄存器堆读口、指令译码器</li>
+</ul>
+</li>
+<li>Exec(执行)：计算内存单元地址<ul>
+<li>扩展器、ALU</li>
+</ul>
+</li>
+<li>Mem(读存储器)：从数据存储器中<ul>
+<li>数据存储器</li>
+</ul>
+</li>
+<li>Wr(写寄存器)：将数据写到寄存器中<ul>
+<li>寄存器堆写口</li>
+</ul>
+</li>
+</ol>
+<p>Tips:这里寄存器读口和写口可看成两个不同的部件</p>
+<h2 id="1-20-动态分支预测"><a href="#1-20-动态分支预测" class="headerlink" title="1.20 动态分支预测"></a>1.20 动态分支预测</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwk2qbklj30es05rjrj.jpg" alt="一位预测状态图" title="">
+                </div>
+                <div class="image-caption">一位预测状态图</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxtwkqgu7oj30e009pt96.jpg" alt="二位预测状态图" title="">
+                </div>
+                <div class="image-caption">二位预测状态图</div>
+            </figure>
+<p>比较：</p>
+<ul>
+<li>一位预测位：当连续两次的分支情况发生改变时，预测错误</li>
+<li>二位预测位：在连续两次分支发生不同时，只会有一次预测错误</li>
+</ul>
+<p>一般采用二位预测位！</p>
+<h1 id="2-后记"><a href="#2-后记" class="headerlink" title="2 后记"></a>2 后记</h1><blockquote>
+<p>2018年12月3日</p>
+</blockquote>
+<p>战场，考场<br>聒噪，沉静<br>忐忑，镇定<br>顾盼，专心<br>窃喜，自信<br>得意忘形，波澜不惊<br>举世皆浊我独清<br>众人皆醉我独醒</p>
+<div style="text-align:right">
+    ——YvanZh
+</div>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.478Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2018/12/03/Advanced-Computer-Architecture/" target="_blank" rel="external">http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Advanced-Computer-Architecture/">Advanced Computer Architecture</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&title=《高级计算机体系结构》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&title=《高级计算机体系结构》 — YvanZh's Blog&source=
+计算机的设计思想、设计原理、设计技术。
+
+
+                
+                    
+                ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《高级计算机体系结构》 — YvanZh's Blog&url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/29/Paper-Notes-3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Generalized Zero-Shot Learning via Synthesized Examples</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/02/Gallery/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">聊聊图床</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&title=《高级计算机体系结构》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&title=《高级计算机体系结构》 — YvanZh's Blog&source=
+计算机的设计思想、设计原理、设计技术。
+
+
+                
+                    
+                ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《高级计算机体系结构》 — YvanZh's Blog&url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/12/03/Advanced-Computer-Architecture/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHElEQVR42u3aW46DMAwFUPa/aWYBaOi1DZWanHxVaik5+bDix3HE67ys67fXz9dn898fbywMDIyfZZy3634rySvvj+AeluwNAwNjH0b+1/mm77eVM+73hoGBgVENiHmAnhwfBgYGxoSRh+lquouBgYEx39Dk2vfVXBwDA+MHGXlq+v3Pr/Q3MDAwfopxFlc1iU3Kbed4YWBgrM3IA1xeVssbnJOAi4GBsScjL2z1wmW1wJe3PDEwMNZm9C5wvVdWr575GzEwMPZk5O3J6rfzNicGBsZujEkyWR2V6BXy8gIfBgbGDoxqIlrNH/OiW/VKioGBsTYjf1lvCKz6VO8CioGBsQ8jD6mTdma1uJYcCgYGxtqM/EKWb2syFFst/x1JDo2BgbEEo1DSSgLfOMhWBz4wMDB2Y+TXxIRUHcjIy3lR6Q0DA2MJRp6C9gpt7wXWDz1YDAyMRRmT9uT8CPJRj38bAxgYGIsyeq3HSRuyV+YrT45gYGAsx+gNgc3T2jzPjp7CwMDYmJFsJRnImGw6KtthYGBswHis+FUcsMj/oTBmgYGBsRDjLK5kc3kQrxbmCgMWGBgYCzHy9dQQRt74bM6MYGBgLMqYp529ZmSV/SG5xcDA2IDRG7aYX/6eSoMxMDAwqte1pLifb3f0AAYGxpaMyYurLdL8sDAwMHZg5CMX1YvdpKBWKP9hYGAszeiljm+0NqtBFgMDYwPGH83US6n8dVUIAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script> -->
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

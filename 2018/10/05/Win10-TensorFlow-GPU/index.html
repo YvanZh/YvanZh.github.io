@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>Win10 系统下配置 TensorFlow-GPU 环境 | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Deep Learning,TensorFlow">
+    <meta name="description" content="让你手中的煤气灶疯狂输出！">
+<meta name="keywords" content="Deep Learning,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10 系统下配置 TensorFlow-GPU 环境">
+<meta property="og:url" content="http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:description" content="让你手中的煤气灶疯狂输出！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc3sgeij31hc0zke0a.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.499Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win10 系统下配置 TensorFlow-GPU 环境">
+<meta name="twitter:description" content="让你手中的煤气灶疯狂输出！">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc3sgeij31hc0zke0a.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Win10 系统下配置 TensorFlow-GPU 环境</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Win10 系统下配置 TensorFlow-GPU 环境</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-05T13:11:11.000Z" itemprop="datePublished" class="page-time">
+  2018-10-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/TensorFlow/">TensorFlow</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-前言"><span class="post-toc-text">1 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-准备工作"><span class="post-toc-text">2 准备工作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-显卡是否支持CUDA？"><span class="post-toc-text">2.1 显卡是否支持CUDA？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-Python环境"><span class="post-toc-text">2.2 Python环境</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-配置流程"><span class="post-toc-text">3 配置流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-安装CUDA-Toolkit和cuDNN"><span class="post-toc-text">3.1 安装CUDA Toolkit和cuDNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-安装TensorFlow-GPU"><span class="post-toc-text">3.2 安装TensorFlow-GPU</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-后记"><span class="post-toc-text">4 后记</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Win10-TensorFlow-GPU" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Win10 系统下配置 TensorFlow-GPU 环境</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-05 21:11:11" datetime="2018-10-05T13:11:11.000Z" itemprop="datePublished">2018-10-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/TensorFlow/">TensorFlow</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><strong><em>让你手中的煤气灶疯狂输出！</em></strong></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc3sgeij31hc0zke0a.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>笔者经过两个月的学习，总算是对机器学习的知识框架以及应用领域有了大体的了解，研读文献也渐入佳境。</p>
+<p>“纸上得来终觉浅，绝知此事要躬行。”笔者准备开始用实践检验真理，奈何没有趁手的电脑，之前的Coding计划被多次推延。</p>
+<p>今天发现偶然发现古董笔记本的显卡居然支持<code>CUDA</code>。于是一番捣腾，踩过无数坑之后终究还是修成正果。</p>
+<p>笔者的笔记本电脑信息如下：</p>
+<ul>
+<li>型号：Thinkpad E540</li>
+<li>系统：Windows 10</li>
+<li>显卡：NVIDIA GeForce 840M</li>
+<li>内存：8 GB</li>
+</ul>
+<p>安装后的环境如下：</p>
+<ul>
+<li>Python 3.6.6</li>
+<li>CUDA Toolkit v9.0</li>
+<li>cuDNN v7.3</li>
+<li>TensorFlow 1.11.0</li>
+<li>PyTorch 0.4.1</li>
+</ul>
+<h1 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h1><h2 id="2-1-显卡是否支持CUDA？"><a href="#2-1-显卡是否支持CUDA？" class="headerlink" title="2.1 显卡是否支持CUDA？"></a>2.1 显卡是否支持CUDA？</h2><p>可浏览<a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">CUDA官网</a>查看显卡是否达到所需的算力(Compute Capability)要求。</p>
+<h2 id="2-2-Python环境"><a href="#2-2-Python环境" class="headerlink" title="2.2 Python环境"></a>2.2 Python环境</h2><p>根据<code>TensorFlow</code>官网给出的<a href="https://www.tensorflow.org/install/pip" target="_blank" rel="noopener">支持信息</a>选择可支持的<code>Python</code>版本。笔者使用的是<code>Python3.6.6</code>版本。</p>
+<p>安装Python的两种方法：</p>
+<ol>
+<li>直接下载并安装<code>Python</code>对应版本。</li>
+<li>安装<code>Anaconda</code>“全家桶”，创建<code>Python</code>对应版本的虚拟环境。</li>
+</ol>
+<p>在<code>Windows</code>系统下笔者推荐后者。原因如下：</p>
+<ul>
+<li><code>Anaconda</code>的<code>base</code>环境集成了多种常用库，省去了自行安装的繁琐过程。</li>
+<li><code>conda</code>可以创建多个独立的虚拟环境，并且能管理使用<code>pip</code>安装的库。</li>
+</ul>
+<p>尽管如此在安装<code>TensorFlow-GPU</code>库的时候笔者还是推荐使用<code>pip</code>。笔者曾尝试使用<code>conda</code>进行安装，结果出现了错误。毕竟<code>conda</code>只是由社区维护的，没有受到TensorFlow官方团队的关注。而原生的<code>pip</code>相较之下就属于“亲儿子”了。</p>
+<h1 id="3-配置流程"><a href="#3-配置流程" class="headerlink" title="3 配置流程"></a>3 配置流程</h1><h2 id="3-1-安装CUDA-Toolkit和cuDNN"><a href="#3-1-安装CUDA-Toolkit和cuDNN" class="headerlink" title="3.1 安装CUDA Toolkit和cuDNN"></a>3.1 安装CUDA Toolkit和cuDNN</h2><p>首先根据<code>TensorFlow</code>官网给出的<a href="https://www.tensorflow.org/install/gpu" target="_blank" rel="noopener">支持信息</a>查看目前<code>TensorFlow</code>支持的<code>CUDA Toolkit</code>与<code>cuDNN</code>的版本。笔者使用的是<code>CUDA Toolkit v9.0</code>以及<code>cuDNN v7.3</code>版本。</p>
+<ol>
+<li><a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">下载</a><code>CUDA Toolkit</code>安装包。安装时注意：<ul>
+<li>选择自定义安装模式，并勾选所有选项。因为<code>CUDA Toolkit</code>安装包内含有与之相匹配的显卡驱动程序。</li>
+</ul>
+</li>
+<li><a href="https://developer.nvidia.com/rdp/cudnn-archive" target="_blank" rel="noopener">下载</a>对应的<code>cuDNN</code>压缩包。将解压的三个文件夹合并到<code>CUDA Toolkit</code>的根目录的三个同名文件夹下。笔者路径为：<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</code></li>
+</ol>
+<h2 id="3-2-安装TensorFlow-GPU"><a href="#3-2-安装TensorFlow-GPU" class="headerlink" title="3.2 安装TensorFlow-GPU"></a>3.2 安装TensorFlow-GPU</h2><ol>
+<li>安装好<code>Anaconda</code>后，创建一个新的虚拟环境。打开<code>Anaconda Prompt</code>并输入：<pre><code> conda create -n py36 python=3.6
+</code></pre> 其中<code>py36</code>为虚拟环境名，<code>python=3.6</code>为指定的版本。<br> 当系统询问是否安装时输入<code>y</code>。</li>
+<li>激活新的虚拟环境。输入：<pre><code> conda activate py36
+</code></pre> 命令行的<code>(base)</code>变成了<code>(py36)</code>。</li>
+<li>在新的虚拟环境中使用<code>pip</code>安装<code>TensorFlow-GPU</code>库。输入：<pre><code> pip install --ignore-installed --upgrade tensorflow-gpu
+</code></pre></li>
+<li>等待安装完成之后，进行测试。输入<code>python</code>以打开解释器，并输入以下：<pre><code> import tensorflow as tf
+ tf.test.gpu_device_name()
+</code></pre></li>
+<li>返回结果的最后一行代码如下：<pre><code> physical_device_desc: &quot;device: 0, name: GeForce 840M, pci bus id: 0000:01:00.0, compute capability: 5.0&quot;
+</code></pre></li>
+<li><p>Tips<br> 使用<code>Anaconda</code>的用户在创建好新环境之后会遇到一个问题——<code>Anaconda</code>自带的<code>Jupyter Notebook</code>或<code>Jupyter Lab</code>并没有把新环境添加到<code>Kernel</code>中去。当然，可以在每个新建的环境中都安装<code>Jupyter</code>，可行但是不优雅。那么解决方法如下：</p>
+<ul>
+<li>在<code>Anacodna Prompt</code>中激活创建的环境<code>py36</code>:<pre><code>  conda activate py36
+</code></pre></li>
+<li>安装插件<code>ipykernel</code>：<pre><code>  pip install ipykernel
+</code></pre></li>
+<li><p>添加内核：</p>
+<pre><code>  python -m ipykernel install --name py36 --display-name &quot;py36&quot;
+</code></pre><p>  <code>--name</code>参数后的<code>py36</code>是内核名称，用于系统保存。而<code>--display-name</code>参数后的 “Py36” 是在<code>Jupyter Notebook</code>网页中选择或切换内核时所显示的。建议二者设置为一样的，方便以后删除<code>Kernel</code>。</p>
+<p>  如果非要设置一个<code>--display-name</code>，然而一段时间后又忘了当时<code>--name</code>是什么了。那么查看所有<code>Kernel</code>,可在<code>CMD</code>中输入:</p>
+<pre><code>  jupyter kernelspec list
+</code></pre></li>
+<li>删除内核时，可在<code>CMD</code>中输入：<pre><code>  jupyter kernelspec remove py36
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4 后记"></a>4 后记</h1><blockquote>
+<p>2018年10月23日更新！</p>
+</blockquote>
+<p>笔者最近在又学习使用<code>PyTorch</code>（<code>TensorFlow</code>还没玩好，逃~）。根据已经安装的<code>CUDA Toolkit v9.0</code>,在<a href="https://pytorch.org/" target="_blank" rel="noopener">Pytorch官网</a>可找到对应的<code>pip</code>的安装方法，同前文描述一样，先创建新的虚拟环境，然后安装<code>PyTorch</code>，最后可以添加<code>Kernel</code>。</p>
+<p>进行测试：</p>
+<pre><code>cuda = t.cuda.is_available()
+print(cuda)
+</code></pre><p>返回结果为<code>True</code>则成功。</p>
+<p>最新的<code>PyTorch 1.0</code>预览版已经发布啦，然而<code>Windows</code>系统暂时还不能玩，有点遗憾。笔者安装的是<code>PyTorch 0.4.1</code>版本。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.499Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2018/10/05/Win10-TensorFlow-GPU/" target="_blank" rel="external">http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&title=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&title=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&source=
+让你手中的煤气灶疯狂输出！
+
+
+                
+                    
+                    
+ ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/29/PyTorch-QuickStart/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PyTorch 快速入门</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/19/Markdown-Blog/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用 Markdown 优雅地写作</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&title=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&title=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&source=
+让你手中的煤气灶疯狂输出！
+
+
+                
+                    
+                    
+ ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Win10 系统下配置 TensorFlow-GPU 环境》 — YvanZh's Blog&url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aUW7jMAwFwN7/0u4BuvG+R7kFLI2+gsaOOS5AUCK/vuJ1/Vg/v01+4f5z/mvDhYGB8VrGdbvur5k9JYclsWFgYJzDyFNk/uAE06bjj3/HwMDACAq4PGnep2AMDAyMZxlJQZnchYGBgZEw8oDyQnBls/qLe3EMDIwXMvLDsr///Cv9DQwMjFcxrnLlR2azbeo1WhgYGHsz2lGJYktZHsnNRjcwMDBOYKykv9lc1nrKHs5xYGBgvJbx1CY2CbodtshfMQYGxjmMpN2YPyZvW+avb9iPxcDAeDkjCW52Gp8ft7Xb5o+nhhgYGAcwZp3BduSiLRyjl4uBgXEYY3aglgf0bMPgY8LFwMDYiDE78Eoe0961MpaBgYFxDmM26JA3I9dHMYptNgYGxnaMJBXmBVx771ODYhgYGLsy8kQ5G7aYXVmXmxgYGFsz8gZAm2pnCXT2WjEwMPZmJAMN7dhEsvmcbXGj/wMGBsZ2jHYTmx/AzYYnZi8UAwPjTEY+wrXe2lzpZvyjQMTAwDiA0Y6l5smxTdxtAYqBgXECY2V0dYVd9Frvn4WBgbEp4ypX20jIWwv5+Ox/GgMYGBjbMWYJbmWoKz9im92LgYGxK6NNkbPQ2wGLNk1jYGCcwGgP9NvyMU+y9S4cAwMDI0igeTMyD3pYvWJgYGDEYbXl3eyax0pDDAyMlzDyUm8l9GGIs04sBgbGRoxZ3dWy26GNJHQMDIwDGN/3rwPxW6pZTgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>Clustering and Projected Clustering with Adaptive Neighbors | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Clustering,Machine Learning">
+    <meta name="keywords" content="Clustering,Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clustering and Projected Clustering with Adaptive Neighbors">
+<meta property="og:url" content="http://yvanzh.top/2019/04/07/Paper-Notes-4/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1nf4za90zj31hc0zkdn6.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clustering and Projected Clustering with Adaptive Neighbors">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1nf4za90zj31hc0zkdn6.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Clustering and Projected Clustering with Adaptive Neighbors</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Clustering and Projected Clustering with Adaptive Neighbors</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-07T09:01:33.000Z" itemprop="datePublished" class="page-time">
+  2019-04-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-简介"><span class="post-toc-text">1 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-模型框架"><span class="post-toc-text">2 模型框架</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-联系-K-means"><span class="post-toc-text">3 联系$K$-means</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-联系谱聚类"><span class="post-toc-text">4 联系谱聚类</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-确定-gamma-的值"><span class="post-toc-text">5 确定$\gamma$的值</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-投影聚类"><span class="post-toc-text">6 投影聚类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-1-模型框架"><span class="post-toc-text">6.1 模型框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-2-联系LDA"><span class="post-toc-text">6.2 联系LDA</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#7-思考"><span class="post-toc-text">7 思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Paper-Notes-4" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Clustering and Projected Clustering with Adaptive Neighbors</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-07 17:01:33" datetime="2019-04-07T09:01:33.000Z" itemprop="datePublished">2019-04-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1nf4za90zj31hc0zkdn6.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p><a href="https://dl.acm.org/citation.cfm?id=2623726" target="_blank" rel="noopener">文章来源</a>：2014-KDD</p>
+<p>文章主旨：</p>
+<ol>
+<li>由于相似性度量和数据聚类分为两个步骤进行，可能会导致学习到的数据相似度不是最佳的。本文提出一个新框架让两者同时进行。</li>
+<li>对拉普拉斯矩阵中的相似度矩阵进行秩约束，从而诱导聚类结构。</li>
+<li>把模型扩展到投影聚类来处理高维数据。</li>
+</ol>
+<p>吐槽与膜拜：</p>
+<p>这篇文章的符号设定简直反人类，且还有几处小错误。但是瑕不掩瑜，论文字字珠玑，最牛批的是直接让$K$-means和谱聚类沦为了跟班小弟。当时就WC了，小脑袋瓜都怎么长的，咋这好使。传统的机器学习确实是宝刀未老，14年的文章现在来看也毫不过时（也可能是我涉猎太少）。反观现在的深度学习研究感觉处在一个病态阶段，大都是在用体力劳动的结果说话，反复修改参数，堆砌部件，结果好就是老大，丝毫不管为什么好，为什么不好，模型的可解释性如何。不得不感叹，我们离真正的人工智能时代之间确实还是道阻路且长，在让机器学会如何学习之前，只能姑且被称为人力驱动的劳动密集型AI。在此之前，传统的机器学习还是应该受到重视的，因为深度学习的诱导和和驱动的源泉还是这些传统机器学习知识。一通认知浅薄的大话，不知不觉就扯远了，总之本文绝对是值得反复读的经典没错！</p>
+<h1 id="2-模型框架"><a href="#2-模型框架" class="headerlink" title="2 模型框架"></a>2 模型框架</h1><ol>
+<li><p>更小的距离应该被分配更大的邻近概率：</p>
+<script type="math/tex; mode=display">\underset{\forall i,s_i^T \mathbf{1} = 1,0\le s_i \le 1}{\mathrm{min}} \sum_{i,j=1}^{n} (\Vert x_i - x_j \Vert_2^2 s_{ij} + \gamma s_{ij}^2) \tag{1}</script><p> 其中第二项相当于正则化项，表示在不考虑数据的距离信息情况下，每个数据点$x_i$与其他点的邻近概率趋向于$\frac{1}{n}$（算术平均数≤平方平均数），以此作为一个先验的邻近分配。</p>
+<p> 进一步，将$d_{ij}^x = \Vert x_i - x_j \Vert_2^2$代入，则$(1)$式可转化为：</p>
+<script type="math/tex; mode=display">\underset{\forall i,s_i^T \mathbf{1} = 1,0\le s_i \le 1}{\mathrm{min}} \Big\Vert s_i + \frac{1}{2\gamma}d_i^x \Big\Vert_2^2 \tag{2}</script></li>
+<li><p>诱导连通分量为$c$个（即将数据聚为$c$簇）。</p>
+<p> 将$(1)$式中得到的$S\in \mathbb{R}^{n\times n}$看作图节点的相似矩阵，每个节点$i$被赋值为$f_i \in \mathbb{R}^{1\times c}$，有：</p>
+<script type="math/tex; mode=display">\sum^n_{i,j=1} \Vert f_i - f_j \Vert_2^2s_{ij} = 2Tr(F^TL_SF) \tag{3}</script><p> 若相似矩阵$S$为非负的，那么拉普拉斯矩阵满足一个重要性质：</p>
+<blockquote>
+<p>定理1<br>在拉普拉斯矩阵$L_S$中，特征根0的重数等于图的相似矩阵$S$的连通分量个数。</p>
+</blockquote>
+<p> 也就是说，我们可以通过约束$rank(L_S) = n-c$来得到很好的聚类结构。而不需要进行$K$-means或者其他离散化程序。因此，结合(1)式，得到：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ J_{opt} = \underset{S}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2)
+ \\
+ s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1,rank(L_S) = n - c
+ \end{gathered} \tag{4}</script></li>
+<li><p>对于$(4)$式的优化算法。</p>
+<p> 设$\sigma_i(L_S)$是$L_S$最小的第$i$个特征值，且因为$L_S$为半正定的，$\sigma_i(L_S)\ge 0$。则可引入一个足够大的$\lambda$，将$(4)$式转化为：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2) + 2\lambda \sum \sigma_i(L_S)
+ \\
+ s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1
+ \end{gathered} \tag{5}</script><p> 根据<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1063126/?page=4" target="_blank" rel="noopener">Ky Fan定理</a>，我们可以得到：</p>
+<script type="math/tex; mode=display">
+ \sum_{i=1}^c \sigma_i(L_S) = \underset{F \in \mathbb{R}^{n \times c},F^T F = I} {\min} Tr(F^T L_S F) \tag{6}</script><p> 将$(6)$式代入$(5)$式，有：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S,F}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2) + 2\lambda Tr(F^TL_SF)
+ \\
+ s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1 ,F\in\mathbb{R}^{n\times c},F^TF =I 
+ \end{gathered}\tag{7}</script><p> 这样一来，问题就简单了很多。我们可以先固定$S$，那么$(7)$式变成了：</p>
+<script type="math/tex; mode=display">\underset{F \in \mathbb{R}^{n \times c},F^T F = I} {\min} Tr(F^T L_S F) \tag{8}</script><p> 我们对$(8)$式求的$F$其实就是$L_S$最小的$c$个特征值所对应的特征向量。然后固定$F$，那么$(7)$式就变成了：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2) + 2\lambda Tr(F^TL_SF)
+ \\
+ s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1    
+ \end{gathered} \tag{9}</script><p> 根据$(3)$式，有：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2 + 2\lambda \Vert f_i - f_j\Vert_2^2 s_{ij})
+ \\
+ s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1     
+ \end{gathered}\tag{10}</script><p> 注意$d<em>{ij}= d^x</em>{ij} + \lambda d^f<em>{ij}$，其中$d</em>{ij}^x = \Vert x<em>i - x_j \Vert_2^2$，$d</em>{ij}^f = \Vert f_i - f_j \Vert_2^2$。根据$(2)$式，有：</p>
+<script type="math/tex; mode=display">\underset{\forall i,s_i^T \mathbf{1} = 1,0\le s_i \le 1}{\mathrm{min}} \Big\Vert s_i + \frac{1}{2\gamma}d_i \Big\Vert_2^2 \tag{11}</script><p> 其中$s<em>i$和$d_i$分别为$S$和$d</em>{ij}$的第$i$列向量。</p>
+<p> 综上，交替迭代$(8)$和$(11)$式更新$F$和$S$即可。</p>
+</li>
+</ol>
+<h1 id="3-联系-K-means"><a href="#3-联系-K-means" class="headerlink" title="3 联系$K$-means"></a>3 联系$K$-means</h1><blockquote>
+<p>引理1<br>$HD^xH =-2HXX^TH$</p>
+</blockquote>
+<p>证明：</p>
+<p>中心矩阵定义为：</p>
+<script type="math/tex; mode=display">H = I - \frac{1}{n}\mathbf{1}\mathbf{1}^T \tag{12}</script><p>由$d^x_{ij} =\Vert x_i -x_j \Vert_2^2 = x_i^Tx_i +x_j^Tx_j -2x_i^Tx_j$，可得：</p>
+<script type="math/tex; mode=display">D^x = Diag(XX^T) \mathbf{1} \mathbf{1}^T + \mathbf{1}\mathbf{1}^TDiag(XX^T) - 2XX^T \tag{13}</script><p>同时注意$H\mathbf{1} = \mathbf{1}^TH = 0$，则对$(13)$式左乘右乘$H$，得证。</p>
+<blockquote>
+<p>定理2<br>当$\gamma \rightarrow \infty$时，$(4)式$等价于$K$-means问题。</p>
+</blockquote>
+<p>证明：</p>
+<p>将$(4)$式写成矩阵形式：</p>
+<script type="math/tex; mode=display">\underset{S\mathbf{1},S\ge0,rank(L_S)=n-c}{\mathrm{min}} Tr(S^TD^x) + \gamma \Vert S \Vert^2_F \tag{14}</script><p>由于$rank(L_S) = n- c$，那么解$S$有确切的$c$个连通分量，也就是$S$经过适当变换之后可以写成块对角的形式，例如：</p>
+<script type="math/tex; mode=display">\left(\begin{matrix}
+    S_1 & 0 & 0\\
+    0 & S_2 & 0\\
+    0 & 0 & S_3
+\end{matrix}\right)</script><p>第$i$个连通分量$S_i \in \mathbb R^{n_i\times n_i}$，其中$n_i$为该连通分量中的数据个数。那么$(14)$式可转化为对每个连通分量$i$：</p>
+<script type="math/tex; mode=display">\underset{S_i\mathbf{1},S_i\ge0}{\mathrm{min}} Tr(S_i^TD_i^x) + \gamma \Vert S_i \Vert^2_F \tag{15}</script><p>当$\gamma \rightarrow \infty$时，$(15)$式就转化为：</p>
+<script type="math/tex; mode=display">\underset{S_i\mathbf{1},S_i\ge0}{\mathrm{min}} \gamma \Vert S_i \Vert^2_F \tag{16}</script><p>那么$(16)$的最优解就是$S_i$的所有元素都等于$\frac{1}{n_i}$。</p>
+<p>因此，当$\gamma \rightarrow \infty$时，$(14)$式的最优解$S$应该是这样的：</p>
+<script type="math/tex; mode=display">
+s_{ij}  =  \begin{cases}
+    \frac{1}{n_k} \ \ \ \ x_i,x_j \ \text{are in the same component }k\\
+    \ 0 \ \ \ \ \  \text{otherwise}
+\end{cases} \tag{17}</script><p>也就是说对于每一个最优的划分$\mathcal{V}$来说，总有$\Vert S \Vert_F^2 = c$。到了这里发现$(14)$式的第二项在后续的优化过程中是个常数，$(14)$式可写为：</p>
+<script type="math/tex; mode=display">\underset{S\in \mathcal{V}}{\mathrm{min}} \ Tr(S^TD^x) \tag{18}</script><p>其中$S$为对称阵，且$\mathbf{1}^T S = \mathbf{1}^T$，再结合$(12)$式。可知：</p>
+<script type="math/tex; mode=display">Tr(HD^xHS) = Tr(D^xS)- \frac{1}{n}\mathbf{1}^TD^x\mathbf{1} \tag{19}</script><p>那么根据$(19)$式，$(18)$式可写为：</p>
+<script type="math/tex; mode=display">\underset{S\in \mathcal{V}}{\mathrm{min}} \ Tr(HD^xHS) \tag{20}</script><p>定义一个标签矩阵$Y \in \mathbb{R}^{n\times c}$，其中：</p>
+<script type="math/tex; mode=display">y_{ij}  =  \begin{cases}
+    \frac{1}{\sqrt {n_k}} \ \ \ \ x_i \ \text{belongs to the }k\text{-th component}\\
+    \ \ 0 \ \ \ \ \ \ \text{otherwise}
+\end{cases} \tag{21}</script><p>结合$(20)(21)$式和引理1，可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    &\underset{S\in \mathcal{V}}{\mathrm{min}} \ Tr(HD^xHS)  \\
+    &\Leftrightarrow \underset{S\in \mathcal{V}}{\mathrm{max}} \ Tr(HXX^THS) \\
+    &\Leftrightarrow \underset{S\in \mathcal{V}}{\mathrm{max}} \ Tr(X^THSHX) \\
+    &\Leftrightarrow \underset{S\in \mathcal{V}}{\mathrm{min}} \ Tr(X^TH(I-S)HX) \\
+    &\Leftrightarrow \underset{Y}{\mathrm{min}} \ Tr(X^TH(I-YY^T)HX) \\
+    &\Leftrightarrow \underset{Y}{\mathrm{min}} \ Tr(S_w) 
+\end{aligned}\tag{22}</script><p>终于得证了当$\gamma \rightarrow \infty$时，这就是一个实打实的$K$-means问题。当标签$Y$已知时，$S_w$其实就是线性判别分析(LDA)中的类内散度矩阵。而$K$-means就是要找到一个最优的$Y$来使得$S_w$的迹最小。</p>
+<p>值得注意的是，尽管$\gamma \rightarrow\infty$时，算法只能用来解决$K$-means问题（对数据进行球形分区），但是当$\gamma$不是很大的时候，还是能解决任意形状的分区问题的。牛批！</p>
+<h1 id="4-联系谱聚类"><a href="#4-联系谱聚类" class="headerlink" title="4 联系谱聚类"></a>4 联系谱聚类</h1><p>当给定图的相似矩阵$S$时，谱聚类要解决的问题是：</p>
+<script type="math/tex; mode=display">\underset{F \in \mathbb{R}^{n \times c},F^T F = I} {\min} Tr(F^T L_S F) \tag{23}</script><p>与$(8)$式一样，最优解$F$就是由拉普拉斯矩阵$L_S$中最小的$c$个特征值所对应的特征向量组成的。</p>
+<p>通常，在给定$S$后求得的$F$并不能直接用来聚类，因为$S$没有给出明确的连通分量个数$c$。也就是需要对$F$进行$K$-means或其他离散化过程才能得到最终的聚类结果。</p>
+<p>但是在本文的模型中，$F$和$S$是交替优化的。当最终收敛时，$(23)$式求出来$F$，$S$同时也被求得。并且得益于$rank(L_S) = n -c$这一约束，学得的$S$有明确的连通分量个数$c$。所以$F$直接就是聚类的结果，不需要像传统的谱聚类一样再对$F$聚类。</p>
+<p>因此，最优解$F$可以被写为：</p>
+<script type="math/tex; mode=display">F =YQ \tag{24}</script><p>其中$Y\in \mathbb{R}^{n \times c}$就是$(21)$式中定义的标签矩阵；$Q \in \mathbb{R}^{c \times c}$是任意的正交矩阵。意思是$rank(F) = c$，也就是说本文模型得到的$F$直接就是聚类的结果。</p>
+<p>可以看到，传统的谱聚类只能在给定相似矩阵$S$时来求$F$，并且还需要对$F$再聚类才能得到结果。而本文算法不仅不需要给定$S$，还能生成一个自适应的$S$。厉害！</p>
+<h1 id="5-确定-gamma-的值"><a href="#5-确定-gamma-的值" class="headerlink" title="5 确定$\gamma$的值"></a>5 确定$\gamma$的值</h1><p>众所周知，调好超参就等于成功了一半。在本文的模型中，$\gamma$恐怕是最难缠的了，其跨度是$[0,\infty)$，想想都头疼。于是作者做了下面的工作大大减少了死于调参的脑细胞。</p>
+<p>对于$(7)$式中的$\gamma$，可以将$(7)$式等价于$(2)$式。$(2)$式的拉格朗日函数为：</p>
+<script type="math/tex; mode=display">\mathcal{L}(s_i,\eta,\beta_i) = \frac{1}{2}\Big\Vert s_i + \frac{d_i^x}{2\gamma_i} \Big\Vert_2^2- \eta (s_i^T \mathbf{1} - 1) - \beta_i^Ts_i \tag{25}</script><p>其中$\eta,\beta_i \ge 0$为拉格朗日乘子 。根据$\mathrm{KKT}$条件，最优解$s_i$可被表示为：</p>
+<script type="math/tex; mode=display">s_{ij}= \frac{-d_{ij}^x}{2\gamma_i}+\eta+ \beta_{ij} \tag{26}</script><p>通常关注数据的局部性可以得到更好的效果，最好就是学的一个稀疏的$s_i$，也就是只有$x_i$的$k$个最临近的点才有机会与$x_i$相连。稀疏的相似矩阵$S$另一个好处当然是可以缓解后续的计算压力。</p>
+<p>不失一般性地假设$d<em>{i1}^x,d</em>{i2}^x,\dots,d<em>{in}^x$从小到大排列。如果最优解$s_i$仅有$k$个非零元素，那么根据$(26)$式，我们知道$s</em>{ik}&gt; 0$且$s_{i,k+1} = 0$。因此，可得到：</p>
+<script type="math/tex; mode=display">\begin{cases}
+    -\frac{d_{ik}^x}{2\gamma_i} + \eta + \beta_{ij}> 0\\
+    -\frac{d_{i,k+1}^x}{2\gamma_i} +\eta + \beta_{ij}\le 0
+\end{cases} \tag{27}</script><p>再根据$(26)$式和$s_i^T\mathbf{1} = 1$，我们有：</p>
+<script type="math/tex; mode=display">\begin{aligned}
+    &\sum_{j=1}^k (-\frac{d_{ij}^x}{2\gamma_i}+\eta+\beta_{ij}) = 1\\
+    &\Leftrightarrow \eta+\beta_{ij} = \frac{1}{k} +\frac{1}{2k\gamma_i}\sum_{j=1}^k d_{ij}^x 
+\end{aligned}\tag{28}</script><p>因此对于$(2)$式，为了得到有$k$个非零元素的最优解$s_i$，根据$(27)(28)$式我们可以将$\gamma_i$设为：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+    \frac{k}{2} d_{i k}^{x}-\frac{1}{2} \sum_{j=1}^{k} d_{i j}^{x}<\gamma_{i} \leq \frac{k}{2} d_{i, k+1}^{x}-\frac{1}{2} \sum_{j=1}^{k} d_{i j}^{x}
+    \\
+    \gamma_i = \frac{k}{2}d_{i,k+1}^x -\frac{1}{2}\sum_{j=1}^k d_{ij}^x 
+\end{gathered}\tag{29}</script><p>那么对于所有的$\gamma$，即$\gamma_1,\gamma_2,\dots,\gamma_n$，有：</p>
+<script type="math/tex; mode=display">\gamma = \frac{1}{n}\sum_{i=1}^n \Big( \frac{k}{2}d_{i,k+1}^x - \frac{1}{2} \sum_{j=1}^k d_{ij}^x\Big) \tag{30}</script><p>这样对$\gamma$的调参就转化为了对邻近数$k$的调参，而$k$属于整数集且有直观的含义，效率无疑得到大幅提升。</p>
+<h1 id="6-投影聚类"><a href="#6-投影聚类" class="headerlink" title="6 投影聚类"></a>6 投影聚类</h1><h2 id="6-1-模型框架"><a href="#6-1-模型框架" class="headerlink" title="6.1 模型框架"></a>6.1 模型框架</h2><ol>
+<li><p>为了解决高维数据的聚类问题，作者想找到一个最优的投影子空间，使得利用本文的模型能让数据点在其中可以得到准确的$c$个连通分量结构。</p>
+<p> 注意到总散度矩阵$S_t = X^THX$，其中$H$为$(12)$式定义的中心矩阵。假设我们要学得一个投影矩阵$W\in \mathbb{R}^{d\times m}$。首先我们需要约束子空间$W^TS_tW=I$，实际上就是保留了原空间的协方差，即保证在子空间中数据都是统计意义上不相关的（协方差矩阵其实就等于散度矩阵除以$n-1$）。其次，需要根据$(1)$式来分配近邻。所以要解决的问题可表示为：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+     {\underset{S,W}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2}\right)} \\
+     {s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1, W^{T} S_{t} W=I}
+ \end{gathered} \tag{31}</script><p> 同样的，为了诱导$c$个连通分量，我们通过$rank(L_S) =n -c$来约束$S$，于是学习投影矩阵$W$和学习聚类可以同时进行：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S,W}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2}\right) \\
+ s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1, W^{T} S_{t} W=I,rank(L_S)= n-c      
+ \end{gathered}
+ \tag{32}</script></li>
+<li><p>对于$(32)$式的优化算法。</p>
+<p> 采用$(5)(6)$式同样的trick将$(32)$式转化为：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S,W,F}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2} + 2 \lambda Tr(F^TL_{S}F)\right) \\
+ s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1, W^{T} S_{t} W=I,F\in \mathbb{R}^{n \times c},F^TF = I    
+ \end{gathered}
+ \tag{33}</script><p> 首先固定$S$和$W$，则$F$由拉普拉斯矩阵$L_S$中$c$个最小特征值对应特征向量组成。</p>
+<p> 然后就是固定$F$，$(33)$式变为：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S,W}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2} + 2 \lambda Tr(F^TL_{S}F)\right) \\
+ s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1, W^{T} S_{t} W=I    
+ \end{gathered}
+ \tag{34}</script><p> 接着固定$S$，$(34)$式变为：</p>
+<script type="math/tex; mode=display">
+ \underset{W^TS_tW=I}{\min} \sum_{i,j=1}^n \left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}\tag{35}</script><p> 再根据$(3)$式，$(35)$式变为：</p>
+<script type="math/tex; mode=display">
+ \underset{W^TS_tW=I}{\min} Tr(W^TX^TL_SXW)\tag{36}</script><p> 那么最优解$W$由$S_t^{-1}X^TL_SX$中最小的$m$个特征值所对应的特征向量组成。</p>
+<p> 最后固定$W$，对于$(34)$式有：</p>
+<script type="math/tex; mode=display">
+ \begin{gathered}
+ \underset{S}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2} \right)+ \lambda \sum_{i,j=1}^n \Vert f_i - f_j \Vert_2^2 s_{ij}\\
+ s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1    
+ \end{gathered}
+ \tag{37}</script><p> 注意到$(37)$式中所有$i$都是独立的。且有$d<em>{ij}^{w}= d^{wx}</em>{ij} + \lambda d^{f}<em>{ij}$，其中$d</em>{ij}^{wx} = \Vert W^Tx<em>i - W^Tx_j \Vert_2^2$，$d</em>{ij}^f = \Vert f_i - f_j \Vert_2^2$。$(37)$式可写为向量形式：</p>
+<script type="math/tex; mode=display">\underset{s^T_i=1,0\le s_i \le 1}{\min}\Big\Vert s_i+\frac{1}{2\lambda d^w_i}\Big\Vert_2^2 \tag{38}</script><p> 综上，首先固定$S$和$W$更新$F$，然后固定$F$和$S$根据$(36)$式更新$W$，最后固定$F$和$W$根据$(38)$式更新$S$。</p>
+</li>
+</ol>
+<h2 id="6-2-联系LDA"><a href="#6-2-联系LDA" class="headerlink" title="6.2 联系LDA"></a>6.2 联系LDA</h2><blockquote>
+<p>定理3<br>当$\lambda \rightarrow \infty$时，$(32)$式等价于LDA问题，其中标签也是需要被优化的变量。</p>
+</blockquote>
+<p>证明：</p>
+<p>$(32)$式写成矩阵的形式：</p>
+<script type="math/tex; mode=display">\underset{S \mathbf{1} = \mathbf{1},S\ge0,W^TS_tW=I,rank(L_S)=n-c}{\min}Tr(S^TD^{wx}) +\gamma\Vert S \Vert_F^2 \tag{39}</script><p>同样最优解$S$由于$rank(L_S) = n -c$的缘故，可以变换后得到一个分块对角阵，对每一个连通分量$i$有：</p>
+<script type="math/tex; mode=display">\underset{S \mathbf{1} = \mathbf{1},S\ge0,W^TS_tW=I}{\min}Tr(S_i^TD^{wx}) +\gamma\Vert S_i \Vert_F^2 \tag{40}</script><p>当$\lambda \rightarrow \infty$时，$(40)$式变成了：</p>
+<script type="math/tex; mode=display">\underset{S_i\mathbf{1}= \mathbf{1},S_i \ge 0}{\min} \Vert S_i \Vert_F^2 \tag{41}</script><p>那么对于最优解$S$，其分块$S_i$的每一个元素都等于$\frac{1}{n_i}$。</p>
+<p>也就说当$\lambda \rightarrow \infty$时，每一个满足最优解的划分$\mathcal{V}$，都有：</p>
+<script type="math/tex; mode=display">\underset{S\in \mathcal{V},W^TS_tW=I}{\min} Tr(HD^wxHS) \tag{42}</script><p>最后结合$(42)$式和引理1，有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    &\underset{S\in \mathcal{V},W^TS_tW=I}{\mathrm{min}} \ Tr(HD^{wx}HS) \\
+    &\Leftrightarrow \underset{S\in \mathcal{V},W^TS_tW=I}{\mathrm{max}} \ Tr(HXWW^TX^THS) \\
+    &\Leftrightarrow \underset{S\in \mathcal{V},W^TS_tW=I}{\mathrm{max}} \ Tr(W^TX^THSHXW) \\
+    &\Leftrightarrow \underset{S\in \mathcal{V},W^TS_tW=I}{\mathrm{min}} \ Tr(W^TX^TH(I-S)HXW) \\
+    &\Leftrightarrow \underset{Y,W^TS_tW=I}{\mathrm{min}} \ Tr(W^TX^TH(I-YY^T)HXW) \\
+    &\Leftrightarrow \underset{Y,W^TS_tW=I}{\mathrm{min}} \ Tr(W^TS_wW) 
+\end{aligned} \tag{43}</script><p>如果标签矩阵$Y$已知，那么$(43)$式就等价于LDA问题。因此当$\lambda \rightarrow \infty$时，本文的模型可以解决标签矩阵未知的LDA问题。</p>
+<p>当$\gamma$不是很大时，$(36)$式中的矩阵$X^TL_SX$可以被视为局部类散度矩阵。在这种情况下，模型可以看作是基于局部散度矩阵的LDA方法的无监督版本，而LDA方法是为处理多模态非高斯数据而设计的。</p>
+<h1 id="7-思考"><a href="#7-思考" class="headerlink" title="7 思考"></a>7 思考</h1><ol>
+<li><p>先说一下读这篇论文的感受。一开始拿到论文，因为不熟悉的聚类领域，认真看了INTRODUCTION。然后就开始懵逼了，这么多公式，推理向的论文简直让人头大。可能是因为看西瓜书看怕了，最怕就是前面还是<code>1+1</code>，后面就变成了<code>@#￥%</code>。但是一路看下来，论文推导写的意外的流畅，看得舒爽无比。看完模型后其实没有感觉有多厉害，然而没有对比就没有伤害，后面作者把自己的模型联系到$K$-means和谱聚类，让二者直接成为了模型的一种特例时，简直激动到爆炸。膜拜！</p>
+<p> 感慨万千，数学功底真的是无比重要，关键时刻旁征博引，各种定理引理张口就莱，打通了论文的任督二脉，狼人话不多，直接两开花。</p>
+</li>
+<li><p>关于均值不等式。</p>
+<p> 如果$x<em>{1},x</em>{2},\ldots ,x_{n}$是正数，则有$H_n \le G_n \le A_n \le Q_n$，其中：</p>
+<script type="math/tex; mode=display">
+ H_n = \dfrac{n}{\displaystyle \sum_{i=1}^{n} \dfrac{1}{x_i}} = \dfrac{n}{\dfrac{1}{x_1}+\dfrac{1}{x_2}+\cdots+\dfrac{1}{x_n}}</script><script type="math/tex; mode=display">
+ G_n=\sqrt[n]{\prod_{i=1}^nx_i}=\sqrt[n]{x_1x_2\cdots x_n}</script><script type="math/tex; mode=display">
+ A_n = \dfrac{\displaystyle \sum_{i=1}^{n} x_i }{n} = \dfrac{x_1+x_2+\cdots+x_n}{n}</script><script type="math/tex; mode=display">
+ Q_n = \sqrt{\dfrac{\displaystyle \sum_{i=1}^{n} x_i^2}{n}} = \sqrt{\dfrac{x^2_1+x^2_2+\cdots+x^2_n}{n}}</script><p> 当且仅当$x<em>{1}=x</em>{2}=\cdots =x_{n}$，等号成立。</p>
+<p> 即对这些正数：调和平均数 ≤ 几何平均数 ≤ 算术平均数 ≤ 平方平均数</p>
+</li>
+<li><p>关于迹的运算。对于$A<em>{n\times n },B</em>{n\times n },C_{n\times n }$有：</p>
+<ul>
+<li>$Tr(AB) = Tr(BA)$</li>
+<li>$Tr(ABC) = Tr(CAB) = Tr(BCA)$</li>
+<li>$Tr(A) = Tr(A^T)$</li>
+<li>$Tr(a) = a, a \in \mathcal{R}$</li>
+<li>$\bigtriangledown_A Tr(AB) = B^T$</li>
+<li>$\bigtriangledown_A Tr(A^TBA) = (B+B^T)A$</li>
+<li>$\bigtriangledown_A T r(ABA^TC) = CAB + C^TAB^T$</li>
+</ul>
+</li>
+<li><p>关于$\mathrm{KKT}$条件（详见李航《统计学习方法》附录C）。</p>
+</li>
+<li><p>可以利用算法到迁移学习中。比如谱聚类中，我们能否利用算法生成的自适应的$S$作为监督学习。</p>
+</li>
+<li><p>2019年4月3日 VALSE Webinar 中听了报告嘉宾的两篇论文：《Image Translation for Domain Adaptation and Generalization》、《Image Translation for Domain Adaptation and Generalization》。然后Panel嘉宾（龙明盛、段立新）的进行了一些讨论。</p>
+<p> 简单规划一下读论文的方向：</p>
+<ul>
+<li>了解一下负迁移，样本迁移，参数迁移的相关论文。</li>
+<li>了解迁移模型的选择工作、迁移模型的交叉验证。</li>
+<li>侧重关注关系迁移，元学习的论文。</li>
+<li>关注杨强教授的研究，读他的经典论文。</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.493Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2019/04/07/Paper-Notes-4/" target="_blank" rel="external">http://yvanzh.top/2019/04/07/Paper-Notes-4/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clustering/">Clustering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&title=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&title=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/07/Paper-Notes-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/08/Hexo-Top/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hexo 之 Indigo 主题博客置顶</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/03/Hexo-Backup/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo 之博客备份</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&title=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&title=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/07/Paper-Notes-4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Clustering and Projected Clustering with Adaptive Neighbors》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/07/Paper-Notes-4/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/07/Paper-Notes-4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aS07EQAwFQO5/6WGLBAnPdkAad2WFRumkKwvjT398xNfr9vp6z/3a73d+X3X1nAcuDAyMt2XkW7z65WpVvul7ZPIWDAyMExhXESwPgtWt5Gvv34WBgYGRp32TwN17LwYGBsYk4PZK2WphjIGBcRqj2krLS82kcO09GQMD4xxG3nX//7//ZL6BgYHxVoxX8aqufTa8Xr4FAwNjNaNaoOZpWXJnoUBNno+BgXEMY9LEz8HJIDP/HBgYGCcwkjIyT/WqlWYOSNgYGBj7GL0CNS9Eq5hmcomBgbGakad0vV96BfDoCAgGBsY6Rh7U7tv984Rv9AkwMDBWM/J0rTrgrH6y6tt/+EwYGBhLGYkyGRU8FZR7T8bAwNjNmByVmDfIkvHDqBjGwMBYx5gcm5gMLH/pAhZbexgYGPsY+TGsXoqW3J8klNFhCwwMjKWMZxtqSSH61P+Hy11hYGAsZVQDaL7FPLzOhwQYGBi7GZM0bnIsrPqxoqYeBgbGUkavEZaH2ura3pgBAwPjNEbeXJu0+ydBuVw9Y2BgrGAkRx/yxC7fepUajQQwMDAWMV7Faz6YnKSVUf2NgYGxjpFfSVCuBuK83VY+44aBgbGOkQfZPAWsFq69ghYDA+M0xiTwVceQPXbhzAgGBgZGTOodC2u28zAwMDDiscHkQGqShj4WcDEwMN6Q8dQxi0nA7SWIGBgYJzDyZfMhQRQ64wYfBgbGAYxPaJeTYVF/Fh4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script> -->
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

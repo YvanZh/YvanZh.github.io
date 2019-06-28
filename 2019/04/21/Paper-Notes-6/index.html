@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?c61262c25ca5d4ed66df331a31b5bf49"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <meta name="baidu-site-verification" content="HnoV7q61W5">
+    
+    
+    
+    <title>Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Clustering,Spectral Clustering">
+    <meta name="keywords" content="Clustering,Spectral Clustering">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph">
+<meta property="og:url" content="http://yvanzh.top/2019/04/21/Paper-Notes-6/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g23ounx6imj31hc12c1aw.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2aj0qrgh5j30q70myjui.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2bdhhoz27j30q60ixq5j.jpg">
+<meta property="og:updated_time" content="2019-06-28T13:50:57.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g23ounx6imj31hc12c1aw.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-21T13:15:54.000Z" itemprop="datePublished" class="page-time">
+  2019-04-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-简介"><span class="post-toc-text">1 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-基本框架"><span class="post-toc-text">2 基本框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-谱聚类"><span class="post-toc-text">2.1 谱聚类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-基本模型"><span class="post-toc-text">2.2 基本模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-优化算法"><span class="post-toc-text">2.3 优化算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-收敛性分析"><span class="post-toc-text">2.4 收敛性分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-半监督框架"><span class="post-toc-text">3 半监督框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-问题描述"><span class="post-toc-text">3.1 问题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-优化算法"><span class="post-toc-text">3.2 优化算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-收敛性分析"><span class="post-toc-text">3.3 收敛性分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-思考"><span class="post-toc-text">4 思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Paper-Notes-6" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-21 21:15:54" datetime="2019-04-21T13:15:54.000Z" itemprop="datePublished">2019-04-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g23ounx6imj31hc12c1aw.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p><a href="https://ieeexplore.ieee.org/abstract/document/6126506/" target="_blank" rel="noopener">文章来源</a>：2011-ICCV</p>
+<p>文章主旨:</p>
+<p>由于图拉普拉斯无法直接得到好的聚类结构，后续需要利用$K$-means来进行聚类。然而$K$-means聚类容易局部收敛，且得到非唯一的聚类结果。</p>
+<p>对于半监督学习来说，图拉普拉斯一般使用的都是采用的<strong>二次型的图嵌入</strong>（TODO），然而这种方式对噪声和异常值敏感。</p>
+<p>作者提出一种$\ell_1$范数约束的谱聚类框架，且扩展了一个半监督学习模型，并证明了其收敛性。</p>
+<h1 id="2-基本框架"><a href="#2-基本框架" class="headerlink" title="2 基本框架"></a>2 基本框架</h1><h2 id="2-1-谱聚类"><a href="#2-1-谱聚类" class="headerlink" title="2.1 谱聚类"></a>2.1 谱聚类</h2><p>对于$Q = \left[q<em>{1}, q</em>{2}, \cdots, q<em>{c}\right] \in \mathbb{R}^{n \times c}$，$q</em>{k} \in \mathbb{R}^{n \times 1}$为$Q$的第$k$列。</p>
+<p>Graph Ratio Cut：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+  \min _{Q^{T} Q=I} \operatorname{Tr}\left(Q^{T} L Q\right) \\
+
+  q_k = (0, \cdots, 0, \overbrace{\frac{1}{\sqrt{n_{k}}}, \cdots, \frac{1}{\sqrt{n_{k}}}}^{n_k}, 0, \cdots, 0)^{T}
+\end{gathered} \tag{1}</script><p>Graph Normalized Cut：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+  \min _{Q^{T}DQ=I} \operatorname{Tr}\left(Q^{T} L Q\right)  \\
+
+  q_{k}=(0, \cdots, 0, \overbrace{\frac{1}{\sqrt{q_{k}^{T} D q_{k}}}, \cdots, \frac{1}{\sqrt{q_{k}^{T} D q_{k}}}}^{n_k}, 0, \cdots, 0)^{T} 
+\end{gathered} \tag{2}</script><p>详情可参见<a href="https://www.cnblogs.com/pinard/p/6221564.html" target="_blank" rel="noopener">谱聚类（spectral clustering）原理总结</a>一文。</p>
+<h2 id="2-2-基本模型"><a href="#2-2-基本模型" class="headerlink" title="2.2 基本模型"></a>2.2 基本模型</h2><p>将$(2)$式写为：</p>
+<script type="math/tex; mode=display">
+\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{3}</script><p>$Q$的理想解就是当$x<em>i,x_j$属于同一类时，使得$q^i = q^j$。也就是说$Q$的许多行都是相等的，这样就有了很强的聚类结构。那么我们想要很多对$(i,j)$有$\left|q^{i}-q^{j}\right|</em>{2}=0$，那么用$\ell_1$范数来解决这个问题也是等价的：</p>
+<script type="math/tex; mode=display">
+\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2} \tag{4}</script><p>设一个$n^2$维向量$p$，其$((i-1)*n+j)$个元素为$W<em>{i j}\left|q^{i}-q^{j}\right|</em>{2}$。那么我们将$(4)$式写为：</p>
+<script type="math/tex; mode=display">
+\min _{Q^{T} D Q=I}\|p\|_{1} \tag{5}</script><p>这样我们可以直观地知道$p$的元素会由于$\ell_1$范数的约束而变得稀疏，也就为$Q$提供了一个理想的聚类结果。</p>
+<h2 id="2-3-优化算法"><a href="#2-3-优化算法" class="headerlink" title="2.3 优化算法"></a>2.3 优化算法</h2><p>$(4)$式的拉格朗格日函数为：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}(Q)=\sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}-\operatorname{Tr}\left(\Lambda\left(Q^{T} D Q-I\right)\right) \tag{6}</script><p>设拉普拉斯矩阵$\widetilde{L} = \widetilde{D} -\widetilde{W}$，$\widetilde{D}$为第$i$个元素为$\sum<em>j\widetilde{W}</em>{ij}$的对角阵，$\widetilde{W}$为：</p>
+<script type="math/tex; mode=display">
+\widetilde{W}_{i j}=\frac{W_{i j}}{2\left\|q^{i}-q^{j}\right\|_{2}} \tag{7}</script><p>那么$\mathcal{L}(Q)$对$Q$的偏导为零时，有：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(Q)}{\partial Q}=\widetilde{L} Q-D Q \Lambda=\mathbf{0} \tag{8}</script><p>也就是说解$Q$为$D^{-1}\widetilde{L}$的特征值。注意到$D^{-1}\widetilde{L}$又依赖于$Q$，于是可以通过迭代来得到$Q$的局部最优解。</p>
+<h2 id="2-4-收敛性分析"><a href="#2-4-收敛性分析" class="headerlink" title="2.4 收敛性分析"></a>2.4 收敛性分析</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2aj0qrgh5j30q70myjui.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<blockquote>
+<p>引理1<br>对任意非零向量$q$，$q_t \in \mathcal{R}^c$，有：</p>
+<script type="math/tex; mode=display">\|q\|_{2}-\|q\|_{2}^{2} / 2\left\|q_{t}\right\|_{2} \leq\left\|q_{t}\right\|_{2}-\left\|q_{t}\right\|_{2}^{2} / 2\left\|q_{t}\right\|_{2} \tag{9}</script></blockquote>
+<p>我们需要利用引理1来证明算法可以收敛。</p>
+<blockquote>
+<p>定理1<br>算法1会在每次迭代中单调地降低问题$(4)$的目标，并接近于问题的局部最优。</p>
+</blockquote>
+<p>证明：</p>
+<p>根据算法1的第二步，可知：</p>
+<script type="math/tex; mode=display">
+Q_{t+1}=\arg \min _{Q^{T} D Q=I} \sum_{i, j=1}^{n}(\widetilde{W}_{t})_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{10}</script><p>又$\left(\widetilde{W}<em>{t}\right)</em>{i j}=\frac{W<em>{i j}}{2\left|q</em>{t}^{i}-q<em>{t}^{j}\right|</em>{2}}$，那么：</p>
+<script type="math/tex; mode=display">
+\sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}} \leq \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}} \tag{11}</script><p>根据引理1，可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} & \sum_{i, j=1}^{n} W_{i j}\left(\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}-\frac{\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}\right) \\ & \leq \sum_{i, j=1}^{n} W_{i j}\left(\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}-\frac{\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}\right) \end{aligned} \tag{12}</script><p>结合$(11)(12)$式，可得：</p>
+<script type="math/tex; mode=display">
+\sum_{i, j=1}^{n} W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2} \leq \sum_{i, j=1}^{n} W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2} \tag{13}</script><p>因此，算法1将在每次迭代$t$中单调地降低问题$(4)$的目标，直到算法收敛。当达到收敛时，$(13)$式等号成立，则$Q_t$和$\widetilde{L}_t$将满足$(8)$式，也就是问题$(4)$的$\text{KKT}$条件。定理1得证。</p>
+<h1 id="3-半监督框架"><a href="#3-半监督框架" class="headerlink" title="3 半监督框架"></a>3 半监督框架</h1><h2 id="3-1-问题描述"><a href="#3-1-问题描述" class="headerlink" title="3.1 问题描述"></a>3.1 问题描述</h2><p>设$Y=[\left(y^{1}\right)^{T},\left(y^{2}\right)^{T}, \cdots,\left(y^{n}\right)^{T}] \in \mathbb{R}^{n \times c}$为初始的标签矩阵。若$x_i$为无标签数据，则$y^i=0$。若$x_i$为$k$类，则$y^i$的第$k$个元素为1，否则为0。</p>
+<p>传统的半监督学习需要解决的问题如下：</p>
+<script type="math/tex; mode=display">
+\min _{Q} \operatorname{Tr}\left(Q^{T} L Q\right)+\operatorname{Tr}(Q-Y)^{T} U(Q-Y) \tag{14}</script><p>其中$L$为拉普拉斯矩阵，$U$为控制$x_i$初始标签$y^i$的影响程度的对角阵（相当于超参），$Q \in \mathcal{R}^{n \times c}$为需要求解的标签矩阵。</p>
+<p>类似的$(14)$式可写为：</p>
+<script type="math/tex; mode=display">
+\min _{Q} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2}+\operatorname{Tr}(Q-Y)^{T} U(Q-Y) \tag{15}</script><p>为了得到最优解$Q$，我们需要解决以下半监督分类问题（注意这个用的是$\ell_1$范数）：</p>
+<script type="math/tex; mode=display">
+\min _{Q} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}+\operatorname{Tr}(Q-Y)^{T} U(Q-Y) \tag{16}</script><h2 id="3-2-优化算法"><a href="#3-2-优化算法" class="headerlink" title="3.2 优化算法"></a>3.2 优化算法</h2><p>$(16)$式对$Q$求偏导为零时有：</p>
+<script type="math/tex; mode=display">
+\widetilde{L} Q+U(Q-Y)=\mathbf{0} \Rightarrow Q=(\widetilde{L}+U)^{-1} U Y \tag{17}</script><h2 id="3-3-收敛性分析"><a href="#3-3-收敛性分析" class="headerlink" title="3.3 收敛性分析"></a>3.3 收敛性分析</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2bdhhoz27j30q60ixq5j.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<blockquote>
+<p>定理1<br>算法2会在每次迭代中单调地降低问题$(16)$的目标，并接近于问题的局部最优。</p>
+</blockquote>
+<p>证明：</p>
+<p>设$f(Q)=\operatorname{Tr}(Q-Y)^{T} U(Q-Y)$，据算法2的第二步可知：</p>
+<script type="math/tex; mode=display">
+Q_{t+1}=\arg \min _{Q} \sum_{i, j=1}^{n}\left(\tilde{W}_{t}\right)_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2}+f(Q) \tag{18}</script><p>注意到$(\tilde{W}<em>{t})</em>{i j}=\frac{W<em>{i j}}{2\left|q</em>{t}^{i}-q<em>{t}^{j}\right|</em>{2}}$，则：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} & \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}+f\left(Q_{t+1}\right) \\ & \leq \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}+f\left(Q_{t}\right) \end{aligned} \tag{19}</script><p>将$(19)$式和$(12)$式两边求和，可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} & \sum_{i, j=1}^{n} W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}+f\left(Q_{t+1}\right) \\ & \leq \sum_{i, j=1}^{n} W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}+f\left(Q_{t}\right) \end{aligned} \tag{20}</script><p>因此，算法2在每次迭代$t$中单调地降低问题$(16)$的目标，收敛时$Q_t$和$L_t$满足$(17)$式。由于问题$(16)$是一个凸优化问题，满足式$(17)$表明$Q_t$是问题$(16)$的全局最优解。因此，算法2收敛到问题$(16)$的全局最优。定理2得证。</p>
+<h1 id="4-思考"><a href="#4-思考" class="headerlink" title="4 思考"></a>4 思考</h1><ol>
+<li><p>本文模型简单来说就是在Normalized Cut谱聚类的基础上，将$\ell_2$范数约束项的平方等价为了一个$\ell_1$范数，目的是为了构造出一个与$Q$相关的$\widetilde{W}$，从而联系了$Q$和$L$并使得二者交替得以更新。相较于固定$L$的原始Normalized Cut算法来说，$L$的更新无疑带来了算法的提升。说穿了感觉就像是一个优化的小trick造就了一篇顶会。</p>
+</li>
+<li><p>从直观层面谈一谈聚类算法：（TODO）</p>
+<ul>
+<li><p>$K$-means。其一般采用欧氏距离所以只能局限于球形簇。距离度量的不确定性是算是聚类算法的通病。我们需要通过多次尝试，或者精细地分析所研究数据的特点来确定选取何种距离。$K$-means最大的问题是初始化过程对结果的影响非常大，对此有$K$-means++和二分$K$-means改进了初始化过程。而对噪点和异常值十分敏感的问题，出现了抛弃均值而转投中值怀抱的尝试（$K$-mediods）。</p>
+</li>
+<li><p>DESCAN。</p>
+</li>
+<li><p>分层聚类。</p>
+</li>
+<li><p>谱聚类。主要的两个问题，</p>
+</li>
+<li><p>流形聚类。</p>
+</li>
+<li><p>子空间聚类。</p>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-28T13:50:57.497Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2019/04/21/Paper-Notes-6/" target="_blank" rel="external">http://yvanzh.top/2019/04/21/Paper-Notes-6/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clustering/">Clustering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spectral-Clustering/">Spectral Clustering</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&title=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&title=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/21/Paper-Notes-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/25/paper-notes-7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Deep Self-Evolution Clustering</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/15/Journal-0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">引子</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2019
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&title=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&title=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/21/Paper-Notes-6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Unsupervised and Semi-Supervised Learning via ℓ1-Norm Graph》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/21/Paper-Notes-6/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/21/Paper-Notes-6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOUlEQVR42u3aSW7DQAwFUd3/0goQZBMkbdUnpSBml1aGraGfFnRzOA58nJ/Hz8+rX1ffvD5zdf/bDhkyZLwt43x5kKXU2OSeZG0yZMjYh0GW8vpMHkzJovnaZMiQISMNggTAf5UhQ4aMDoPkkp3NogwZMmTUklgeQNOtHtmS3paLy5Ah4w0ZncbA05//qL8hQ4aMf8w4w+O5sFhLkr+ukiFDxmhGLYGsNSNJgyGNrkcnD5YhQ8abMGpDWumiSWmvdudv/xsyZMgYyugMW3TKbbWBsIt0V4YMGaMZ5JG1VmXaeEgTYxkyZOzAeHrRnRdU3BTKkCFjHKNWoE+vraWsnRchQ4aMSQySQKbpJb9PrST3y5kyZMjYgEGGKjpNx7u2mMuXKEOGjNEMnjrygS3equSNBB6+ZciQMZXBC228TMYblmkzYPlEGTJkDGXw9JIX6/nrSAP6ciUyZMgYzeAtAb7Ju7eFwDejMmTImMroZL219mS/kBfk3zJkyBjBSJNJHjTjah8IyhdbQxkyZAxl8JDHk1ieEqcjHcvzZciQsQ2jM2xRGwhLg/VF/i1DhoyhjDRd7AxYpGNhfD0yZMiYzTjDoxNk+aBGunGUIUPGbMZd+6t+GS4d7Aj+N2TIkDGCwQtb/JG11gJpf8qQIWNnRtpE5KlsUOLvD1vIkCFje0a6gauNhbW2hjJkyJARBsq0AZAOf8iQIWM3Bk9ia2MQPDUl18qQIWM3Rpo69jeFpBWaluFkyJAxlPEBirI84q0trokAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script> -->
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>
