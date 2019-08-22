@@ -306,8 +306,8 @@
  \underset{S}{\mathrm{min}} \sum_{i,j =1}^n(\Vert x_i - x_j\Vert_2^2s_{ij} + \gamma s_{ij}^2 + 2\lambda \Vert f_i - f_j\Vert_2^2 s_{ij})
  \\
  s.t. \ \ \ \ \forall i,s_i^T\mathbf{1}=1,0\le s_i \le 1     
- \end{gathered}\tag{10}</script><p> 注意$d<em>{ij}= d^x</em>{ij} + \lambda d^f<em>{ij}$，其中$d</em>{ij}^x = \Vert x<em>i - x_j \Vert_2^2$，$d</em>{ij}^f = \Vert f_i - f_j \Vert_2^2$。根据$(2)$式，有：</p>
-<script type="math/tex; mode=display">\underset{\forall i,s_i^T \mathbf{1} = 1,0\le s_i \le 1}{\mathrm{min}} \Big\Vert s_i + \frac{1}{2\gamma}d_i \Big\Vert_2^2 \tag{11}</script><p> 其中$s<em>i$和$d_i$分别为$S$和$d</em>{ij}$的第$i$列向量。</p>
+ \end{gathered}\tag{10}</script><p> 注意$d_{ij}= d^x_{ij} + \lambda d^f_{ij}$，其中$d_{ij}^x = \Vert x_i - x_j \Vert_2^2$，$d_{ij}^f = \Vert f_i - f_j \Vert_2^2$。根据$(2)$式，有：</p>
+<script type="math/tex; mode=display">\underset{\forall i,s_i^T \mathbf{1} = 1,0\le s_i \le 1}{\mathrm{min}} \Big\Vert s_i + \frac{1}{2\gamma}d_i \Big\Vert_2^2 \tag{11}</script><p> 其中$s_i$和$d_i$分别为$S$和$d_{ij}$的第$i$列向量。</p>
 <p> 综上，交替迭代$(8)$和$(11)$式更新$F$和$S$即可。</p>
 </li>
 </ol>
@@ -365,7 +365,7 @@ s_{ij}  =  \begin{cases}
 <p>对于$(7)$式中的$\gamma$，可以将$(7)$式等价于$(2)$式。$(2)$式的拉格朗日函数为：</p>
 <script type="math/tex; mode=display">\mathcal{L}(s_i,\eta,\beta_i) = \frac{1}{2}\Big\Vert s_i + \frac{d_i^x}{2\gamma_i} \Big\Vert_2^2- \eta (s_i^T \mathbf{1} - 1) - \beta_i^Ts_i \tag{25}</script><p>其中$\eta,\beta_i \ge 0$为拉格朗日乘子 。根据$\mathrm{KKT}$条件，最优解$s_i$可被表示为：</p>
 <script type="math/tex; mode=display">s_{ij}= \frac{-d_{ij}^x}{2\gamma_i}+\eta+ \beta_{ij} \tag{26}</script><p>通常关注数据的局部性可以得到更好的效果，最好就是学的一个稀疏的$s_i$，也就是只有$x_i$的$k$个最临近的点才有机会与$x_i$相连。稀疏的相似矩阵$S$另一个好处当然是可以缓解后续的计算压力。</p>
-<p>不失一般性地假设$d<em>{i1}^x,d</em>{i2}^x,\dots,d<em>{in}^x$从小到大排列。如果最优解$s_i$仅有$k$个非零元素，那么根据$(26)$式，我们知道$s</em>{ik}&gt; 0$且$s_{i,k+1} = 0$。因此，可得到：</p>
+<p>不失一般性地假设$d_{i1}^x,d_{i2}^x,\dots,d_{in}^x$从小到大排列。如果最优解$s_i$仅有$k$个非零元素，那么根据$(26)$式，我们知道$s_{ik}&gt; 0$且$s_{i,k+1} = 0$。因此，可得到：</p>
 <script type="math/tex; mode=display">\begin{cases}
     -\frac{d_{ik}^x}{2\gamma_i} + \eta + \beta_{ij}> 0\\
     -\frac{d_{i,k+1}^x}{2\gamma_i} +\eta + \beta_{ij}\le 0
@@ -420,7 +420,7 @@ s_{ij}  =  \begin{cases}
  \underset{S}{\min} \sum_{i,j=1}^n \left(\left\|W^{T} x_{i}-W^{T} x_{j}\right\|_{2}^{2} s_{i j}+\gamma s_{i j}^{2} \right)+ \lambda \sum_{i,j=1}^n \Vert f_i - f_j \Vert_2^2 s_{ij}\\
  s.t. \quad \forall i, s_{i}^{T} \mathbf{1}=1,0 \leq s_{i} \leq 1    
  \end{gathered}
- \tag{37}</script><p> 注意到$(37)$式中所有$i$都是独立的。且有$d<em>{ij}^{w}= d^{wx}</em>{ij} + \lambda d^{f}<em>{ij}$，其中$d</em>{ij}^{wx} = \Vert W^Tx<em>i - W^Tx_j \Vert_2^2$，$d</em>{ij}^f = \Vert f_i - f_j \Vert_2^2$。$(37)$式可写为向量形式：</p>
+ \tag{37}</script><p> 注意到$(37)$式中所有$i$都是独立的。且有$d_{ij}^{w}= d^{wx}_{ij} + \lambda d^{f}_{ij}$，其中$d_{ij}^{wx} = \Vert W^Tx_i - W^Tx_j \Vert_2^2$，$d_{ij}^f = \Vert f_i - f_j \Vert_2^2$。$(37)$式可写为向量形式：</p>
 <script type="math/tex; mode=display">\underset{s^T_i=1,0\le s_i \le 1}{\min}\Big\Vert s_i+\frac{1}{2\lambda d^w_i}\Big\Vert_2^2 \tag{38}</script><p> 综上，首先固定$S$和$W$更新$F$，然后固定$F$和$S$根据$(36)$式更新$W$，最后固定$F$和$W$根据$(38)$式更新$S$。</p>
 </li>
 </ol>
@@ -449,15 +449,15 @@ s_{ij}  =  \begin{cases}
 <p> 感慨万千，数学功底真的是无比重要，关键时刻旁征博引，各种定理引理张口就莱，打通了论文的任督二脉，狼人话不多，直接两开花。</p>
 </li>
 <li><p>关于均值不等式。</p>
-<p> 如果$x<em>{1},x</em>{2},\ldots ,x_{n}$是正数，则有$H_n \le G_n \le A_n \le Q_n$，其中：</p>
+<p> 如果$x_{1},x_{2},\ldots ,x_{n}$是正数，则有$H_n \le G_n \le A_n \le Q_n$，其中：</p>
 <script type="math/tex; mode=display">
  H_n = \dfrac{n}{\displaystyle \sum_{i=1}^{n} \dfrac{1}{x_i}} = \dfrac{n}{\dfrac{1}{x_1}+\dfrac{1}{x_2}+\cdots+\dfrac{1}{x_n}}</script><script type="math/tex; mode=display">
  G_n=\sqrt[n]{\prod_{i=1}^nx_i}=\sqrt[n]{x_1x_2\cdots x_n}</script><script type="math/tex; mode=display">
  A_n = \dfrac{\displaystyle \sum_{i=1}^{n} x_i }{n} = \dfrac{x_1+x_2+\cdots+x_n}{n}</script><script type="math/tex; mode=display">
- Q_n = \sqrt{\dfrac{\displaystyle \sum_{i=1}^{n} x_i^2}{n}} = \sqrt{\dfrac{x^2_1+x^2_2+\cdots+x^2_n}{n}}</script><p> 当且仅当$x<em>{1}=x</em>{2}=\cdots =x_{n}$，等号成立。</p>
+ Q_n = \sqrt{\dfrac{\displaystyle \sum_{i=1}^{n} x_i^2}{n}} = \sqrt{\dfrac{x^2_1+x^2_2+\cdots+x^2_n}{n}}</script><p> 当且仅当$x_{1}=x_{2}=\cdots =x_{n}$，等号成立。</p>
 <p> 即对这些正数：调和平均数 ≤ 几何平均数 ≤ 算术平均数 ≤ 平方平均数</p>
 </li>
-<li><p>关于迹的运算。对于$A<em>{n\times n },B</em>{n\times n },C_{n\times n }$有：</p>
+<li><p>关于迹的运算。对于$A_{n\times n },B_{n\times n },C_{n\times n }$有：</p>
 <ul>
 <li>$Tr(AB) = Tr(BA)$</li>
 <li>$Tr(ABC) = Tr(CAB) = Tr(BCA)$</li>

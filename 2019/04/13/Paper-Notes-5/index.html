@@ -273,7 +273,7 @@ g_G(F) = \frac{1}{2} \sum_{i,j=1}^m \Vert F_{i.} - F_{j.} \Vert^2 S_{ij} +\lambd
 <p>来简单看一下LapRLS/L，它就是将MR对岭回归进行扩展，同时计算岭回归的误差并保留流形平滑度。其表示为：</p>
 <script type="math/tex; mode=display">
 g_M(W,b) = \lambda_A\Vert W \Vert^2 + \lambda_I\operatorname{Tr}r(W^TXLX^TW) + \frac{1}{n} \sum_{i =1}^n \Vert W^Tx_i +b -Y_{i.}^T \Vert^2 \tag{4}</script><h2 id="2-3-SDA"><a href="#2-3-SDA" class="headerlink" title="2.3 SDA"></a>2.3 SDA</h2><p>Semi-Supervised Discriminant Analysis (SDA) 的核心假设依然是流形平滑，也就是在低维空间中相近的点具有相似的特征表示。</p>
-<p>定义$X<em>l = [x_1,x_2,\dots,x_n]$为有标签数据的矩阵。第$i$类的样本数为$n_i$。图相似矩阵$\tilde{S}^w,\tilde{S}^b \in \mathcal{R}^{n\times n}$，其中$\tilde{S}^w</em>{ij}= \delta<em>{y_i,y_j}/n</em>{y<em>i}$，$\tilde{S}^b</em>{ij}= (\frac{1}{n})-\tilde{S}^w_{ij}$。它们分别对应的拉普拉斯矩阵为$\tilde{L}_w$和$\tilde{L}_b$。</p>
+<p>定义$X_l = [x_1,x_2,\dots,x_n]$为有标签数据的矩阵。第$i$类的样本数为$n_i$。图相似矩阵$\tilde{S}^w,\tilde{S}^b \in \mathcal{R}^{n\times n}$，其中$\tilde{S}^w_{ij}= \delta_{y_i,y_j}/n_{y_i}$，$\tilde{S}^b_{ij}= (\frac{1}{n})-\tilde{S}^w_{ij}$。它们分别对应的拉普拉斯矩阵为$\tilde{L}_w$和$\tilde{L}_b$。</p>
 <p>类内散度:</p>
 <script type="math/tex; mode=display">S_w = \sum_{i =1}^n(x_i - \bar{x}_{y_i})(x_i - \bar{x}_{y_i})^T = X_l\tilde{L}_wX_l^T \tag{5}</script><p>类间散度：</p>
 <script type="math/tex; mode=display">S_b = \sum_{l =1}^c n_c ( \bar{x}_l- \bar{x})(\bar{x}_l - \bar{x})^T = X_l \tilde{L}_b X_l^T \tag{6}</script><p>SDA：</p>
@@ -306,7 +306,7 @@ Tr[(X^TW + \mathbf{1}b^T)^T M (X^TW + \mathbf{1}b^T)] \\
 &+ \mu(\Vert W \Vert^2 + \gamma \Vert F_0 \Vert^2)    
 \end{aligned}
  \tag{10}</script><p>其中$M \in \mathcal{R}^{m\times m}$为拉普拉斯矩阵，$U \in \mathcal{R}^{m \times m}$为对角阵。前人也做过一些类似工作，不过都是聚焦于二分类任务。在这里，作者扩展到多类别的降维任务，且类别的独立性可以从提取的特征中捕捉到。</p>
-<p>与LGC、GFHF和LapRLS/L类似，$(10)$式的前两项分别表示标签适配度和流形平滑度。考虑到不同样本（比如$j \neq i$）的预测标签$F<em>i$和给定标签$Y_j$之间的近似是无意义的，因此设定$U$为前$n$个元素和后$m-n$个元素分别为$1$和$0$的对角阵。此外，为了保持流形结构（比如，$F$应该尽可能地在整个图中保持平滑），在半监督学习中$M$应该被设为图的拉普拉斯矩阵。用高斯核函数来计算$M = D - S$，其中$D</em>{ii} = \sum<em>{j}S</em>{ij}$，若$x<em>i$为$x_j$的$k$近邻，$S</em>{ij} = exp(- \Vert x<em>i - x_j \Vert^2/t)$；否则$S</em>{ij} = 0$。</p>
+<p>与LGC、GFHF和LapRLS/L类似，$(10)$式的前两项分别表示标签适配度和流形平滑度。考虑到不同样本（比如$j \neq i$）的预测标签$F_i$和给定标签$Y_j$之间的近似是无意义的，因此设定$U$为前$n$个元素和后$m-n$个元素分别为$1$和$0$的对角阵。此外，为了保持流形结构（比如，$F$应该尽可能地在整个图中保持平滑），在半监督学习中$M$应该被设为图的拉普拉斯矩阵。用高斯核函数来计算$M = D - S$，其中$D_{ii} = \sum_{j}S_{ij}$，若$x_i$为$x_j$的$k$近邻，$S_{ij} = exp(- \Vert x_i - x_j \Vert^2/t)$；否则$S_{ij} = 0$。</p>
 <p>$(10)$式中的后两项用来控制投影矩阵$W$和回归残差$F_0$。相较于LapRLS/L，我们不强制$F$位于训练样本$X$所张成的空间中。因此，我们的框架更灵活，同时也能更好地处理驻留在非线性流形的样本。</p>
 <p>用$F-X^TW -\mathbf{1}b^T$替换$F_0$，那么得到：</p>
 <script type="math/tex; mode=display">
@@ -358,11 +358,11 @@ g(F,W,b) = Tr  \begin{bmatrix}
 <script type="math/tex; mode=display">
 \begin{aligned} F^{*}=& \arg \min _{F} \operatorname{Tr}(F-Y)^{T} U(F-Y) \\ &+\operatorname{Tr}\left(F^{T} M F\right)+\mu\left(\operatorname{Tr}\left(F^{T} A^{T} A F\right)\right.\\ &+\gamma \operatorname{Tr}(B F-F)^{T}(B F-F) ) \end{aligned} \tag{14}</script><p>然后设$(14)$式对$F$偏导为$0$，可得：</p>
 <script type="math/tex; mode=display">
-F=\left(U+M+\mu \gamma(B-I)^{T}(B-I)+\mu A^{T} A\right)^{-1} U Y \tag{15}</script><p>根据$H<em>cH_c = H_c = H_c^T$和$\gamma\mu  A^TXH_cX^TA+\mu A^TA = \gamma \mu A^TXH_c = \gamma\mu H_cX^TA$，$(15)$式中的$\mu \gamma(B-I)^{T}(B-I)+ \mu A^TA$可写为$\mu \gamma\left(A^{T} X-I\right) H</em>{c}\left(X^{T} A-I\right)+ \mu A^TA$。因此可得：</p>
+F=\left(U+M+\mu \gamma(B-I)^{T}(B-I)+\mu A^{T} A\right)^{-1} U Y \tag{15}</script><p>根据$H_cH_c = H_c = H_c^T$和$\gamma\mu  A^TXH_cX^TA+\mu A^TA = \gamma \mu A^TXH_c = \gamma\mu H_cX^TA$，$(15)$式中的$\mu \gamma(B-I)^{T}(B-I)+ \mu A^TA$可写为$\mu \gamma\left(A^{T} X-I\right) H_{c}\left(X^{T} A-I\right)+ \mu A^TA$。因此可得：</p>
 <script type="math/tex; mode=display">
 \begin{aligned} \mu \gamma(B-I)^{T}(B-I)+\mu A^{T} A=& \mu \gamma H_{c}-\mu \gamma^{2} H_{c} X^{T} \\ & \times\left(\gamma X H_{c} X^{T}+I\right)^{-1} X H_{c} \end{aligned} \tag{16}</script><p>根据定义$X_c = XH_c$，我们可以计算预测标签$F$：</p>
 <script type="math/tex; mode=display">
-F=\left(U+M+\mu \gamma H_{c}-\mu \gamma^{2} N\right)^{-1} U Y \tag{17}</script><p>其中$N=X<em>{c}^{T}\left(\gamma X</em>{c} X<em>{c}^{T}+I\right)^{-1} X</em>{c}=X<em>{c}^{T} X</em>{c}\left(\gamma X<em>{c}^{T} X</em>{c}+I\right)^{-1}$。</p>
+F=\left(U+M+\mu \gamma H_{c}-\mu \gamma^{2} N\right)^{-1} U Y \tag{17}</script><p>其中$N=X_{c}^{T}\left(\gamma X_{c} X_{c}^{T}+I\right)^{-1} X_{c}=X_{c}^{T} X_{c}\left(\gamma X_{c}^{T} X_{c}+I\right)^{-1}$。</p>
 <p>综上，首先利用$(17)$式得到最优解$F$，然后根据$(12)$式得到最优解$W,b$。</p>
 <h2 id="3-3-FME-U"><a href="#3-3-FME-U" class="headerlink" title="3.3 FME/U"></a>3.3 FME/U</h2><p>通过设定$(11)$式中的矩阵$U$为$0$可以简单得到FME的无监督版本：</p>
 <script type="math/tex; mode=display">
@@ -372,7 +372,7 @@ F=\left(U+M+\mu \gamma H_{c}-\mu \gamma^{2} N\right)^{-1} U Y \tag{17}</script><
 <script type="math/tex; mode=display">
 \begin{aligned} F^{*}= \arg \min _{F, F^{T} H_{c} F=I} &\operatorname{Tr}\left(F^{T} M F\right)+\mu\left(\operatorname{Tr}\left(F^{T} A^{T} A F\right)\right.\\ &+\gamma \operatorname{Tr}(B F-F)^{T}(B F-F) ) \end{aligned} \tag{19}</script><p>最后根据$(16)$式，可以将$(19)$式写为：</p>
 <script type="math/tex; mode=display">
-\begin{aligned} F^{*} &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M+\mu \gamma H_{c}-\mu \gamma^{2} N\right) F \\ &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M-\mu \gamma^{2} N\right) F \end{aligned} \tag{20}</script><p>其中$N=X<em>{c}^{T}\left(\gamma X</em>{c} X<em>{c}^{T}+I\right)^{-1} X</em>{c}=X<em>{c}^{T} X</em>{c}\left(\gamma X<em>{c}^{T} X</em>{c}+I\right)^{-1}$。</p>
+\begin{aligned} F^{*} &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M+\mu \gamma H_{c}-\mu \gamma^{2} N\right) F \\ &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M-\mu \gamma^{2} N\right) F \end{aligned} \tag{20}</script><p>其中$N=X_{c}^{T}\left(\gamma X_{c} X_{c}^{T}+I\right)^{-1} X_{c}=X_{c}^{T} X_{c}\left(\gamma X_{c}^{T} X_{c}+I\right)^{-1}$。</p>
 <p>综上，我们先通过$(20)$式得到最优解$F$，然后通过$(12)$式得到最优解$W,b$。</p>
 <h1 id="4-模型比较"><a href="#4-模型比较" class="headerlink" title="4 模型比较"></a>4 模型比较</h1><p>模型比较分三个部分：</p>
 <ol>
@@ -409,7 +409,7 @@ F^{*}=\arg \min _{F, F^{T} V F=I} \operatorname{Tr}\left(F^{T} M F\right) \tag{2
 <p>示例4<br>SR是$FME/U$的一种特殊情形。</p>
 </blockquote>
 <p>证明：</p>
-<p>当$\mu \rightarrow 0, \gamma = 1/\lambda$，那么$(18)$式会退化为$(22)$式，也就是说我们先解$F$。然后目标函数从$(18)$式转化到$(24)$式来解$W$，此时注意到SR目标函数为$W^{*}=\left(X H<em>{c} X^{T}+\lambda I\right)^{-1} X H</em>{c} F$，且与FME/U中的一致。示例4得证。</p>
+<p>当$\mu \rightarrow 0, \gamma = 1/\lambda$，那么$(18)$式会退化为$(22)$式，也就是说我们先解$F$。然后目标函数从$(18)$式转化到$(24)$式来解$W$，此时注意到SR目标函数为$W^{*}=\left(X H_{c} X^{T}+\lambda I\right)^{-1} X H_{c} F$，且与FME/U中的一致。示例4得证。</p>
 <h2 id="4-4-汇总"><a href="#4-4-汇总" class="headerlink" title="4.4 汇总"></a>4.4 汇总</h2><p>直接上图：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">

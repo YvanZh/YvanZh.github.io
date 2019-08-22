@@ -271,8 +271,8 @@
             </figure>
 <ol>
 <li>模型分析：<ul>
-<li>假设隐变量与类属性是分离的(隐变量$z<em>n$表示$x_n$的非结构化部分，类属性向量$a</em>{y_n}$表示类特定的判别信息)，也就是说$x_n$受到这两者的共同影响；并且在类属性向量的指导下，有助于生成本质上具有更好区分度的样本。</li>
-<li>包含一个多元回归器，其利用解码器的输出$\hat{x}<em>n$作为输入，映射到类属性向量$a</em>{y_n}$。它有两点重要作用：<ul>
+<li>假设隐变量与类属性是分离的(隐变量$z_n$表示$x_n$的非结构化部分，类属性向量$a_{y_n}$表示类特定的判别信息)，也就是说$x_n$受到这两者的共同影响；并且在类属性向量的指导下，有助于生成本质上具有更好区分度的样本。</li>
+<li>包含一个多元回归器，其利用解码器的输出$\hat{x}_n$作为输入，映射到类属性向量$a_{y_n}$。它有两点重要作用：<ul>
 <li>可以对生成器产生反馈，使其生成更好可区分性的样本。</li>
 <li>可以通过计算类属性向量上的概率分布$p(a | x)$来使用无标签的样本进行训练(即进行半监督学习)。</li>
 </ul>
@@ -286,7 +286,7 @@
 </ul>
 </li>
 <li>多元回归器：<ul>
-<li>对于可见类的样本${x<em>n,a</em>{y<em>n}}</em>{n=1}^{N_s}$，定义监督损失：<script type="math/tex; mode=display">\mathcal{L}_{Sup}(\theta_R) = -\mathbb{E}_{ \{x_n,{a_{y_n}}\} } [p_R(a_{y_n} | x_n)] \tag{1}</script></li>
+<li>对于可见类的样本$\{x_n,a_{y_n}\}_{n=1}^{N_s}$，定义监督损失：<script type="math/tex; mode=display">\mathcal{L}_{Sup}(\theta_R) = -\mathbb{E}_{ \{x_n,{a_{y_n}}\} } [p_R(a_{y_n} | x_n)] \tag{1}</script></li>
 <li>对于由生成器生成的样本$\hat{x}$，定义非监督损失：<script type="math/tex; mode=display">\mathcal{L}_{Unsup}(\theta_R) = -\mathbb{E}_{p_{ {\theta}_G} (\hat{\mathbf{x}}| \mathbf{z,a})p(\mathbf{z})p(\mathbf{a})}[p_R(\mathbf{a} | \mathbf{\hat{x}})]\tag{2}</script></li>
 <li>由(1)(2)式，得到损失函数：<script type="math/tex; mode=display">\underset{\theta_R} \ \mathcal{L}_R = \mathcal{L}_{Sup} + \lambda_R  \centerdot \mathcal{L}_{Unsup}\tag{3}</script></li>
 <li>Tips：使用回归器通过反向传播来改进生成器。优化$\theta_R$时需固定生成器的分布（即固定$\theta_G$）。</li>
@@ -329,7 +329,7 @@
  \hline 
  D,d & D\text{是输入}x\text{的维度，}d\text{是隐变量}z\text{的维度}\\ 
  \hline 
- \end{array}</script><p> 数据样本${x_1,\dots,x_n}$，其整体用$x$来描述，我们希望借助隐变量$z$描述$x$的分布$\tilde{p}(x)$：</p>
+ \end{array}</script><p> 数据样本$\{x_1,\dots,x_n\}$，其整体用$x$来描述，我们希望借助隐变量$z$描述$x$的分布$\tilde{p}(x)$：</p>
 <script type="math/tex; mode=display">q(x)=\int q(x|z)q(z)dz,\quad q(x,z) = q(x|z)q(z)\tag{9}</script><p> 其中$q(z)$是先验分布（标准正态分布），目的是希望$q(x)$能逼近$\tilde{p}(x)$。这样（理论上）我们既描述了$p~(x)$，又得到了生成模型$q(x|z)$，一举两得。</p>
 <p> 接下来就是利用KL散度进行近似。很多教程推导都是聚焦于后验分布$p(z|x)$。但事实上，直接来对$p(x,z)$进行近似是最为干脆的。具体来说，定义$p(x,z) = \tilde{p}(x)p(z|x)$，设想用一个联合概率分布$q(x,z)$来逼近$p(x,z)$，那么用KL散度来看它们的距离：</p>
 <script type="math/tex; mode=display">KL\Big(p(x,z)\Big\Vert q(x,z)\Big) = \iint p(x,z)\ln \frac{p(x,z)}{q(x,z)} dzdx  \tag{10}</script><p> KL散度是我们的终极目标，因为我们希望两个分布越接近越好，所以KL散度越小越好。于是有：</p>

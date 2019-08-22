@@ -271,7 +271,7 @@
 <h2 id="1-3-相对熵-Relative-Entropy"><a href="#1-3-相对熵-Relative-Entropy" class="headerlink" title="1.3 相对熵(Relative Entropy)"></a>1.3 相对熵(Relative Entropy)</h2><p>又称<strong>KL散度</strong>或<strong>信息增益</strong>，用来衡量来个分布之间的差异，具有不对称性。</p>
 <script type="math/tex; mode=display">D_{KL} = H(p,q) - H(p)</script><p>相对熵的意义：估计平均编码长度相较于最短平均编码长度的冗余。</p>
 <h1 id="2-概率论"><a href="#2-概率论" class="headerlink" title="2 概率论"></a>2 概率论</h1><h2 id="2-1-最大似然估计-MLE"><a href="#2-1-最大似然估计-MLE" class="headerlink" title="2.1 最大似然估计(MLE)"></a>2.1 最大似然估计(MLE)</h2><script type="math/tex; mode=display">max \space p(x_0 \mid \theta)</script><h2 id="2-2-贝叶斯估计-BE"><a href="#2-2-贝叶斯估计-BE" class="headerlink" title="2.2 贝叶斯估计(BE)"></a>2.2 贝叶斯估计(BE)</h2><script type="math/tex; mode=display">p()</script><h2 id="2-3-最大后验估计-MAP"><a href="#2-3-最大后验估计-MAP" class="headerlink" title="2.3 最大后验估计(MAP)"></a>2.3 最大后验估计(MAP)</h2><script type="math/tex; mode=display">max \space p(\theta \mid x_0) = \frac{p(x_0 \mid \theta) \cdot p(\theta)} {p(x_0)}</script><p>因$p(x_0)$，已知。故等价于：</p>
-<script type="math/tex; mode=display">max \space p(x_0 \mid \theta) \cdot p(\theta)</script><h1 id="3-矩阵分析"><a href="#3-矩阵分析" class="headerlink" title="3 矩阵分析"></a>3 矩阵分析</h1><h2 id="3-1-特征值分解"><a href="#3-1-特征值分解" class="headerlink" title="3.1 特征值分解"></a>3.1 特征值分解</h2><h2 id="3-2-奇异值分解"><a href="#3-2-奇异值分解" class="headerlink" title="3.2 奇异值分解"></a>3.2 奇异值分解</h2><h2 id="3-4-中心矩阵"><a href="#3-4-中心矩阵" class="headerlink" title="3.4 中心矩阵"></a>3.4 中心矩阵</h2><p>给定m维数据的n个样本，用$m \times n$矩阵${X=[\mathbf{x}<em>{1},\mathbf{x}</em>{2},\ldots ,\mathbf{x}_{n}]}$。其表示样本均值为：</p>
+<script type="math/tex; mode=display">max \space p(x_0 \mid \theta) \cdot p(\theta)</script><h1 id="3-矩阵分析"><a href="#3-矩阵分析" class="headerlink" title="3 矩阵分析"></a>3 矩阵分析</h1><h2 id="3-1-特征值分解"><a href="#3-1-特征值分解" class="headerlink" title="3.1 特征值分解"></a>3.1 特征值分解</h2><h2 id="3-2-奇异值分解"><a href="#3-2-奇异值分解" class="headerlink" title="3.2 奇异值分解"></a>3.2 奇异值分解</h2><h2 id="3-4-中心矩阵"><a href="#3-4-中心矩阵" class="headerlink" title="3.4 中心矩阵"></a>3.4 中心矩阵</h2><p>给定m维数据的n个样本，用$m \times n$矩阵${X=[\mathbf{x}_{1},\mathbf{x}_{2},\ldots ,\mathbf{x}_{n}]}$。其表示样本均值为：</p>
 
 $$\overline { {\mathbf {x} } }={\frac {1}{n}}\sum _{ {j=1} }^{n}{\mathbf {x}}_{j}$$
 
@@ -307,7 +307,7 @@ $$\overline { {\mathbf {x} } }={\frac {1}{n}}\sum _{ {j=1} }^{n}{\mathbf {x}}_{j
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<h2 id="3-6-拉普拉斯矩阵-Graph-Laplacians"><a href="#3-6-拉普拉斯矩阵-Graph-Laplacians" class="headerlink" title="3.6 拉普拉斯矩阵(Graph Laplacians)"></a>3.6 拉普拉斯矩阵(Graph Laplacians)</h2><p>一般的$L = D - \frac{S^T+S}{2}$，其中$D$为对角矩阵，元素为$\sum(s<em>{ij}+s</em>{ji})/2$。</p>
+<h2 id="3-6-拉普拉斯矩阵-Graph-Laplacians"><a href="#3-6-拉普拉斯矩阵-Graph-Laplacians" class="headerlink" title="3.6 拉普拉斯矩阵(Graph Laplacians)"></a>3.6 拉普拉斯矩阵(Graph Laplacians)</h2><p>一般的$L = D - \frac{S^T+S}{2}$，其中$D$为对角矩阵，元素为$\sum(s_{ij}+s_{ji})/2$。</p>
 <p>性质：对称，半正定。</p>
 <ol>
 <li><p>对于特征向量$\bf x$有：</p>
@@ -417,18 +417,18 @@ $$\overline { {\mathbf {x} } }={\frac {1}{n}}\sum _{ {j=1} }^{n}{\mathbf {x}}_{j
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2018/11/08/Hexo-MathJax/" id="post-prev" class="post-nav-link">
+      <a href="/2018/11/14/Paper-Notes-1/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Hexo 之公式渲染</h4>
+        <h4 class="title">Deep Transfer Low-Rank Coding for Cross-Domain Learning</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/11/04/Git-Handbook/" id="post-next" class="post-nav-link">
+      <a href="/2018/11/08/Hexo-MathJax/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Git 手册</h4>
+        <h4 class="title">Hexo 之公式渲染</h4>
       </a>
     </div>
   

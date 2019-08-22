@@ -27,8 +27,8 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Transfer Learning,Cross-Domain,Deep Learning">
-    <meta name="keywords" content="Transfer Learning,Cross-Domain,Deep Learning">
+    <meta name="keywords" content="Cross-Domain,Transfer Learning,Deep Learning">
+    <meta name="keywords" content="Cross-Domain,Transfer Learning,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Transfer Low-Rank Coding for Cross-Domain Learning">
 <meta property="og:url" content="http://yvanzh.top/2018/11/14/Paper-Notes-1/index.html">
@@ -266,8 +266,8 @@
 </ul>
 <p>为了实现两个领域的迁移需要减小其分布差异：</p>
 <ul>
-<li>[X] 边缘分布$P(X<em>{s})$与$P(X</em>{t})$</li>
-<li>[X] 条件分布$P(Y<em>{s}|X</em>{s})$与$P(Y<em>{t}|X</em>{t})$</li>
+<li>[X] 边缘分布$P(X_{s})$与$P(X_{t})$</li>
+<li>[X] 条件分布$P(Y_{s}|X_{s})$与$P(Y_{t}|X_{t})$</li>
 </ul>
 <h1 id="2-详情"><a href="#2-详情" class="headerlink" title="2 详情"></a>2 详情</h1><ol>
 <li>从稀疏编码谈起：<script type="math/tex; mode=display">
@@ -275,7 +275,7 @@
  \text{s.t.} \,\, \lVert{ {d}_{i}^j}\rVert_{2}^2 \le 1 \quad \forall i,j \tag{1}</script></li>
 <li>减小边缘分布差异：<ol>
 <li>由于光照，角度等问题。直接通过字典学习得到新特征太浅显。$\Rightarrow$使用CNN提取抽象特征（参数共享）。</li>
-<li>对于存在较大分布差异情况，学习的一个字典之后新特征空间中$P(Z<em>{s})$与$P(Z</em>{t})$的差异依然大。$\Rightarrow$通过task-specific全连接层学习多层字典来覆盖两个领域共同特征，逐步减小分布差异。<ul>
+<li>对于存在较大分布差异情况，学习的一个字典之后新特征空间中$P(Z_{s})$与$P(Z_{t})$的差异依然大。$\Rightarrow$通过task-specific全连接层学习多层字典来覆盖两个领域共同特征，逐步减小分布差异。<ul>
 <li>task-specific全连接层的神经元个数需要根据秩固定。 </li>
 </ul>
 </li>
@@ -298,7 +298,7 @@ Z_{k-1} = D_{k}Z_{k} \Rightarrow \text{rank}(Z_{k-1}) = \text{rank}(D_{k}Z_{k}) 
 </ol>
 </li>
 <li>减小条件分布差异：<ol>
-<li>半监督知识适应($Z<em>{k}=[Z</em>{k}^s,Z_{k}^t]$)：<ol>
+<li>半监督知识适应($Z_{k}=[Z_{k}^s,Z_{k}^t]$)：<ol>
 <li>从传统的MMD谈起：<script type="math/tex; mode=display">
 \begin{aligned}
 \mathcal{M}(Z_{k}) &= \left| \left| {\frac{1}{m_{s}} \sum_{i=1}^{m_{s}} {z_{k,i}} - \frac{1}{m_{t}} \sum_{j=m_{s}+1}^{m}{z_{k,j}} } \right| \right| _{2}^2   \\
@@ -326,7 +326,7 @@ Z_{i} \approx f(D_{i+1}Z_{i+1})  \tag{7}</script></li>
 </ul>
 </li>
 <li>低秩约束： <ul>
-<li>希望同类样本的被一个基底张成。那么$Z<em>{k}$的真实秩即类的总数$C$。将$Z</em>{k}\approx AB$作为低秩约束，其中$A\in \mathbb{R}^{d_{k}\times C}$，$B\in \mathbb{R}^{C \times n}$。</li>
+<li>希望同类样本的被一个基底张成。那么$Z_{k}$的真实秩即类的总数$C$。将$Z_{k}\approx AB$作为低秩约束，其中$A\in \mathbb{R}^{d_{k}\times C}$，$B\in \mathbb{R}^{C \times n}$。</li>
 </ul>
 </li>
 <li>最终目标函数:  <script type="math/tex; mode=display">
@@ -457,9 +457,9 @@ Z_{i} \approx f(D_{i+1}Z_{i+1})  \tag{7}</script></li>
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/11/08/Hexo-MathJax/" id="post-next" class="post-nav-link">
+      <a href="/2018/11/08/ML-Math/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Hexo 之公式渲染</h4>
+        <h4 class="title">机器学习数学基础</h4>
       </a>
     </div>
   

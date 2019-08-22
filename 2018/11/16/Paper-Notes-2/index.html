@@ -27,8 +27,8 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Heterogeneous Domain Adaptation,Transfer Learning">
-    <meta name="keywords" content="Heterogeneous Domain Adaptation,Transfer Learning">
+    <meta name="keywords" content="Transfer Learning,Heterogeneous Domain Adaptation">
+    <meta name="keywords" content="Transfer Learning,Heterogeneous Domain Adaptation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Heterogeneous Domain Adaptation Through Progressive Alignment">
 <meta property="og:url" content="http://yvanzh.top/2018/11/16/Paper-Notes-2/index.html">
@@ -273,7 +273,7 @@
 \underset{\bf{B,S}}{\text{min}} \quad \underbrace{\underbrace{\mathcal{C_{1}}(\bf{X_{s},X_{t},B,S})}_{\text{feature alignment}} + \underbrace{\alpha \mathcal{C_{2}}(\bf{S_{s},S_{t}})}_{\text{distribution alignment}}}_{\text{progressive alignment}} + \underbrace{\beta \Omega(S)}_{\text{constraint}}  \tag{1}</script><ol>
 <li><p>维度差异和特征失配问题：</p>
 <ul>
-<li><p>将领域特征分别经$\bf P<em>{s}$、$\bf P</em>{t}$投影到同一维度，并通过共享字典$\bf B$来学的一个新的特征空间。</p>
+<li><p>将领域特征分别经$\bf P_{s}$、$\bf P_{t}$投影到同一维度，并通过共享字典$\bf B$来学的一个新的特征空间。</p>
 <script type="math/tex; mode=display">
 \underset{ {\bf{b}}_{s},{\bf{s}}_{s}}{\text{min}} \quad
 \sum_{i=1}^{n_{s}}{ \Vert{ {\bf{x}}_{s,i} - \sum_{j=1}^{k}{\bf{b}}_{s,j}{\bf{s}}_{s,j}^{j}}\Vert_{2}^{2} +\beta \sum_{i=1}^{n_{s}}{\Vert{ {\bf{s}}_{s,i}}}\Vert_{1} } \\

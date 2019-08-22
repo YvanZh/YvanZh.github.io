@@ -258,7 +258,7 @@
 <p>由于图拉普拉斯无法直接得到好的聚类结构，后续需要利用$K$-means来进行聚类。然而$K$-means聚类容易局部收敛，且得到非唯一的聚类结果。</p>
 <p>对于半监督学习来说，图拉普拉斯一般使用的都是采用的<strong>二次型的图嵌入</strong>（TODO），然而这种方式对噪声和异常值敏感。</p>
 <p>作者提出一种$\ell_1$范数约束的谱聚类框架，且扩展了一个半监督学习模型，并证明了其收敛性。</p>
-<h1 id="2-基本框架"><a href="#2-基本框架" class="headerlink" title="2 基本框架"></a>2 基本框架</h1><h2 id="2-1-谱聚类"><a href="#2-1-谱聚类" class="headerlink" title="2.1 谱聚类"></a>2.1 谱聚类</h2><p>对于$Q = \left[q<em>{1}, q</em>{2}, \cdots, q<em>{c}\right] \in \mathbb{R}^{n \times c}$，$q</em>{k} \in \mathbb{R}^{n \times 1}$为$Q$的第$k$列。</p>
+<h1 id="2-基本框架"><a href="#2-基本框架" class="headerlink" title="2 基本框架"></a>2 基本框架</h1><h2 id="2-1-谱聚类"><a href="#2-1-谱聚类" class="headerlink" title="2.1 谱聚类"></a>2.1 谱聚类</h2><p>对于$Q = \left[q_{1}, q_{2}, \cdots, q_{c}\right] \in \mathbb{R}^{n \times c}$，$q_{k} \in \mathbb{R}^{n \times 1}$为$Q$的第$k$列。</p>
 <p>Graph Ratio Cut：</p>
 <script type="math/tex; mode=display">
 \begin{gathered}
@@ -274,14 +274,14 @@
 \end{gathered} \tag{2}</script><p>详情可参见<a href="https://www.cnblogs.com/pinard/p/6221564.html" target="_blank" rel="noopener">谱聚类（spectral clustering）原理总结</a>一文。</p>
 <h2 id="2-2-基本模型"><a href="#2-2-基本模型" class="headerlink" title="2.2 基本模型"></a>2.2 基本模型</h2><p>将$(2)$式写为：</p>
 <script type="math/tex; mode=display">
-\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{3}</script><p>$Q$的理想解就是当$x<em>i,x_j$属于同一类时，使得$q^i = q^j$。也就是说$Q$的许多行都是相等的，这样就有了很强的聚类结构。那么我们想要很多对$(i,j)$有$\left|q^{i}-q^{j}\right|</em>{2}=0$，那么用$\ell_1$范数来解决这个问题也是等价的：</p>
+\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{3}</script><p>$Q$的理想解就是当$x_i,x_j$属于同一类时，使得$q^i = q^j$。也就是说$Q$的许多行都是相等的，这样就有了很强的聚类结构。那么我们想要很多对$(i,j)$有$\left|q^{i}-q^{j}\right|_{2}=0$，那么用$\ell_1$范数来解决这个问题也是等价的：</p>
 <script type="math/tex; mode=display">
-\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2} \tag{4}</script><p>设一个$n^2$维向量$p$，其$((i-1)*n+j)$个元素为$W<em>{i j}\left|q^{i}-q^{j}\right|</em>{2}$。那么我们将$(4)$式写为：</p>
+\min _{Q^{T} D Q=I} \sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2} \tag{4}</script><p>设一个$n^2$维向量$p$，其$((i-1)*n+j)$个元素为$W_{i j}\left|q^{i}-q^{j}\right|_{2}$。那么我们将$(4)$式写为：</p>
 <script type="math/tex; mode=display">
 \min _{Q^{T} D Q=I}\|p\|_{1} \tag{5}</script><p>这样我们可以直观地知道$p$的元素会由于$\ell_1$范数的约束而变得稀疏，也就为$Q$提供了一个理想的聚类结果。</p>
 <h2 id="2-3-优化算法"><a href="#2-3-优化算法" class="headerlink" title="2.3 优化算法"></a>2.3 优化算法</h2><p>$(4)$式的拉格朗格日函数为：</p>
 <script type="math/tex; mode=display">
-\mathcal{L}(Q)=\sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}-\operatorname{Tr}\left(\Lambda\left(Q^{T} D Q-I\right)\right) \tag{6}</script><p>设拉普拉斯矩阵$\widetilde{L} = \widetilde{D} -\widetilde{W}$，$\widetilde{D}$为第$i$个元素为$\sum<em>j\widetilde{W}</em>{ij}$的对角阵，$\widetilde{W}$为：</p>
+\mathcal{L}(Q)=\sum_{i, j=1}^{n} W_{i j}\left\|q^{i}-q^{j}\right\|_{2}-\operatorname{Tr}\left(\Lambda\left(Q^{T} D Q-I\right)\right) \tag{6}</script><p>设拉普拉斯矩阵$\widetilde{L} = \widetilde{D} -\widetilde{W}$，$\widetilde{D}$为第$i$个元素为$\sum_j\widetilde{W}_{ij}$的对角阵，$\widetilde{W}$为：</p>
 <script type="math/tex; mode=display">
 \widetilde{W}_{i j}=\frac{W_{i j}}{2\left\|q^{i}-q^{j}\right\|_{2}} \tag{7}</script><p>那么$\mathcal{L}(Q)$对$Q$的偏导为零时，有：</p>
 <script type="math/tex; mode=display">
@@ -303,7 +303,7 @@
 <p>证明：</p>
 <p>根据算法1的第二步，可知：</p>
 <script type="math/tex; mode=display">
-Q_{t+1}=\arg \min _{Q^{T} D Q=I} \sum_{i, j=1}^{n}(\widetilde{W}_{t})_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{10}</script><p>又$\left(\widetilde{W}<em>{t}\right)</em>{i j}=\frac{W<em>{i j}}{2\left|q</em>{t}^{i}-q<em>{t}^{j}\right|</em>{2}}$，那么：</p>
+Q_{t+1}=\arg \min _{Q^{T} D Q=I} \sum_{i, j=1}^{n}(\widetilde{W}_{t})_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2} \tag{10}</script><p>又$\left(\widetilde{W}_{t}\right)_{i j}=\frac{W_{i j}}{2\left|q_{t}^{i}-q_{t}^{j}\right|_{2}}$，那么：</p>
 <script type="math/tex; mode=display">
 \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}} \leq \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}} \tag{11}</script><p>根据引理1，可得：</p>
 <script type="math/tex; mode=display">
@@ -333,7 +333,7 @@ Q_{t+1}=\arg \min _{Q^{T} D Q=I} \sum_{i, j=1}^{n}(\widetilde{W}_{t})_{i j}\left
 <p>证明：</p>
 <p>设$f(Q)=\operatorname{Tr}(Q-Y)^{T} U(Q-Y)$，据算法2的第二步可知：</p>
 <script type="math/tex; mode=display">
-Q_{t+1}=\arg \min _{Q} \sum_{i, j=1}^{n}\left(\tilde{W}_{t}\right)_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2}+f(Q) \tag{18}</script><p>注意到$(\tilde{W}<em>{t})</em>{i j}=\frac{W<em>{i j}}{2\left|q</em>{t}^{i}-q<em>{t}^{j}\right|</em>{2}}$，则：</p>
+Q_{t+1}=\arg \min _{Q} \sum_{i, j=1}^{n}\left(\tilde{W}_{t}\right)_{i j}\left\|q^{i}-q^{j}\right\|_{2}^{2}+f(Q) \tag{18}</script><p>注意到$(\tilde{W}_{t})_{i j}=\frac{W_{i j}}{2\left|q_{t}^{i}-q_{t}^{j}\right|_{2}}$，则：</p>
 <script type="math/tex; mode=display">
 \begin{aligned} & \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t+1}^{i}-q_{t+1}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}+f\left(Q_{t+1}\right) \\ & \leq \sum_{i, j=1}^{n} \frac{W_{i j}\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}^{2}}{2\left\|q_{t}^{i}-q_{t}^{j}\right\|_{2}}+f\left(Q_{t}\right) \end{aligned} \tag{19}</script><p>将$(19)$式和$(12)$式两边求和，可得：</p>
 <script type="math/tex; mode=display">
