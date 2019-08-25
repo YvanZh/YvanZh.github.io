@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yvanzh.top/"/>
-  <updated>2019-06-28T13:50:57.478Z</updated>
+  <updated>2019-08-25T08:53:05.650Z</updated>
   <id>http://yvanzh.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>失踪人口回归~</title>
+    <link href="http://yvanzh.top/2019/08/08/My-First-Paper/"/>
+    <id>http://yvanzh.top/2019/08/08/My-First-Paper/</id>
+    <published>2019-08-08T10:01:33.000Z</published>
+    <updated>2019-08-25T08:53:05.650Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/20190825161350.jpg" width="50%" height="50%"></p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://wx1.sinaimg.cn/mw690/007v1rTBgy1g2ua64x7uaj30zm1hcgvg.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><p>的撒大</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/20190825161350.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/p&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;https://wx1.sinaimg.cn/mw690/007v1rTBgy1g2ua64x7uaj30zm1hcgvg.jpg&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Researching" scheme="http://yvanzh.top/categories/Researching/"/>
+    
+    
+      <category term="Researching" scheme="http://yvanzh.top/tags/Researching/"/>
+    
+  </entry>
   
   <entry>
     <title>二三年华</title>
@@ -467,37 +496,6 @@
   </entry>
   
   <entry>
-    <title>机器学习数学基础</title>
-    <link href="http://yvanzh.top/2018/11/08/ML-Math/"/>
-    <id>http://yvanzh.top/2018/11/08/ML-Math/</id>
-    <published>2018-11-08T14:33:33.000Z</published>
-    <updated>2019-07-22T08:59:28.678Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote><p><strong><em>问渠那得清如许？为有源头活水来。</em></strong></p></blockquote><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4qygxj31hc0tz7cv.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><h1 id="1-信息论"><a href="#1-信息论" class="headerlink" title="1 信息论"></a>1 信息论</h1><h2 id="1-1-信息熵-Entropy"><a href="#1-1-信息熵-Entropy" class="headerlink" title="1.1 信息熵(Entropy)"></a>1.1 信息熵(Entropy)</h2><p>信息熵的本质是香农信息量$log\frac{1}{p}$的期望。</p><p>离散：</p><script type="math/tex; mode=display">H(p) = E[\log{\frac{1}{p}}] = \sum{p_{i} \cdot log\frac{1}{p_{i}}}</script><p>连续：</p><script type="math/tex; mode=display">H(p) = E[\log{\frac{1}{p}}] = \int{p(x) \cdot log\frac{1}{p(x)}}dx</script><p>香农信息量的意义：一个事件出现的概率越低，对其编码的长度越大。（huffman编码的思想。）</p><p>熵的意义：最短平均编码长度。（因为我们用真实分布$p_i$来编码，编码方案是最优的。）</p><h2 id="1-2-交叉熵-Cross-Entropy"><a href="#1-2-交叉熵-Cross-Entropy" class="headerlink" title="1.2 交叉熵(Cross Entropy)"></a>1.2 交叉熵(Cross Entropy)</h2><p>交叉熵的本质是对估计分布的编码长度。todo</p><p>离散:</p><script type="math/tex; mode=display">H(p,q) = E_{p}[-\log{q}] = \sum_{i} {p_i \cdot \log{\frac{1}{q_i}}}</script><p>连续：</p><script type="math/tex; mode=display">H(p,q) = E_{p}[-\log{q}] = \int{p(x) \cdot \log{\frac{1}{q(x)}} dx}</script><p>交叉熵的意义：估计平均编码长度。（用一个估计分布$q_i$来编码一个真实分布$p_i$，编码不一定是最优的。）</p><p>可证明$H(p,q)\le H(p)$，当且仅当$p=q$时等号成立。</p><h2 id="1-3-相对熵-Relative-Entropy"><a href="#1-3-相对熵-Relative-Entropy" class="headerlink" title="1.3 相对熵(Relative Entropy)"></a>1.3 相对熵(Relative Entropy)</h2><p>又称<strong>KL散度</strong>或<strong>信息增益</strong>，用来衡量来个分布之间的差异，具有不对称性。</p><script type="math/tex; mode=display">D_{KL} = H(p,q) - H(p)</script><p>相对熵的意义：估计平均编码长度相较于最短平均编码长度的冗余。</p><h1 id="2-概率论"><a href="#2-概率论" class="headerlink" title="2 概率论"></a>2 概率论</h1><h2 id="2-1-最大似然估计-MLE"><a href="#2-1-最大似然估计-MLE" class="headerlink" title="2.1 最大似然估计(MLE)"></a>2.1 最大似然估计(MLE)</h2><script type="math/tex; mode=display">max \space p(x_0 \mid \theta)</script><h2 id="2-2-贝叶斯估计-BE"><a href="#2-2-贝叶斯估计-BE" class="headerlink" title="2.2 贝叶斯估计(BE)"></a>2.2 贝叶斯估计(BE)</h2><script type="math/tex; mode=display">p()</script><h2 id="2-3-最大后验估计-MAP"><a href="#2-3-最大后验估计-MAP" class="headerlink" title="2.3 最大后验估计(MAP)"></a>2.3 最大后验估计(MAP)</h2><script type="math/tex; mode=display">max \space p(\theta \mid x_0) = \frac{p(x_0 \mid \theta) \cdot p(\theta)} {p(x_0)}</script><p>因$p(x_0)$，已知。故等价于：</p><script type="math/tex; mode=display">max \space p(x_0 \mid \theta) \cdot p(\theta)</script><h1 id="3-矩阵分析"><a href="#3-矩阵分析" class="headerlink" title="3 矩阵分析"></a>3 矩阵分析</h1><h2 id="3-1-特征值分解"><a href="#3-1-特征值分解" class="headerlink" title="3.1 特征值分解"></a>3.1 特征值分解</h2><h2 id="3-2-奇异值分解"><a href="#3-2-奇异值分解" class="headerlink" title="3.2 奇异值分解"></a>3.2 奇异值分解</h2><h2 id="3-4-中心矩阵"><a href="#3-4-中心矩阵" class="headerlink" title="3.4 中心矩阵"></a>3.4 中心矩阵</h2><p>给定m维数据的n个样本，用$m \times n$矩阵${X=[\mathbf{x}_{1},\mathbf{x}_{2},\ldots ,\mathbf{x}_{n}]}$。其表示样本均值为：</p>$$\overline { {\mathbf {x} } }={\frac {1}{n}}\sum _{ {j=1} }^{n}{\mathbf {x}}_{j}$$<p>其中${\mathbf {x} _{j}}$表示$X$矩阵的第$j$列。</p><ol><li><p>$n \times n$的中心矩阵可表示为：</p><script type="math/tex; mode=display">C_n = I_n - \frac{1}{n} \phi</script><p> $I_{n}$为单位矩阵， $\phi$表示全为1的矩阵。</p><ul><li>中心矩阵的性质：<ul><li>对称半正定；</li><li>幂等；</li><li>奇异；</li><li>有n-1个值为1的特征值，有一个值为0的特征值；</li><li>当n为1时，是零空间；</li><li>是投影矩阵，也就是说，把n维空间投影到n-1维子空间。</li></ul></li><li>中心矩阵的特性：<ul><li>给定$n$维的列向量$v$，若$u$中每个元素都是列向量$v$的所有元素的均值，有：<script type="math/tex; mode=display">C_{n}v = v - u</script></li></ul></li></ul></li><li><p>散度矩阵$S$可表示为：</p><script type="math/tex; mode=display">{S=\sum _{j=1}^{n}(\mathbf {x} _{j}-{\overline {\mathbf {x} }})(\mathbf {x} _{j}-{\overline {\mathbf {x} }})^{T}=\sum _{j=1}^{n}(\mathbf {x} _{j}-{\overline {\mathbf {x} }})\otimes (\mathbf {x} _{j}-{\overline {\mathbf {x} }})=\left(\sum _{j=1}^{n}\mathbf {x} _{j}\mathbf {x} _{j}^{T}\right)-n{\overline {\mathbf {x} }}{\overline {\mathbf {x} }}^{T}}</script><p> 或</p><script type="math/tex; mode=display">S= XC_{n}(XC_{n})^{T} = XC_{n}C_{n}X^{T}= XC_{n}X^{T}</script></li><li>协方差矩阵$\Sigma$可表示为：<script type="math/tex; mode=display">\Sigma = \frac{1}{n-1}S = \frac{1}{n-1}XC_{n}X^T</script></li></ol><h2 id="3-5-三个矩阵"><a href="#3-5-三个矩阵" class="headerlink" title="3.5 三个矩阵"></a>3.5 三个矩阵</h2><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2ltpevt35j30nw0r6wg6.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><h2 id="3-6-拉普拉斯矩阵-Graph-Laplacians"><a href="#3-6-拉普拉斯矩阵-Graph-Laplacians" class="headerlink" title="3.6 拉普拉斯矩阵(Graph Laplacians)"></a>3.6 拉普拉斯矩阵(Graph Laplacians)</h2><p>一般的$L = D - \frac{S^T+S}{2}$，其中$D$为对角矩阵，元素为$\sum(s_{ij}+s_{ji})/2$。</p><p>性质：对称，半正定。</p><ol><li><p>对于特征向量$\bf x$有：</p><script type="math/tex; mode=display"> {\bf x^\top Lx} = \frac{1}{2}\sum_{j,l=1}^{n}({ {\bf x}_{j}-{\bf x}_{l}} )^{2} {\bf S}_{jl} \\</script></li><li><p>对于特征矩阵$\bf X$有：</p><script type="math/tex; mode=display"> \text{tr}({\bf XLX}^\top) = \frac{1}{2}\sum_{j,l=1}^{n}\Vert{ {\bf x}_{j}-{\bf x}_{l}} \Vert_{2}^{2} {\bf S}_{jl} \\</script></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;问渠那得清如许？为有源头活水来。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4qygxj31hc0tz7cv.jpg&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
-            &lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Math" scheme="http://yvanzh.top/categories/Math/"/>
-    
-    
-      <category term="Math" scheme="http://yvanzh.top/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Hexo 之公式渲染</title>
     <link href="http://yvanzh.top/2018/11/08/Hexo-MathJax/"/>
     <id>http://yvanzh.top/2018/11/08/Hexo-MathJax/</id>
@@ -525,6 +523,37 @@
     
     
       <category term="Hexo" scheme="http://yvanzh.top/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习数学基础</title>
+    <link href="http://yvanzh.top/2018/11/08/ML-Math/"/>
+    <id>http://yvanzh.top/2018/11/08/ML-Math/</id>
+    <published>2018-11-08T14:33:33.000Z</published>
+    <updated>2019-07-22T08:59:28.678Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote><p><strong><em>问渠那得清如许？为有源头活水来。</em></strong></p></blockquote><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4qygxj31hc0tz7cv.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><h1 id="1-信息论"><a href="#1-信息论" class="headerlink" title="1 信息论"></a>1 信息论</h1><h2 id="1-1-信息熵-Entropy"><a href="#1-1-信息熵-Entropy" class="headerlink" title="1.1 信息熵(Entropy)"></a>1.1 信息熵(Entropy)</h2><p>信息熵的本质是香农信息量$log\frac{1}{p}$的期望。</p><p>离散：</p><script type="math/tex; mode=display">H(p) = E[\log{\frac{1}{p}}] = \sum{p_{i} \cdot log\frac{1}{p_{i}}}</script><p>连续：</p><script type="math/tex; mode=display">H(p) = E[\log{\frac{1}{p}}] = \int{p(x) \cdot log\frac{1}{p(x)}}dx</script><p>香农信息量的意义：一个事件出现的概率越低，对其编码的长度越大。（huffman编码的思想。）</p><p>熵的意义：最短平均编码长度。（因为我们用真实分布$p_i$来编码，编码方案是最优的。）</p><h2 id="1-2-交叉熵-Cross-Entropy"><a href="#1-2-交叉熵-Cross-Entropy" class="headerlink" title="1.2 交叉熵(Cross Entropy)"></a>1.2 交叉熵(Cross Entropy)</h2><p>交叉熵的本质是对估计分布的编码长度。todo</p><p>离散:</p><script type="math/tex; mode=display">H(p,q) = E_{p}[-\log{q}] = \sum_{i} {p_i \cdot \log{\frac{1}{q_i}}}</script><p>连续：</p><script type="math/tex; mode=display">H(p,q) = E_{p}[-\log{q}] = \int{p(x) \cdot \log{\frac{1}{q(x)}} dx}</script><p>交叉熵的意义：估计平均编码长度。（用一个估计分布$q_i$来编码一个真实分布$p_i$，编码不一定是最优的。）</p><p>可证明$H(p,q)\le H(p)$，当且仅当$p=q$时等号成立。</p><h2 id="1-3-相对熵-Relative-Entropy"><a href="#1-3-相对熵-Relative-Entropy" class="headerlink" title="1.3 相对熵(Relative Entropy)"></a>1.3 相对熵(Relative Entropy)</h2><p>又称<strong>KL散度</strong>或<strong>信息增益</strong>，用来衡量来个分布之间的差异，具有不对称性。</p><script type="math/tex; mode=display">D_{KL} = H(p,q) - H(p)</script><p>相对熵的意义：估计平均编码长度相较于最短平均编码长度的冗余。</p><h1 id="2-概率论"><a href="#2-概率论" class="headerlink" title="2 概率论"></a>2 概率论</h1><h2 id="2-1-最大似然估计-MLE"><a href="#2-1-最大似然估计-MLE" class="headerlink" title="2.1 最大似然估计(MLE)"></a>2.1 最大似然估计(MLE)</h2><script type="math/tex; mode=display">max \space p(x_0 \mid \theta)</script><h2 id="2-2-贝叶斯估计-BE"><a href="#2-2-贝叶斯估计-BE" class="headerlink" title="2.2 贝叶斯估计(BE)"></a>2.2 贝叶斯估计(BE)</h2><script type="math/tex; mode=display">p()</script><h2 id="2-3-最大后验估计-MAP"><a href="#2-3-最大后验估计-MAP" class="headerlink" title="2.3 最大后验估计(MAP)"></a>2.3 最大后验估计(MAP)</h2><script type="math/tex; mode=display">max \space p(\theta \mid x_0) = \frac{p(x_0 \mid \theta) \cdot p(\theta)} {p(x_0)}</script><p>因$p(x_0)$，已知。故等价于：</p><script type="math/tex; mode=display">max \space p(x_0 \mid \theta) \cdot p(\theta)</script><h1 id="3-矩阵分析"><a href="#3-矩阵分析" class="headerlink" title="3 矩阵分析"></a>3 矩阵分析</h1><h2 id="3-1-特征值分解"><a href="#3-1-特征值分解" class="headerlink" title="3.1 特征值分解"></a>3.1 特征值分解</h2><h2 id="3-2-奇异值分解"><a href="#3-2-奇异值分解" class="headerlink" title="3.2 奇异值分解"></a>3.2 奇异值分解</h2><h2 id="3-4-中心矩阵"><a href="#3-4-中心矩阵" class="headerlink" title="3.4 中心矩阵"></a>3.4 中心矩阵</h2><p>给定m维数据的n个样本，用$m \times n$矩阵${X=[\mathbf{x}_{1},\mathbf{x}_{2},\ldots ,\mathbf{x}_{n}]}$。其表示样本均值为：</p>$$\overline { {\mathbf {x} } }={\frac {1}{n}}\sum _{ {j=1} }^{n}{\mathbf {x}}_{j}$$<p>其中${\mathbf {x} _{j}}$表示$X$矩阵的第$j$列。</p><ol><li><p>$n \times n$的中心矩阵可表示为：</p><script type="math/tex; mode=display">C_n = I_n - \frac{1}{n} \phi</script><p> $I_{n}$为单位矩阵， $\phi$表示全为1的矩阵。</p><ul><li>中心矩阵的性质：<ul><li>对称半正定；</li><li>幂等；</li><li>奇异；</li><li>有n-1个值为1的特征值，有一个值为0的特征值；</li><li>当n为1时，是零空间；</li><li>是投影矩阵，也就是说，把n维空间投影到n-1维子空间。</li></ul></li><li>中心矩阵的特性：<ul><li>给定$n$维的列向量$v$，若$u$中每个元素都是列向量$v$的所有元素的均值，有：<script type="math/tex; mode=display">C_{n}v = v - u</script></li></ul></li></ul></li><li><p>散度矩阵$S$可表示为：</p><script type="math/tex; mode=display">{S=\sum _{j=1}^{n}(\mathbf {x} _{j}-{\overline {\mathbf {x} }})(\mathbf {x} _{j}-{\overline {\mathbf {x} }})^{T}=\sum _{j=1}^{n}(\mathbf {x} _{j}-{\overline {\mathbf {x} }})\otimes (\mathbf {x} _{j}-{\overline {\mathbf {x} }})=\left(\sum _{j=1}^{n}\mathbf {x} _{j}\mathbf {x} _{j}^{T}\right)-n{\overline {\mathbf {x} }}{\overline {\mathbf {x} }}^{T}}</script><p> 或</p><script type="math/tex; mode=display">S= XC_{n}(XC_{n})^{T} = XC_{n}C_{n}X^{T}= XC_{n}X^{T}</script></li><li>协方差矩阵$\Sigma$可表示为：<script type="math/tex; mode=display">\Sigma = \frac{1}{n-1}S = \frac{1}{n-1}XC_{n}X^T</script></li></ol><h2 id="3-5-三个矩阵"><a href="#3-5-三个矩阵" class="headerlink" title="3.5 三个矩阵"></a>3.5 三个矩阵</h2><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g2ltpevt35j30nw0r6wg6.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><h2 id="3-6-拉普拉斯矩阵-Graph-Laplacians"><a href="#3-6-拉普拉斯矩阵-Graph-Laplacians" class="headerlink" title="3.6 拉普拉斯矩阵(Graph Laplacians)"></a>3.6 拉普拉斯矩阵(Graph Laplacians)</h2><p>一般的$L = D - \frac{S^T+S}{2}$，其中$D$为对角矩阵，元素为$\sum(s_{ij}+s_{ji})/2$。</p><p>性质：对称，半正定。</p><ol><li><p>对于特征向量$\bf x$有：</p><script type="math/tex; mode=display"> {\bf x^\top Lx} = \frac{1}{2}\sum_{j,l=1}^{n}({ {\bf x}_{j}-{\bf x}_{l}} )^{2} {\bf S}_{jl} \\</script></li><li><p>对于特征矩阵$\bf X$有：</p><script type="math/tex; mode=display"> \text{tr}({\bf XLX}^\top) = \frac{1}{2}\sum_{j,l=1}^{n}\Vert{ {\bf x}_{j}-{\bf x}_{l}} \Vert_{2}^{2} {\bf S}_{jl} \\</script></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;问渠那得清如许？为有源头活水来。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div class=&quot;img-lightbox&quot;&gt;
+                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
+                    &lt;img src=&quot;https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc4qygxj31hc0tz7cv.jpg&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
+            &lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Math" scheme="http://yvanzh.top/categories/Math/"/>
+    
+    
+      <category term="Math" scheme="http://yvanzh.top/tags/Math/"/>
     
   </entry>
   
@@ -589,39 +618,6 @@
       <category term="Deep Learning" scheme="http://yvanzh.top/tags/Deep-Learning/"/>
     
       <category term="PyTorch" scheme="http://yvanzh.top/tags/PyTorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Win10 系统下配置 TensorFlow-GPU 环境</title>
-    <link href="http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/"/>
-    <id>http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/</id>
-    <published>2018-10-05T13:11:11.000Z</published>
-    <updated>2019-06-28T13:50:57.499Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote><p><strong><em>让你手中的煤气灶疯狂输出！</em></strong></p></blockquote><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc3sgeij31hc0zke0a.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><a id="more"></a><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>笔者经过两个月的学习，总算是对机器学习的知识框架以及应用领域有了大体的了解，研读文献也渐入佳境。</p><p>“纸上得来终觉浅，绝知此事要躬行。”笔者准备开始用实践检验真理，奈何没有趁手的电脑，之前的Coding计划被多次推延。</p><p>今天发现偶然发现古董笔记本的显卡居然支持<code>CUDA</code>。于是一番捣腾，踩过无数坑之后终究还是修成正果。</p><p>笔者的笔记本电脑信息如下：</p><ul><li>型号：Thinkpad E540</li><li>系统：Windows 10</li><li>显卡：NVIDIA GeForce 840M</li><li>内存：8 GB</li></ul><p>安装后的环境如下：</p><ul><li>Python 3.6.6</li><li>CUDA Toolkit v9.0</li><li>cuDNN v7.3</li><li>TensorFlow 1.11.0</li><li>PyTorch 0.4.1</li></ul><h1 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h1><h2 id="2-1-显卡是否支持CUDA？"><a href="#2-1-显卡是否支持CUDA？" class="headerlink" title="2.1 显卡是否支持CUDA？"></a>2.1 显卡是否支持CUDA？</h2><p>可浏览<a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">CUDA官网</a>查看显卡是否达到所需的算力(Compute Capability)要求。</p><h2 id="2-2-Python环境"><a href="#2-2-Python环境" class="headerlink" title="2.2 Python环境"></a>2.2 Python环境</h2><p>根据<code>TensorFlow</code>官网给出的<a href="https://www.tensorflow.org/install/pip" target="_blank" rel="noopener">支持信息</a>选择可支持的<code>Python</code>版本。笔者使用的是<code>Python3.6.6</code>版本。</p><p>安装Python的两种方法：</p><ol><li>直接下载并安装<code>Python</code>对应版本。</li><li>安装<code>Anaconda</code>“全家桶”，创建<code>Python</code>对应版本的虚拟环境。</li></ol><p>在<code>Windows</code>系统下笔者推荐后者。原因如下：</p><ul><li><code>Anaconda</code>的<code>base</code>环境集成了多种常用库，省去了自行安装的繁琐过程。</li><li><code>conda</code>可以创建多个独立的虚拟环境，并且能管理使用<code>pip</code>安装的库。</li></ul><p>尽管如此在安装<code>TensorFlow-GPU</code>库的时候笔者还是推荐使用<code>pip</code>。笔者曾尝试使用<code>conda</code>进行安装，结果出现了错误。毕竟<code>conda</code>只是由社区维护的，没有受到TensorFlow官方团队的关注。而原生的<code>pip</code>相较之下就属于“亲儿子”了。</p><h1 id="3-配置流程"><a href="#3-配置流程" class="headerlink" title="3 配置流程"></a>3 配置流程</h1><h2 id="3-1-安装CUDA-Toolkit和cuDNN"><a href="#3-1-安装CUDA-Toolkit和cuDNN" class="headerlink" title="3.1 安装CUDA Toolkit和cuDNN"></a>3.1 安装CUDA Toolkit和cuDNN</h2><p>首先根据<code>TensorFlow</code>官网给出的<a href="https://www.tensorflow.org/install/gpu" target="_blank" rel="noopener">支持信息</a>查看目前<code>TensorFlow</code>支持的<code>CUDA Toolkit</code>与<code>cuDNN</code>的版本。笔者使用的是<code>CUDA Toolkit v9.0</code>以及<code>cuDNN v7.3</code>版本。</p><ol><li><a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">下载</a><code>CUDA Toolkit</code>安装包。安装时注意：<ul><li>选择自定义安装模式，并勾选所有选项。因为<code>CUDA Toolkit</code>安装包内含有与之相匹配的显卡驱动程序。</li></ul></li><li><a href="https://developer.nvidia.com/rdp/cudnn-archive" target="_blank" rel="noopener">下载</a>对应的<code>cuDNN</code>压缩包。将解压的三个文件夹合并到<code>CUDA Toolkit</code>的根目录的三个同名文件夹下。笔者路径为：<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</code></li></ol><h2 id="3-2-安装TensorFlow-GPU"><a href="#3-2-安装TensorFlow-GPU" class="headerlink" title="3.2 安装TensorFlow-GPU"></a>3.2 安装TensorFlow-GPU</h2><ol><li>安装好<code>Anaconda</code>后，创建一个新的虚拟环境。打开<code>Anaconda Prompt</code>并输入：<pre><code> conda create -n py36 python=3.6</code></pre> 其中<code>py36</code>为虚拟环境名，<code>python=3.6</code>为指定的版本。<br> 当系统询问是否安装时输入<code>y</code>。</li><li>激活新的虚拟环境。输入：<pre><code> conda activate py36</code></pre> 命令行的<code>(base)</code>变成了<code>(py36)</code>。</li><li>在新的虚拟环境中使用<code>pip</code>安装<code>TensorFlow-GPU</code>库。输入：<pre><code> pip install --ignore-installed --upgrade tensorflow-gpu</code></pre></li><li>等待安装完成之后，进行测试。输入<code>python</code>以打开解释器，并输入以下：<pre><code> import tensorflow as tf tf.test.gpu_device_name()</code></pre></li><li>返回结果的最后一行代码如下：<pre><code> physical_device_desc: &quot;device: 0, name: GeForce 840M, pci bus id: 0000:01:00.0, compute capability: 5.0&quot;</code></pre></li><li><p>Tips<br> 使用<code>Anaconda</code>的用户在创建好新环境之后会遇到一个问题——<code>Anaconda</code>自带的<code>Jupyter Notebook</code>或<code>Jupyter Lab</code>并没有把新环境添加到<code>Kernel</code>中去。当然，可以在每个新建的环境中都安装<code>Jupyter</code>，可行但是不优雅。那么解决方法如下：</p><ul><li>在<code>Anacodna Prompt</code>中激活创建的环境<code>py36</code>:<pre><code>  conda activate py36</code></pre></li><li>安装插件<code>ipykernel</code>：<pre><code>  pip install ipykernel</code></pre></li><li><p>添加内核：</p><pre><code>  python -m ipykernel install --name py36 --display-name &quot;py36&quot;</code></pre><p>  <code>--name</code>参数后的<code>py36</code>是内核名称，用于系统保存。而<code>--display-name</code>参数后的 “Py36” 是在<code>Jupyter Notebook</code>网页中选择或切换内核时所显示的。建议二者设置为一样的，方便以后删除<code>Kernel</code>。</p><p>  如果非要设置一个<code>--display-name</code>，然而一段时间后又忘了当时<code>--name</code>是什么了。那么查看所有<code>Kernel</code>,可在<code>CMD</code>中输入:</p><pre><code>  jupyter kernelspec list</code></pre></li><li>删除内核时，可在<code>CMD</code>中输入：<pre><code>  jupyter kernelspec remove py36</code></pre></li></ul></li></ol><h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4 后记"></a>4 后记</h1><blockquote><p>2018年10月23日更新！</p></blockquote><p>笔者最近在又学习使用<code>PyTorch</code>（<code>TensorFlow</code>还没玩好，逃~）。根据已经安装的<code>CUDA Toolkit v9.0</code>,在<a href="https://pytorch.org/" target="_blank" rel="noopener">Pytorch官网</a>可找到对应的<code>pip</code>的安装方法，同前文描述一样，先创建新的虚拟环境，然后安装<code>PyTorch</code>，最后可以添加<code>Kernel</code>。</p><p>进行测试：</p><pre><code>cuda = t.cuda.is_available()print(cuda)</code></pre><p>返回结果为<code>True</code>则成功。</p><p>最新的<code>PyTorch 1.0</code>预览版已经发布啦，然而<code>Windows</code>系统暂时还不能玩，有点遗憾。笔者安装的是<code>PyTorch 0.4.1</code>版本。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;让你手中的煤气灶疯狂输出！&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                    &lt;img src=&quot;https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc3sgeij31hc0zke0a.jpg&quot; alt=&quot;&quot; title=&quot;&quot;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;image-caption&quot;&gt;&lt;/div&gt;
-            &lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="TensorFlow" scheme="http://yvanzh.top/categories/TensorFlow/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://yvanzh.top/tags/Deep-Learning/"/>
-    
-      <category term="TensorFlow" scheme="http://yvanzh.top/tags/TensorFlow/"/>
     
   </entry>
   
