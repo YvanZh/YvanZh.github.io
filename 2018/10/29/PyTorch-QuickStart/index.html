@@ -37,7 +37,7 @@
 <meta property="og:description" content="一只菜鸟的PyTorch笔记！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc47kg8j31hc0zk4qp.jpg">
-<meta property="og:updated_time" content="2019-06-28T13:50:57.498Z">
+<meta property="og:updated_time" content="2019-08-25T11:00:25.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PyTorch 快速入门">
 <meta name="twitter:description" content="一只菜鸟的PyTorch笔记！">
@@ -645,7 +645,7 @@ print(&#39;10000张测试集中的准确率为: %d %%&#39; % (100 * correct / to
 <li>CUDA Toolkit V9.0</li>
 <li>cuDNN v7.3</li>
 </ul>
-<p>具体可参考笔者的<a href="http://yvanzh.top/2018/10/05/Win10&amp;TensorFlow-GPU/">前篇博文</a>。</p>
+<p>具体可参考笔者的<a href="http://yvanzh.top/2018/10/05/Win10-TensorFlow-GPU/">前篇博文</a>。</p>
 <p>在上述的代码中，只需设置<code>use_cuda = Ture</code>即可。如自行设置GPU加速,需注意：</p>
 <pre><code class="lang-python">device = torch.device(&quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;) # device命名。如果多个CPU有待补充，TODO。
 net.to(device) # 将网络存入显存
@@ -662,7 +662,7 @@ images = images.to(device) # 将测试时的输入存入显存
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-06-28T13:50:57.498Z" itemprop="dateUpdated">2019-06-28 21:50:57</time>
+    最后更新时间：<time datetime="2019-08-25T11:00:25.876Z" itemprop="dateUpdated">2019-08-25 19:00:25</time>
 </span><br>
 
 
