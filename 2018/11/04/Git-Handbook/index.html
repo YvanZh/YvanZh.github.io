@@ -8,8 +8,27 @@
     
 
 
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
 
     <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="_HYeEvcrSB1gSTDyzgVD1iWlcCd6zWrg4Lx2R3Cw4WE">
     
     
     
@@ -441,9 +460,9 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2018/11/08/Hexo-MathJax/" id="post-prev" class="post-nav-link">
+      <a href="/2018/11/08/ML-Math/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Hexo 之公式渲染</h4>
+        <h4 class="title">机器学习数学基础</h4>
       </a>
     </div>
   
