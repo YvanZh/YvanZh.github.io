@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://tvax2.sinaimg.cn/mw690/007v1rTBgy1g9qfpff2axj31hc0zj4qp.jpg">
 <meta property="og:image" content="https://tvax3.sinaimg.cn/mw690/007v1rTBgy1g9qfdf336rj30is0h440n.jpg">
 <meta property="og:image" content="https://tvax4.sinaimg.cn/bmiddle/007v1rTBgy1g9svl0bprbj30ir0gr76c.jpg">
-<meta property="og:updated_time" content="2019-12-11T13:46:35.107Z">
+<meta property="og:updated_time" content="2019-12-11T13:58:21.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unsupervised Domain Adaptation via Structured Prediction Based Selective Pseudo-Labeling">
 <meta name="twitter:image" content="https://tvax2.sinaimg.cn/mw690/007v1rTBgy1g9qfpff2axj31hc0zj4qp.jpg">
@@ -300,7 +300,7 @@ p(y|x^t)=\max\{p_1(y|x^t),p_2(y|x^t)\}
 \tag{10}</script><p>最终，$x^t$的伪标签被预测为：</p>
 <script type="math/tex; mode=display">
 \hat{y}^t = \arg \max_{y\in \mathcal{Y}} p(y|x^t)
-\tag{11}</script><p>此外，在学习投影矩阵的时候本文运用了一个技巧，即逐步添加目标域样本到特征矩阵$X$中。给定最大迭代次数$T$，第$k$次迭代时$X$中包含$kn_t/T$个目标域样本。注意样本的选择按照其</p>
+\tag{11}</script><p>此外，在学习投影矩阵的时候本文运用了一个技巧，即逐步添加目标域样本到特征矩阵$X$中。给定最大迭代次数$T$，第$k$次迭代时$X$中包含$kn_t/T$个目标域样本。为了避免某高概率类选择的样本太多，对每个伪标签$c\in \mathcal{Y}$样本按照最大概率排序选择前$kn^c_t/T$个。</p>
 <p>算法流程如下图所示：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -325,7 +325,7 @@ p(y|x^t)=\max\{p_1(y|x^t),p_2(y|x^t)\}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-12-11T13:46:35.107Z" itemprop="dateUpdated">2019-12-11 21:46:35</time>
+    最后更新时间：<time datetime="2019-12-11T13:58:21.370Z" itemprop="dateUpdated">2019-12-11 21:58:21</time>
 </span><br>
 
 
