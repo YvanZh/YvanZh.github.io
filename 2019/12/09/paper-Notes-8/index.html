@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://tvax2.sinaimg.cn/mw690/007v1rTBgy1g9qfpff2axj31hc0zj4qp.jpg">
 <meta property="og:image" content="https://tvax3.sinaimg.cn/mw690/007v1rTBgy1g9qfdf336rj30is0h440n.jpg">
 <meta property="og:image" content="https://tvax4.sinaimg.cn/bmiddle/007v1rTBgy1g9svl0bprbj30ir0gr76c.jpg">
-<meta property="og:updated_time" content="2019-12-11T13:58:21.370Z">
+<meta property="og:updated_time" content="2019-12-12T03:17:40.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unsupervised Domain Adaptation via Structured Prediction Based Selective Pseudo-Labeling">
 <meta name="twitter:image" content="https://tvax2.sinaimg.cn/mw690/007v1rTBgy1g9qfpff2axj31hc0zj4qp.jpg">
@@ -257,7 +257,7 @@
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
-<h2 id="2-1-Dimensionality-Reduction"><a href="#2-1-Dimensionality-Reduction" class="headerlink" title="2.1 Dimensionality Reduction"></a>2.1 Dimensionality Reduction</h2><p>利用PCA对原始特征矩阵$X\in \mathbb{R}^{m\times n}$进行降维。由于PCA的降维是线性的，所以对降维后的$\tilde{X}$每一行的特征向量实行$L_2$归一化，即$\tilde{x} \leftarrow \tilde{x}/ \Vert \tilde{x} \Vert_2$。</p>
+<h2 id="2-1-Dimensionality-Reduction"><a href="#2-1-Dimensionality-Reduction" class="headerlink" title="2.1 Dimensionality Reduction"></a>2.1 Dimensionality Reduction</h2><p>利用PCA对原始特征矩阵$X\in \mathbb{R}^{m\times n}$进行降维。由于PCA的降维是线性的，所以对降维后的$\tilde{X}$每一列向量实行$L_2$归一化，即$\tilde{x} \leftarrow \tilde{x}/ \Vert \tilde{x} \Vert_2$。</p>
 <h2 id="2-2-Domain-Alignment"><a href="#2-2-Domain-Alignment" class="headerlink" title="2.2 Domain Alignment"></a>2.2 Domain Alignment</h2><p>应用Supervised LPP学习一个保持原始空间局部结构的投影子空间：</p>
 <script type="math/tex; mode=display">
 \min_{P} \sum_{i,j} \Vert P^T\tilde{x}_i -P^T\tilde{x}_j \Vert_2^2 M_{ij}
@@ -325,7 +325,7 @@ p(y|x^t)=\max\{p_1(y|x^t),p_2(y|x^t)\}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-12-11T13:58:21.370Z" itemprop="dateUpdated">2019-12-11 21:58:21</time>
+    最后更新时间：<time datetime="2019-12-12T03:17:40.208Z" itemprop="dateUpdated">2019-12-12 11:17:40</time>
 </span><br>
 
 
