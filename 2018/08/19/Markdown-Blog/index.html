@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="_HYeEvcrSB1gSTDyzgVD1iWlcCd6zWrg4Lx2R3Cw4WE">
+    
+    
+    
+    
+    <title>使用 Markdown 优雅地写作 | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Markdown">
+    <meta name="description" content="抛开排版的烦恼，优雅地记录世界！">
+<meta name="keywords" content="Markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Markdown 优雅地写作">
+<meta property="og:url" content="http://yvanzh.top/2018/08/19/Markdown-Blog/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:description" content="抛开排版的烦恼，优雅地记录世界！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc7s1d0j31hc0zkdxs.jpg">
+<meta property="og:updated_time" content="2020-01-01T07:00:21.854Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Markdown 优雅地写作">
+<meta name="twitter:description" content="抛开排版的烦恼，优雅地记录世界！">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc7s1d0j31hc0zkdxs.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用 Markdown 优雅地写作</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用 Markdown 优雅地写作</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-19T11:01:33.000Z" itemprop="datePublished" class="page-time">
+  2018-08-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Markdown/">Markdown</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-前言"><span class="post-toc-text">1 前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Mardown语法"><span class="post-toc-text">2 Mardown语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-标题"><span class="post-toc-text">2.1 标题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-段落"><span class="post-toc-text">2.2 段落</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-区块引用"><span class="post-toc-text">2.2 区块引用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-代码区块"><span class="post-toc-text">2.3 代码区块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-强调"><span class="post-toc-text">2.4 强调</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-5-列表"><span class="post-toc-text">2.5 列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-1-无序列表"><span class="post-toc-text">2.5.1 无序列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-2-有序列表"><span class="post-toc-text">2.5.2 有序列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-3-列表嵌套"><span class="post-toc-text">2.5.3 列表嵌套</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-6-分割线"><span class="post-toc-text">2.6 分割线</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-7-生成链接"><span class="post-toc-text">2.7 生成链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-8-插入图片"><span class="post-toc-text">2.8 插入图片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-9-反斜杠"><span class="post-toc-text">2.9 反斜杠</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-10-标记块"><span class="post-toc-text">2.10 标记块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-11-表格"><span class="post-toc-text">2.11 表格</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Hexo写作技巧"><span class="post-toc-text">3 Hexo写作技巧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-主页文章摘要"><span class="post-toc-text">3.1 主页文章摘要</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Markdown-Blog" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用 Markdown 优雅地写作</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-19 19:01:33" datetime="2018-08-19T11:01:33.000Z" itemprop="datePublished">2018-08-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Markdown/">Markdown</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><strong><em>抛开排版的烦恼，优雅地记录世界！</em></strong></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1fxscc7s1d0j31hc0zkdxs.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>第一次接触Markdown是在考完研之后。那段时间，笔者正在家中学习计算机网络的视频课。因为其知识结构比较繁杂，手写记录起来也比较累，于是笔者想偷个懒，把课件上的知识点梳理好，存放在电脑中，以便不时翻阅温习。</p>
+<p>后来成绩公布，笔者落榜，笔记也就不了了之。但是笔者依然对这个大宝贝情有独钟。想来，如今用其来写博客也是一件美妙的事情。</p>
+<p>本文主要是把Mardown语法以及在Hexo框架下写作的一些技巧记录下来与诸位分享。</p>
+<h1 id="2-Mardown语法"><a href="#2-Mardown语法" class="headerlink" title="2 Mardown语法"></a>2 Mardown语法</h1><h2 id="2-1-标题"><a href="#2-1-标题" class="headerlink" title="2.1 标题"></a>2.1 标题</h2><p>标题最低为六级标题，如：</p>
+<pre><code class="lang-markdown"># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+<h2 id="2-2-段落"><a href="#2-2-段落" class="headerlink" title="2.2 段落"></a>2.2 段落</h2><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用两个及以上空格加上回车。</p>
+<h2 id="2-2-区块引用"><a href="#2-2-区块引用" class="headerlink" title="2.2 区块引用"></a>2.2 区块引用</h2><p>只在第一行使用或者在段落的每行符号<code>&gt;</code>，还可使用多个嵌套引用。如：</p>
+<pre><code class="lang-markdown">&gt; 区块引用
+&gt;&gt; 嵌套引用
+</code></pre>
+<p>效果如下：</p>
+<blockquote>
+<p>区块引用</p>
+<blockquote>
+<p>嵌套引用</p>
+</blockquote>
+</blockquote>
+<h2 id="2-3-代码区块"><a href="#2-3-代码区块" class="headerlink" title="2.3 代码区块"></a>2.3 代码区块</h2><p>代码区块表示有两种方式：</p>
+<ol>
+<li>在每行加上4个空格或者一个制表符。</li>
+<li>在代码前后行分别添加三个`符号。如需要，可在第一行的符号后输入对应的代码类型来实现代码高亮。</li>
+</ol>
+<h2 id="2-4-强调"><a href="#2-4-强调" class="headerlink" title="2.4 强调"></a>2.4 强调</h2><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>。如：</p>
+<pre><code class="lang-markdown">*斜体*，_斜体_
+**粗体**，__粗体__
+</code></pre>
+<p>效果：</p>
+<blockquote>
+<p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
+</blockquote>
+<h2 id="2-5-列表"><a href="#2-5-列表" class="headerlink" title="2.5 列表"></a>2.5 列表</h2><h3 id="2-5-1-无序列表"><a href="#2-5-1-无序列表" class="headerlink" title="2.5.1 无序列表"></a>2.5.1 无序列表</h3><p>无序列表的标记方式是使用<code>-</code>、<code>+</code>、或<code>·</code>。如：</p>
+<pre><code class="lang-markdown">- 第一项
+- 第二项
+- 第三项
+</code></pre>
+<p>注意：标记后面最少有一个空格。若不在引用区块中，必须和前方段落之间存在空行。</p>
+<p>效果如下：</p>
+<blockquote>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+</blockquote>
+<h3 id="2-5-2-有序列表"><a href="#2-5-2-有序列表" class="headerlink" title="2.5.2 有序列表"></a>2.5.2 有序列表</h3><p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>。如：</p>
+<pre><code class="lang-markdown">1. 第一项
+2. 第二项
+3. 第三项
+</code></pre>
+<p>效果如下：</p>
+<blockquote>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+</blockquote>
+<h3 id="2-5-3-列表嵌套"><a href="#2-5-3-列表嵌套" class="headerlink" title="2.5.3 列表嵌套"></a>2.5.3 列表嵌套</h3><p>列表嵌套的方式是在所需嵌套的列表项前添加四个空格或一个制表符。无序列表和有序列表可以相互嵌套。如：</p>
+<pre><code class="lang-markdown">- 第一项
+    1. 嵌套有序第一项
+        - 嵌套无序第一项
+        - 嵌套无序第二项
+        - 嵌套无序第三项
+    2. 嵌套有序第二项
+    3. 嵌套有序第三项
+- 第二项
+- 第三项
+</code></pre>
+<p>效果如下：</p>
+<blockquote>
+<ul>
+<li>第一项<ol>
+<li>嵌套有序第一项<ul>
+<li>嵌套无序第一项</li>
+<li>嵌套无序第二项</li>
+<li>嵌套无序第三项</li>
+</ul>
+</li>
+<li>嵌套有序第二项  </li>
+<li>嵌套有序第三项  </li>
+</ol>
+</li>
+<li>第二项  </li>
+<li>第三项    </li>
+</ul>
+</blockquote>
+<h2 id="2-6-分割线"><a href="#2-6-分割线" class="headerlink" title="2.6 分割线"></a>2.6 分割线</h2><p>分割线最常使用就是三个或以上<code>-</code>，还可以使用<code>*</code>或<code>_</code>。</p>
+<h2 id="2-7-生成链接"><a href="#2-7-生成链接" class="headerlink" title="2.7 生成链接"></a>2.7 生成链接</h2><p>链接的生成需使用<code>[]()</code>符号。如：</p>
+<pre><code class="lang-markdown">[YvanZh的博客](http://yvanzh.top/)
+</code></pre>
+<p>效果如下：</p>
+<p><a href="http://yvanzh.top/">YvanZh的博客</a></p>
+<h2 id="2-8-插入图片"><a href="#2-8-插入图片" class="headerlink" title="2.8 插入图片"></a>2.8 插入图片</h2><p>添加图片的形式和链接相似，使用<code>![]()</code>符号即可。</p>
+<h2 id="2-9-反斜杠"><a href="#2-9-反斜杠" class="headerlink" title="2.9 反斜杠"></a>2.9 反斜杠</h2><p>反斜杠<code>\</code>相当于反转义作用。使符号成为普通符号。</p>
+<h2 id="2-10-标记块"><a href="#2-10-标记块" class="headerlink" title="2.10 标记块"></a>2.10 标记块</h2><p>标记块使用符号`。如：</p>
+<pre><code class="lang-markdown">`ctrl+a`
+</code></pre>
+<p>效果如下：</p>
+<blockquote>
+<p><code>ctrl+a</code></p>
+</blockquote>
+<h2 id="2-11-表格"><a href="#2-11-表格" class="headerlink" title="2.11 表格"></a>2.11 表格</h2><p>使用<code>|</code>来分隔表格，使用前需空行。使用<code>|-|</code>分隔表头和表身。如：</p>
+<pre><code>|姓名|性别|年龄|
+|---|---|---|
+|YvanZh|男|11|
+</code></pre><p>效果如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>性别</th>
+<th>年龄</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YvanZh</td>
+<td>男</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>更多说明：</p>
+<ol>
+<li><code>|</code>、<code>-</code>、<code>:</code>之间的多余空格会被忽略，不影响布局。</li>
+<li>默认居左对齐。 <code>-:</code>表示内容和标题栏居右对齐，<code>:-</code>表示内容和标题栏居左对齐，<code>:-:</code>表示内容和标题栏居中对齐。</li>
+<li>内容和<code>|</code>之间的多余空格会被忽略，每行第一个<code>|</code>和最后一个<code>|</code>可以省略，<code>-</code>的数量至少有一个。</li>
+</ol>
+<h1 id="3-Hexo写作技巧"><a href="#3-Hexo写作技巧" class="headerlink" title="3 Hexo写作技巧"></a>3 Hexo写作技巧</h1><h2 id="3-1-主页文章摘要"><a href="#3-1-主页文章摘要" class="headerlink" title="3.1 主页文章摘要"></a>3.1 主页文章摘要</h2><ol>
+<li>使用<code>&lt;!--more--&gt;</code>，可使得在此之前的内容作为摘要出现在主页中，同时也会出现在文章详情中。</li>
+<li>在文章中的<code>front-matter</code>中添加<code>description：</code>，并提供文章摘录。则首页中会显示文章的摘要内容，而文章详情后不会再显示。比如：</li>
+</ol>
+<blockquote>
+<p>2019年4月6日：更换indigo主题后色块不可用。</p>
+</blockquote>
+<pre><code>    ## 3.2 `Next`主题自带引用块
+</code></pre><pre><code>{% cq %}
+    我是引用内容。
+    {% endcq %}
+```
+
+效果如下：
+
+{% cq %}
+    我是引用的内容。
+    {% endcq %}
+
+## 3.3 `Next`主题自带色块
+
+主题共自带六种色块，分别为：default、success、danger、primary、info、warning。使用色块的方式为：
+
+```
+{% note 色块类型 %}
+    我是色块的内容。
+    {% endnote %}
+```
+
+1. default色块
+
+{% note default %}
+    我是default色块的内容。
+    {% endnote %}
+
+1. success色块
+
+{% note success %}
+    我是success色块的内容。
+    {% endnote %}
+
+1. danger色块
+
+{% note danger %}
+    我是danger色块的内容。
+    {% endnote %}
+
+1. primary色块
+
+{% note primary %}
+    我是primary色块的内容。
+    {% endnote %}
+
+1. info色块
+
+{% note info %}
+    我是info色块的内容。
+    {% endnote %}
+
+1. warning色块
+
+{% note warning %}
+    我是warning色块的内容。
+    {% endnote %}
+
+## 3.4 `Next`主题自带Tabs
+
+需在主题配置文件`_config.yml`中，将`Tabs Tag`相关设置改为`true`。
+
+Tabs显示效果类似于选项卡。使用Tabs的方式为：
+
+```
+{% tabs 选项卡, 2 %}
+    <!-- tab -->
+    **这是选项卡 1** 哇，你找到我了！φ(≧ω≦*)♪～
+    <!-- endtab -->
+    <!-- tab -->
+    **这是选项卡 2**
+    <!-- endtab -->
+    <!-- tab -->
+    **这是选项卡 3** 哇，你找到我了！φ(≧ω≦*)♪～
+    <!-- endtab -->
+    {% endtabs %}
+```
+
+上方的源码中, 数字`2`表示初始显示的是第二个选项卡。非必须，若数值为`-1`则隐藏选项卡内容。
+
+效果如下：
+
+{% tabs 选项卡, 2 %}
+    <!-- tab -->
+    **这是选项卡 1** 哇，你找到我了！φ(≧ω≦*)♪～
+    <!-- endtab -->
+    <!-- tab -->
+    **这是选项卡 2**
+    <!-- endtab -->
+    <!-- tab -->
+    **这是选项卡 3** 哇，你找到我了！φ(≧ω≦*)♪～
+    <!-- endtab -->
+    {% endtabs %}
+</code></pre><p>```</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-01-01T07:00:21.854Z" itemprop="dateUpdated">2020-01-01 15:00:21</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2018/08/19/Markdown-Blog/" target="_blank" rel="external">http://yvanzh.top/2018/08/19/Markdown-Blog/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/08/19/Markdown-Blog/&title=《使用 Markdown 优雅地写作》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/08/19/Markdown-Blog/&title=《使用 Markdown 优雅地写作》 — YvanZh's Blog&source=
+抛开排版的烦恼，优雅地记录世界！
+
+
+                
+                    
+                   ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/08/19/Markdown-Blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用 Markdown 优雅地写作》 — YvanZh's Blog&url=http://yvanzh.top/2018/08/19/Markdown-Blog/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/08/19/Markdown-Blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/05/Win10-TensorFlow-GPU/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Win10 系统下配置 TensorFlow-GPU 环境</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/15/GitHub-Conding-Hexo/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">通过 GitHub&amp;Conding+Hexo 搭建个人博客</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2020
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2018/08/19/Markdown-Blog/&title=《使用 Markdown 优雅地写作》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2018/08/19/Markdown-Blog/&title=《使用 Markdown 优雅地写作》 — YvanZh's Blog&source=
+抛开排版的烦恼，优雅地记录世界！
+
+
+                
+                    
+                   ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2018/08/19/Markdown-Blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用 Markdown 优雅地写作》 — YvanZh's Blog&url=http://yvanzh.top/2018/08/19/Markdown-Blog/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2018/08/19/Markdown-Blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3awW7rMAwEwPz/T6dAr238dimneJHGp6CAZY4OLCXy8Yif5/fz83f71qt3Z+vXDwYGxscynpfPdUCvgrsOa/1bv1AxMDAOYORJ8Dp1rgSaJ18MDAyMJPG9CrrdjlmZiIGBgdEeLGeFYLIdGBgYGO0hNj+4rlzDvf0sjoGB8YGMlcbAu3//UX8DAwPjP2Y8R08ObpsKw3gwMDC2ZuQX/bNw18cvikSMgYGxKWPlyHpXNTorEP/xfwMDA2MjRpvgrsF5Y+CuhsRjlqcxMDA+itGOlrZX+Xk52G4fBgbGyYxZYk0GyGbsaPswMDAOY+QBLaXIy/XrFIyBgbE1o20MvGOEYobBwMDASJJdfvTNr9vy9kPdEsDAwNiOce+YxazcrAtKDAyMTRnJ0XS9vMuv2NrScLg0BgbGRzFWhrdm12Tt2EfyFQwMjNMYebhJokwOtyt7HI1fYGBgbMFYKb/a8i5ZuR3UwMDAOIHRXoq1oczSbp7KMTAwTmC0LYE8uIS6kogf+csYGBjbMVYKvruScgHAwMA4gNGOUOSFYzIiNkv30SEWAwNjC8azfO5qfM4aEi9Xw8DA2Jqx0vNs/5IXfHlLAAMD4xzG7Po+WTp5KzncRteCGBgYBzCSEGdl3GyMI+dhYGBgzFoFd7GL5IuBgYERNzLbldtjcz0zgoGBsRGjHfOatTDz79b3ghgYGFszZo2BleGJvJ2ZbzQGBsamjC/eJX5M27/JAgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>

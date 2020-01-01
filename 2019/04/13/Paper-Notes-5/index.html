@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="_HYeEvcrSB1gSTDyzgVD1iWlcCd6zWrg4Lx2R3Cw4WE">
+    
+    
+    
+    
+    <title>Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction | YvanZh&#39;s Blog | Goketsu Monogatari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Machine Learning,Manifold Learning,Dimension Reduction">
+    <meta name="keywords" content="Machine Learning,Manifold Learning,Dimension Reduction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction">
+<meta property="og:url" content="http://yvanzh.top/2019/04/13/Paper-Notes-5/index.html">
+<meta property="og:site_name" content="YvanZh&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1vekpd0kij31hc0qo7er.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1z0g7zhtvj30rn0fdjs9.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g21ahtrfepj30n80p7766.jpg">
+<meta property="og:updated_time" content="2020-01-01T07:00:45.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1vekpd0kij31hc0qo7er.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="YvanZh&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link href="/css/prism/prism-atom-dark.css" rel="stylesheet">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-list-ul"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/back_blue.png)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YvanZh</h5>
+          <a href="mailto:Yvan562220078@gmail.com" title="Yvan562220078@gmail.com" class="mail">Yvan562220078@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/books">
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/movies">
+                <i class="icon icon-lg icon-film"></i>
+                影视
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/games">
+                <i class="icon icon-lg icon-gamepad"></i>
+                游戏
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/music">
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/poetry">
+                <i class="icon icon-lg icon-leaf"></i>
+                诗意
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cogito">
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                哲思
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/faraway">
+                <i class="icon icon-lg icon-moon-o"></i>
+                远方
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-13T07:52:52.000Z" itemprop="datePublished" class="page-time">
+  2019-04-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-简介"><span class="post-toc-text">1 简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-相关工作"><span class="post-toc-text">2 相关工作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-LGC-and-GFHF"><span class="post-toc-text">2.1 LGC and GFHF</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-MR"><span class="post-toc-text">2.2 MR</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-SDA"><span class="post-toc-text">2.3 SDA</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-模型框架"><span class="post-toc-text">3 模型框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-联系-LGC-GFHF-和-LapRLSL-L"><span class="post-toc-text">3.1 联系 LGC/GFHF 和 LapRLSL/L</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-FME"><span class="post-toc-text">3.2 FME</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-FME-U"><span class="post-toc-text">3.3 FME/U</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-模型比较"><span class="post-toc-text">4 模型比较</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-比较FME"><span class="post-toc-text">4.1 比较FME</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-比较FME-U与GE"><span class="post-toc-text">4.2 比较FME/U与GE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-3-比较FME-U与SR"><span class="post-toc-text">4.3 比较FME/U与SR</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-4-汇总"><span class="post-toc-text">4.4 汇总</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-思考"><span class="post-toc-text">5 思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Paper-Notes-5" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-13 15:52:52" datetime="2019-04-13T07:52:52.000Z" itemprop="datePublished">2019-04-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper-Notes/">Paper Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1vekpd0kij31hc0qo7er.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p><a href="https://ieeexplore.ieee.org/document/5427147" target="_blank" rel="noopener">文章来源</a>：2010-TPAMI</p>
+<p>文章主旨：</p>
+<p>很多降维方法都是使用线性映射$F=X^TW$（比如PCA，LDA，LPP，SDA）。它们简单高效，但是在实际应用中预测标签$F$位于训练样本所张成的低维空间中未免太多严格。</p>
+<p>提出一个新的框架，同时优化预测标签$F$，线性回归函数$h(X)$和回归残差$F_0$。其结合了标签适配度和流形平滑度（其实指的就是局部信息或局部一致性）有关的两项，以及一个灵活的惩罚项$\Vert F_0 \Vert^2$。</p>
+<p>后知后觉：</p>
+<p>本文的模型依然是线性的，保留了线性映射的简单高效的特点，同时利用残差放宽了线性约束，很好避免了过拟合。在深度学习还没有兴起时，这无疑是个很好的方法。感觉何凯明也是吸取了残差的思想才创造了Res-Net，本文的影响可见一斑。</p>
+<h1 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2 相关工作"></a>2 相关工作</h1><h2 id="2-1-LGC-and-GFHF"><a href="#2-1-LGC-and-GFHF" class="headerlink" title="2.1 LGC and GFHF"></a>2.1 LGC and GFHF</h2><p>Local and global consistency (LGC)：</p>
+<script type="math/tex; mode=display">
+g_L(F) = \frac{1}{2}\sum_{i,j=1}^m \Big\Vert \frac{F_{i.}}{\sqrt{D_{ii}}}- \frac{F_{i.}}{\sqrt{D_{jj}}} \Big \Vert^2 S_{ij} +\lambda\sum _{i=1}^n \Vert F_{i.} -Y_{i.} \Vert^2  \tag{1}</script><p>Gaussian fields and harmonic functions (GFHF):</p>
+<script type="math/tex; mode=display">
+g_G(F) = \frac{1}{2} \sum_{i,j=1}^m \Vert F_{i.} - F_{j.} \Vert^2 S_{ij} +\lambda_{\infty} \sum_{i =1} ^n \Vert F_{i.} -Y{i.} \Vert^2 \tag{2}</script><p>其中配分系数$\lambda$用来平衡流形平滑度和标签适配。$\lambda_{\infty}$是个非常大的数。</p>
+<p>注意到$(1)(2)$式共享一个方程：</p>
+<script type="math/tex; mode=display">
+\operatorname{Tr}(F^TMF) +\operatorname{Tr}(F-Y)^T U (F-Y) \tag{3}</script><p>其中$M \in \mathcal{R}^{m\times m}$代表拉普拉斯矩阵，$U \in \mathcal{R}^{m \times m}$为对角矩阵。</p>
+<p>在LGC中，$M$表示一个归一化的拉普拉斯矩阵$\hat{L}$，$U$表示元素为$\lambda$的对角矩阵。</p>
+<p>在GFHF中，$M$表示普通的拉普拉斯矩阵，$U$表示前n个元素和后$m-n$个元素分别为$\lambda_\infty$和$0$的对角矩阵。</p>
+<h2 id="2-2-MR"><a href="#2-2-MR" class="headerlink" title="2.2 MR"></a>2.2 MR</h2><p>Manifold Regularization (MR) 扩展了许多现有的算法。比如岭回归和SVM，使得它们可以通过加入一个基于几何的正则化项来进行半监督学习。</p>
+<p>来简单看一下LapRLS/L，它就是将MR对岭回归进行扩展，同时计算岭回归的误差并保留流形平滑度。其表示为：</p>
+<script type="math/tex; mode=display">
+g_M(W,b) = \lambda_A\Vert W \Vert^2 + \lambda_I\operatorname{Tr}r(W^TXLX^TW) + \frac{1}{n} \sum_{i =1}^n \Vert W^Tx_i +b -Y_{i.}^T \Vert^2 \tag{4}</script><h2 id="2-3-SDA"><a href="#2-3-SDA" class="headerlink" title="2.3 SDA"></a>2.3 SDA</h2><p>Semi-Supervised Discriminant Analysis (SDA) 的核心假设依然是流形平滑，也就是在低维空间中相近的点具有相似的特征表示。</p>
+<p>定义$X_l = [x_1,x_2,\dots,x_n]$为有标签数据的矩阵。第$i$类的样本数为$n_i$。图相似矩阵$\tilde{S}^w,\tilde{S}^b \in \mathcal{R}^{n\times n}$，其中$\tilde{S}^w_{ij}= \delta_{y_i,y_j}/n_{y_i}$，$\tilde{S}^b_{ij}= (\frac{1}{n})-\tilde{S}^w_{ij}$。它们分别对应的拉普拉斯矩阵为$\tilde{L}_w$和$\tilde{L}_b$。</p>
+<p>类内散度:</p>
+<script type="math/tex; mode=display">S_w = \sum_{i =1}^n(x_i - \bar{x}_{y_i})(x_i - \bar{x}_{y_i})^T = X_l\tilde{L}_wX_l^T \tag{5}</script><p>类间散度：</p>
+<script type="math/tex; mode=display">S_b = \sum_{l =1}^c n_c ( \bar{x}_l- \bar{x})(\bar{x}_l - \bar{x})^T = X_l \tilde{L}_b X_l^T \tag{6}</script><p>SDA：</p>
+<script type="math/tex; mode=display">g_S(W) = \frac{\vert W^TX_l \tilde{L}_bX^T_l W \vert } {\vert W^T(X_l(\tilde{L}_w +\tilde{L}_b)X_l^T +\alpha XLX^T + \beta I) W \vert}  \tag{7}</script><h1 id="3-模型框架"><a href="#3-模型框架" class="headerlink" title="3 模型框架"></a>3 模型框架</h1><h2 id="3-1-联系-LGC-GFHF-和-LapRLSL-L"><a href="#3-1-联系-LGC-GFHF-和-LapRLSL-L" class="headerlink" title="3.1 联系 LGC/GFHF 和 LapRLSL/L"></a>3.1 联系 LGC/GFHF 和 LapRLSL/L</h2><p>LGC/GFHF基于标签传播和随机游走而被提出，LapRLSL/L的提出为了对岭回归的进行半监督扩展。<br>LGC/GFHF只能为现有的数据点找到一个合适的映射关系，而LapRLSL/L可以通过线性函数$h(x)$为新数据点提供一个映射。</p>
+<blockquote>
+<p>命题1<br>当拉普拉斯矩阵$M\in \mathcal{R}^{m\times m}$满足$M\mathbf{1} = 0$与$\mathbf{1}^TM = 0^T，$LapRLSL/L是扩展到样本外的LGC/GFHF。</p>
+</blockquote>
+<p>证明：</p>
+<p>假设LGC/GFHF的解$F$位于由$X$张成的线性子空间中，比如$F= h(X)= X^TW + \mathbf{1}b^T$。其中$W \in \mathcal{R}^{f\times c}$为投影矩阵，$b\in \mathcal{R}^{c \times 1}$为偏置项。那么LGC/GFHF的目标函数$(3)$式可被写为：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+Tr[(X^TW + \mathbf{1}b^T)^T M (X^TW + \mathbf{1}b^T)] \\
++ Tr[(X^TW + \mathbf{1}b^T - Y )^T U(X^TW + \mathbf{1}b^T -Y)] 
+\end{gathered} \tag{8}</script><p>接着添加一个正则化项$(\lambda_A)/(\lambda_I) \Vert W \Vert^2$，并设$M = L$，对角阵$U$的前$n$个元素和后$m-n$个元素分别为$(1)/(n\lambda_A)$和$0$。则$(8)$式变为：</p>
+<script type="math/tex; mode=display">
+\frac{\lambda_A}{\lambda_I}\Vert W \Vert^2 \operatorname{Tr}r(W^TXLX^TW) + \frac{1}{n\lambda_I}\sum_{i =1}^n \Vert W^Tx_i + b - Y_i^T \Vert^2
+\tag{9}</script><p>于是$(9)$式就等于$(1)/(\lambda_I)g_M(W,b)$。命题1得证。</p>
+<h2 id="3-2-FME"><a href="#3-2-FME" class="headerlink" title="3.2 FME"></a>3.2 FME</h2><p>从命题1我们知道LapRLSL/L中的预测标签$F$也是被限制在由所有训练样本$X$所张成的空间中。尽管我们学得的线性函数可以映射新的数据点，但是$W$中的参数的个数并不依赖于样本的个数。因此，这个线性函数可能会过拟合来自非线性流形的训练样本。于是作者提出FME(Flexible Manifold Embedding)框架来解决这个问题。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g1z0g7zhtvj30rn0fdjs9.jpg" alt="Fig.1" title="">
+                </div>
+                <div class="image-caption">Fig.1</div>
+            </figure>
+<p>如Fig.1所示，设$F = h(X) +F_0 = X^TW + \mathbf{1}b^T + F_0$，作者通过使用回归残差来放宽约束。其中$F_0 \in \mathcal{R}^{m \times c}$就是用来建模$F$与$h(X)$之间失配的回归残差。FME就是为了同时寻找最优的预测标签$F$，回归残差$F_0$，和线性回归函数$h(X)$。即：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(F^*,F^*_0,W^*,b^*) = \arg \underset{F,F_0,W,b}{\min} &\operatorname{Tr}(F-Y)^TU(F-Y) +\operatorname{Tr}(F^TMF) \\
+&+ \mu(\Vert W \Vert^2 + \gamma \Vert F_0 \Vert^2)    
+\end{aligned}
+ \tag{10}</script><p>其中$M \in \mathcal{R}^{m\times m}$为拉普拉斯矩阵，$U \in \mathcal{R}^{m \times m}$为对角阵。前人也做过一些类似工作，不过都是聚焦于二分类任务。在这里，作者扩展到多类别的降维任务，且类别的独立性可以从提取的特征中捕捉到。</p>
+<p>与LGC、GFHF和LapRLS/L类似，$(10)$式的前两项分别表示标签适配度和流形平滑度。考虑到不同样本（比如$j \neq i$）的预测标签$F_i$和给定标签$Y_j$之间的近似是无意义的，因此设定$U$为前$n$个元素和后$m-n$个元素分别为$1$和$0$的对角阵。此外，为了保持流形结构（比如，$F$应该尽可能地在整个图中保持平滑），在半监督学习中$M$应该被设为图的拉普拉斯矩阵。用高斯核函数来计算$M = D - S$，其中$D_{ii} = \sum_{j}S_{ij}$，若$x_i$为$x_j$的$k$近邻，$S_{ij} = exp(- \Vert x_i - x_j \Vert^2/t)$；否则$S_{ij} = 0$。</p>
+<p>$(10)$式中的后两项用来控制投影矩阵$W$和回归残差$F_0$。相较于LapRLS/L，我们不强制$F$位于训练样本$X$所张成的空间中。因此，我们的框架更灵活，同时也能更好地处理驻留在非线性流形的样本。</p>
+<p>用$F-X^TW -\mathbf{1}b^T$替换$F_0$，那么得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(F^*,W^*,b^*) = \arg \underset{F,W,b}{\min} &\operatorname{Tr}(F-Y)^T U (F-Y) + \operatorname{Tr}(F^TMF) \\
+&+\mu(\vert W \Vert^2 +\gamma \Vert X^TW + \mathbf{1}b^T - F \Vert^2)
+\end{aligned}  \tag{11}</script><blockquote>
+<p>定理1<br>设$U,M \in \mathcal{R}^{m\times m}$，$F,Y\in \mathcal{R}^{m\times c}$，$W\in \mathcal{R}^{f \times c}$，$b \in\mathcal{R}^{c \times 1}$。若$U$和$M$为半正定矩阵，且$\mu ,\gamma \ge 0$，则</p>
+<script type="math/tex; mode=display">g(F,W,b) = \operatorname{Tr}(F-Y)^TU(F-Y) + \operatorname{Tr}(F^TMF) + \mu(\Vert W \Vert^2 + \gamma \Vert X^TW + \mathbf{1}b^T - F \Vert^2)</script><p>对于$F,W,b$为联合凸的。</p>
+</blockquote>
+<p>证明：</p>
+<p>在$g(F,W,b)$中，我们移除常数项$\operatorname{Tr}(Y^TUY)$，那么可以写为：</p>
+<script type="math/tex; mode=display">
+g(F,W,b) = Tr  \begin{bmatrix}
+    F \\
+    W \\
+    b^T
+\end{bmatrix}^T P \begin{bmatrix}
+    F \\
+    W \\
+    b^T    
+\end{bmatrix} - Tr \begin{bmatrix}
+    F \\
+    W \\
+    b^T
+\end{bmatrix}^T \begin{bmatrix}
+    2UY \\
+    0 \\
+    0   
+\end{bmatrix}</script><p>其中：</p>
+<script type="math/tex; mode=display">P = \begin{bmatrix}
+    \mu\gamma I+M+U & -\mu \gamma X^T & -\mu \gamma \mathbf{1}    \\
+    - \mu\gamma X & \mu I +\mu \gamma XX^T & \mu \gamma X\mathbf{1} \\
+    - \mu \gamma \mathbf{1}^T & \mu \gamma \mathbf{1}^TX^T & \mu \gamma m
+\end{bmatrix}</script><p>因此我们要证$g(F,W,b)$对$F,W,b$为联合凸的，只需要证$P$为半正定矩阵即可。</p>
+<p>对任意向量$z = [z_1^T,z_2^T,z_3^T]\in \mathcal{R}^{(m+f+1)\times 1}$，其中$z_1 \in \mathcal{R}^{m \times 1},z_2 \in \mathcal{R}^{f\times 1},z_3$是个标量，则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} z^{T} P z=& z_{1}^{T}(\mu \gamma I+M+U) z_{1}-2 \mu \gamma z_{1}^{T} X^{T} z_{2}-2 \mu \gamma z_{1}^{T} 1 z_{3} \\ &+z_{2}^{T}\left(\mu I+\mu \gamma X X^{T}\right) z_{2}+2 \mu \gamma z_{2}^{T} X \mathbf{1} z_{3}+\mu \gamma m z_{3}^{T} z_{3} \\
+= &z_{1}^{T}(M+U) z_{1}+\mu z_{2}^{T} z_{2}+\mu \gamma\left(z_{1}^{T} z_{1}-2 z_{1}^{T} X^{T} z_{2}\right.\\ &-2 z_{1}^{T} 1 z_{3}+z_{2}^{T} X X^{T} z_{2}+2 z_{2}^{T} X \mathbf{1} z_{3}+m z_{3}^{T} z_{3} ) \\
+=& z_{1}^{T}(M+U) z_{1}+\mu z_{2}^{T} z_{2}+\mu \gamma\left(z_{1}-X^{T} z_{2}-\mathbf{1} z_{3}\right)^{T} \\ & \times\left(z_{1}-X^{T} z_{2}-\mathbf{1} z_{3}\right)\end{aligned}</script><p>也就是若$U,M$为半正定矩阵，且$\mu,\gamma \ge 0$，那么$\forall z,z^TPz \ge 0$。因此$P$为正定矩阵，也就是说$g(F,W,b)$是凸函数。定理1得证。</p>
+<p>为了得到最优解，首先我们设$(11)$式对$b,W$的偏导为$0$。可得：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+    b = \frac{1}{m}(F^T\mathbf{1} - W^TX\mathbf{1}) \\
+    W = \gamma(\gamma XH_cX^T + I)^{-1}XH_cF = AF 
+\end{gathered} \tag{12}</script><p>其中$A = \gamma(\gamma XH_cX^T + I)^{-1}XH_c,H_c = I - (1/m)\mathbf{1}\mathbf{1}^T$用来对数据进行中心化。利用$(12)$式重新表示$(11)$式中回归函数 $X^TW+\mathbf{1}b^T$为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} X^{T} W+\mathbf{1} b^{T} &=X^{T} A F+\frac{1}{m} \mathbf{1 1}^{T} F-\frac{1}{m} \mathbf{1 1}^{T} X^{T} A F \\ &=H_{c} X^{T} A F+\frac{1}{m} \mathbf{1 1}^{T} F=B F \end{aligned} \tag{13}</script><p>其中$B=H_{c} X^{T} A+(1 / m) \mathbf{1} \mathbf{1}^{T}$。代入$(11)$是，得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} F^{*}=& \arg \min _{F} \operatorname{Tr}(F-Y)^{T} U(F-Y) \\ &+\operatorname{Tr}\left(F^{T} M F\right)+\mu\left(\operatorname{Tr}\left(F^{T} A^{T} A F\right)\right.\\ &+\gamma \operatorname{Tr}(B F-F)^{T}(B F-F) ) \end{aligned} \tag{14}</script><p>然后设$(14)$式对$F$偏导为$0$，可得：</p>
+<script type="math/tex; mode=display">
+F=\left(U+M+\mu \gamma(B-I)^{T}(B-I)+\mu A^{T} A\right)^{-1} U Y \tag{15}</script><p>根据$H_cH_c = H_c = H_c^T$和$\gamma\mu  A^TXH_cX^TA+\mu A^TA = \gamma \mu A^TXH_c = \gamma\mu H_cX^TA$，$(15)$式中的$\mu \gamma(B-I)^{T}(B-I)+ \mu A^TA$可写为$\mu \gamma\left(A^{T} X-I\right) H_{c}\left(X^{T} A-I\right)+ \mu A^TA$。因此可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \mu \gamma(B-I)^{T}(B-I)+\mu A^{T} A=& \mu \gamma H_{c}-\mu \gamma^{2} H_{c} X^{T} \\ & \times\left(\gamma X H_{c} X^{T}+I\right)^{-1} X H_{c} \end{aligned} \tag{16}</script><p>根据定义$X_c = XH_c$，我们可以计算预测标签$F$：</p>
+<script type="math/tex; mode=display">
+F=\left(U+M+\mu \gamma H_{c}-\mu \gamma^{2} N\right)^{-1} U Y \tag{17}</script><p>其中$N=X_{c}^{T}\left(\gamma X_{c} X_{c}^{T}+I\right)^{-1} X_{c}=X_{c}^{T} X_{c}\left(\gamma X_{c}^{T} X_{c}+I\right)^{-1}$。</p>
+<p>综上，首先利用$(17)$式得到最优解$F$，然后根据$(12)$式得到最优解$W,b$。</p>
+<h2 id="3-3-FME-U"><a href="#3-3-FME-U" class="headerlink" title="3.3 FME/U"></a>3.3 FME/U</h2><p>通过设定$(11)$式中的矩阵$U$为$0$可以简单得到FME的无监督版本：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\left(F^{*}, W^{*}, b^{*}\right)=& \arg \min_{F, W, b, F^{T} V F=I} \operatorname{Tr}\left(F^{T} M F\right) \\ &+\mu\left(\|W\|^{2}+\gamma\left\|X^{T} W+1 b^{T}-F\right\|^{2}\right) \end{aligned} \tag{18}</script><p>其中$V$被设为$H_c$，$I$为单位矩阵。</p>
+<p>在无监督学习中，变量$F$可以看作低维表征的隐变量。我们限制$F$经过中心化操作后位于一个球面上，以避免$F=0$。同时$(18)$式是一个一般形式的等式，其可以通过使用不同的矩阵$M$和$V$来进行监督学习（TODO）。FME/U很自然地提供了一个对新数据映射方法，即$h(X) = X^TW+ \mathbf{1}b^T$，且由于增加了一个残差惩罚项（$\Vert h(X) - F \Vert^2$），所以较于前人研究的“硬核”映射$F = X^TW$更显灵活性。</p>
+<p>同样类似的优化步骤，首先设$(18)$式对于$W,b$的偏导为$0$，根据$(12)$式计算$W,b$，然后将$W,b$代入$(18)$式中，得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} F^{*}= \arg \min _{F, F^{T} H_{c} F=I} &\operatorname{Tr}\left(F^{T} M F\right)+\mu\left(\operatorname{Tr}\left(F^{T} A^{T} A F\right)\right.\\ &+\gamma \operatorname{Tr}(B F-F)^{T}(B F-F) ) \end{aligned} \tag{19}</script><p>最后根据$(16)$式，可以将$(19)$式写为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} F^{*} &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M+\mu \gamma H_{c}-\mu \gamma^{2} N\right) F \\ &=\arg \min _{F, F^{T} H_{c} F=I} \operatorname{Tr} F^{T}\left(M-\mu \gamma^{2} N\right) F \end{aligned} \tag{20}</script><p>其中$N=X_{c}^{T}\left(\gamma X_{c} X_{c}^{T}+I\right)^{-1} X_{c}=X_{c}^{T} X_{c}\left(\gamma X_{c}^{T} X_{c}+I\right)^{-1}$。</p>
+<p>综上，我们先通过$(20)$式得到最优解$F$，然后通过$(12)$式得到最优解$W,b$。</p>
+<h1 id="4-模型比较"><a href="#4-模型比较" class="headerlink" title="4 模型比较"></a>4 模型比较</h1><p>模型比较分三个部分：</p>
+<ol>
+<li>比较FME与其他的半监督学习算法LGC,GFHF,LapRLS/L。</li>
+<li>比较FME/U与Graph Embedding Framwork。</li>
+<li>比较FME/U与Spectral Regression。</li>
+</ol>
+<h2 id="4-1-比较FME"><a href="#4-1-比较FME" class="headerlink" title="4.1 比较FME"></a>4.1 比较FME</h2><blockquote>
+<p>示例1<br>LGC与GFHF为FME的两种特殊情形。</p>
+</blockquote>
+<p>证明：</p>
+<p>若我们设$\mu = 0$，那么FME的目标函数$(11)$式就退化成了<br>$(3)$式，也就是LGC和GFHF的一般形式。示例1得证。</p>
+<blockquote>
+<p>示例2<br>LapRLS/L也是FME的一种特殊情形。</p>
+</blockquote>
+<p>证明：</p>
+<p>若我们设$(11)$式中$\mu (\lambda_A)/(\lambda_I)$且$\gamma \rightarrow \infty$，那么可得$F = X^TW+\mathbf{1}b^T$，代入$(11)$式有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} g(W, b)=& \operatorname{Tr}\left(X^{T} W+\mathbf{1} b^{T}\right)^{T} M\left(X^{T} W+1 b^{T}\right) \\ &+\mu\|W\|^{2}+\operatorname{Tr}\left(X^{T} W+1 b^{T}-Y\right)^{T} \\ & U\left(X^{T} W+1 b^{T}-Y\right) \end{aligned} \tag{21}</script><p>进一步设$M = L$且$U$为前$n$个元素和后$m-n$个元素分别为$(1)/(n\lambda_I)$和$0$的对角阵。那么$g(W,b)$就等于$(4)$式中的$(1)/(\lambda_I)g_M(W,b)$。示例2得证。</p>
+<h2 id="4-2-比较FME-U与GE"><a href="#4-2-比较FME-U与GE" class="headerlink" title="4.2 比较FME/U与GE"></a>4.2 比较FME/U与GE</h2><p>此前有一篇很厉害的<a href="https://ieeexplore.ieee.org/document/4016549" target="_blank" rel="noopener">文章</a>提出了广义的图嵌入框架整合了一大堆降维算法（如PCA, LDA, ISOMAP, LLE, LE）。文章把各个算法给定的统计和几何性质编码为图形关系，并且每个算法都可以被看作是直接图嵌入，线性图嵌入，或其他扩展。直接图嵌入的目标函数为：</p>
+<script type="math/tex; mode=display">
+F^{*}=\arg \min _{F, F^{T} V F=I} \operatorname{Tr}\left(F^{T} M F\right) \tag{22}</script><p>其中$V$为另一个图拉普拉斯矩阵（比如中心矩阵$H_c$），那么有$V\mathbf{1} = \mathbf{0},\mathbf{1}^TV = \mathbf{0}^T$。</p>
+<p>然而直接的图嵌入计算得到的对于训练样本低维表征$F$并不能为新的数据点提供映射。那篇文章中也给出了解决方法，线性化，核化，向量化等。假设一个硬线性映射为$F = X^TW +\mathbf{1}b^T$，那么目标函数在线性图嵌入中表示为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} W^{*}=& \arg \min_{W,\left(X^{T} W+\mathbf{1} b^{T}\right)^{T} V\left(X^{T} W+\mathbf{1} b^{T}\right)=I} \\ & \operatorname{Tr}\left(X^{T} W+\mathbf{1} b^{T}\right)^{T} M\left(X^{T} W+\mathbf{1} b^{T}\right) \\ =&\arg \min_{W, W^{T} X V X^{T} W=I} \operatorname{Tr}\left(W^{T} X M X^{T} W\right) \end{aligned} \tag{23}</script><blockquote>
+<p>示例3<br>直接图嵌入和它的线性化是$FME/U$的一种特殊情形。</p>
+</blockquote>
+<p>证明：</p>
+<p>若我们设$\mu = 0$，那么$FME/U$的目标函数退化为$(22)$式中的直接图嵌入。</p>
+<p>当$(18)$式中$\mu \rightarrow 0,\mu \gamma \rightarrow \infty$时，有$F = X^TW +\mathbf{1}b^T$。替换$(18)$式中的的$F$后$FME/U$的目标函数退化为$(23)$式中的线性图嵌入。示例3得证。</p>
+<h2 id="4-3-比较FME-U与SR"><a href="#4-3-比较FME-U与SR" class="headerlink" title="4.3 比较FME/U与SR"></a>4.3 比较FME/U与SR</h2><p>SR的提出是为了解决投影矩阵$W$来映射新数据点的问题。分为两个步骤，首先$(18)$式已经得到最优解$F$，然后计算最优解$W,b$：</p>
+<script type="math/tex; mode=display">
+\left[W^{*}, b^{*}\right]=\arg \min _{W, b}\left\|X^{T} W+1 b^{T}-F\right\|^{2}+\lambda\|W\|^{2} \tag{24}</script><blockquote>
+<p>示例4<br>SR是$FME/U$的一种特殊情形。</p>
+</blockquote>
+<p>证明：</p>
+<p>当$\mu \rightarrow 0, \gamma = 1/\lambda$，那么$(18)$式会退化为$(22)$式，也就是说我们先解$F$。然后目标函数从$(18)$式转化到$(24)$式来解$W$，此时注意到SR目标函数为$W^{*}=\left(X H_{c} X^{T}+\lambda I\right)^{-1} X H_{c} F$，且与FME/U中的一致。示例4得证。</p>
+<h2 id="4-4-汇总"><a href="#4-4-汇总" class="headerlink" title="4.4 汇总"></a>4.4 汇总</h2><p>直接上图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/YvanZh/BlogPic/master/img/007v1rTBgy1g21ahtrfepj30n80p7766.jpg" alt="Fig.2" title="">
+                </div>
+                <div class="image-caption">Fig.2</div>
+            </figure>
+<h1 id="5-思考"><a href="#5-思考" class="headerlink" title="5 思考"></a>5 思考</h1><ol>
+<li><p>文章的创新点在于加入了一个回归残差作为惩罚项，并整合了多个降维算法。看这篇文章最大的收获，其一就是学会了一种利用残差来放宽约束的方法，可以避免过拟合非线性流形的训练数据。其二就是了解了各大知名的降维算法。论文有些地方的还没有读通透，需要再仔细研读一下。</p>
+</li>
+<li><p>对于迁移学习的研究的思考。</p>
+<p> 我们一般假设源域和源域数据采样一个高维流形之中，那么一般的做法大多是对源域和目标域数据进行本文中所描述的“硬核”线性投影（$W^TX+b$），得到一个利于最终任务的子空间（当然其中需要有各种图拉普拉斯约束，MMD约束等）。也就是说我们得到的子空间其实是一个线性的空间（见Fig.1），对于投影后不在这个空间的新数据而言，约束太过严格了。那么我们能否加一个残差项来补足呢？也就是说我们最后学的映射是$F =W^TX+b+ F_0$觉得这一点很值得一试。</p>
+</li>
+<li><p>对于深度学习的思考。</p>
+<p> 按照作者的理论，其实普通的全连接神经网络的每一层的输出相当于对输入做了一次投影$W^TX+b$，那么为了让输出有更好的表现力，利于最终任务，我们能否在每一层中加入一个残差项呢？这个残差项跟何凯明的Res-Net不一样。我们的目的是使得输出有更好非线性表现，也就是相当于一个激活函数的作用，重要的是这个激活函数不需人为指定。至于是否会出现过拟合，梯度爆炸和梯度消失，结合BN层会产生哪些“化学反应”等问题，还需仔细琢磨一下。这也不失为一种创新的方法。</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-01-01T07:00:45.870Z" itemprop="dateUpdated">2020-01-01 15:00:45</time>
+</span><br>
+
+
+        
+        文章发布地址：<a href="/2019/04/13/Paper-Notes-5/" target="_blank" rel="external">http://yvanzh.top/2019/04/13/Paper-Notes-5/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yvanzh.top">
+            <img src="/img/avatar.jpg" alt="YvanZh">
+            YvanZh
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dimension-Reduction/">Dimension Reduction</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Manifold-Learning/">Manifold Learning</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&title=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&title=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/13/Paper-Notes-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/15/Journal-0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">引子</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/08/Hexo-Top/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo 之 Indigo 主题博客置顶</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment v" id="vcomments"></div>
+    <!-- <div class="comment" id="comment"></div> -->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+    <!-- <script src="//t1.aixinxi.net/o_1c3n4pim01nl3jg91b6l1kjtkvsa.js"></script> -->
+    <!-- <script src="/js/Valine.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cat.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            av: AV,
+            // el: '#comments',
+            el: '#vcomments',
+            emoticon_url: 'https://abelsu7.top/alu', //表情图片网址
+            emoticon_list: ["赞一个.png","坐等.png","长草.png","阴暗.png","邪恶.png","小眼睛.png","想一想.png","献黄瓜.png","献花.png","喜极而泣.png","无语.png","无所谓.png","无奈.png","投降.png","深思.png","期待.png","狂汗.png","蜡烛.png","看不见.png","惊喜.png","击掌.png","欢呼.png","得意.png","不出所料.png","观察.png"],//表情图片文件名
+            // notify: 'false' == 'false',
+            // verify: 'false' == 'false',
+            // notify: 'false',
+            // verify: 'false',
+            notify: false,
+            verify: false,
+            appId: "AhTK0SAX1OjJszPA4WWvRE26-gzGzoHsz",
+            appKey: "WOSP1qSGoeO32U7LzRh78Fhj",
+            avatar: "mp",
+            placeholder: "Write a comment",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢支持！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-item switch">切换</span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span>
+                        <a href="/atom.xml" target="_blank" class="rss" title="rss">
+                            <i class="icon icon-lg icon-rss"></i>
+                        </a>
+                    </span>
+                    
+                        <span>
+                            博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+                        </span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                YvanZh &copy;
+                    
+                        2018 -
+                            
+                                2020
+            </span>
+            <span>
+                
+                    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+                        暂无备案
+                    </a>
+                    <br>
+                    
+                        Power by
+                        <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+                        <a href="https://github.com/abelsu7/hexo-theme-indigo-plus" target="_blank">indigo plus</a>
+                        <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gobottom" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-comments"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&title=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&pic=http://yvanzh.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&title=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yvanzh.top/2019/04/13/Paper-Notes-5/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flexible Manifold Embedding:A Framework for Semi-Supervised and Unsupervised Dimension Reduction》 — YvanZh's Blog&url=http://yvanzh.top/2019/04/13/Paper-Notes-5/&via=http://yvanzh.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yvanzh.top/2019/04/13/Paper-Notes-5/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aQXKDMBBEUd//0mSbKgfl94ziFKOvFYXB6LFoNJJeL9yut7Y+f3fv9zPvx3dntjUZMmQ8lnEtG+ku+XXd6TVy3TcZMmScw7hLsF3HNSrpmwwZMmSQa0gj8SpDhgwZewOXdKgzBJQhQ4aMWhFbi1pSuK5f3+ZaXIYMGQ9k8Fn3zx//yfqGDBkyHsXoh2a6zNmJ19teyZAhYzSDB1xnUZOEeLrZQoYMGWcy+ORXbeKMIGuvQ4YMGbMZ/O9q3SWVJgfc9lOGDBmjGZ1HpqFM7t01uJQhQ8YkRhpnfIotvaZW4sqQIeNMBg9TXgzzgrn4CmTIkHEAY1c5SoZxte7+UvrKkCHjGEa6bECqYR7i/APwQ69kyJBxAGPbLB2GkSI5KJhlyJAxmpFuwqiVu2nIklcjQ4aMcxj879LykkzqkTPBnhEZMmQMZZDb+kM90qH0+3A7zpUhQ8ZQBi8pO5vAasucccTLkCFjKIMHblqU9mM3+AzIkCHjGEYKqO3RSp+IFiFkyJBxAINvdyAP4xsyaqEc1NMyZMgYxEgXHfn1tam6+HoZMmQMZVxhe+HGX0Q6tRdHrQwZMh7O6HQr/evOdNuGPW4yZMh4OON/h4adhQQZMmScxugHHx8Ikg1h6cScDBkyZJDArW2VIE8nMS1DhgwZZABHHpyGNR+MypAh4wQG31TBi9U0cDuTdzJkyJjN4LeRAF2P1vgSaS2aZciQMY7xBSCVYL4Y0HjdAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/node-waves@0.7.6/src/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
+<!-- <script async src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script> -->
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="/js/prism.js"></script>
+
+
+    <script src="/js/cursor.js"></script>
+
+
+
+
+</body>
+</html>
