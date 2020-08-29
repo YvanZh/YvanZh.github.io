@@ -35,7 +35,7 @@
   </entry>
   <entry>
     <title><![CDATA[Deep Self-Evolution Clustering]]></title>
-    <url>%2F2019%2F04%2F25%2Fpaper-notes-7%2F</url>
+    <url>%2F2019%2F04%2F25%2Fpaper-Notes-7%2F</url>
     <content type="text"><![CDATA[1 简介To be continue 如今的聚类任务的难点并不是在于方法，而是在于确定任务数据的预设聚类模式。 传统的聚类方法依然需要分步进行聚类。比如将特征提取得到的特征来做聚类，在做聚类之前，数据的特征就是已经固定好了，也就是说在做聚类的过程中，数据特征是一成不变，也就无法使得聚类产生更好的效果。 2 详情 DSEC]]></content>
       <categories>
         <category>Paper Notes</category>
