@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[2020秋招冲鸭！！！]]></title>
     <url>%2F2020%2F08%2F11%2FCoding%2F</url>
-    <content type="text"><![CDATA[一些有意思的题24点游戏题目描述问题描述：给出4个1-10的数字，通过加减乘除，得到数字为24就算胜利输入：4个1-10的数字。[数字允许重复，但每个数字仅允许使用一次，测试用例保证无异常数字]输出：true or false 输入描述: 输入4个int整数 输出描述: 返回能否得到24点，能输出true，不能输出false 示例1输入 7 2 1 10 输出 true 解答def p24(a): #返回条件 if len(a)== 1: if sum(a)== 24: return 1 else: return 0 #递归 for i in range(0,len(a)): for j in range(i+1,len(a)): p,q = a[i],a[j] for k in range(4): b = a[::] del b[j] del b[i] c = b[::] if k == 0: b.append(p+q) elif k == 1: b.append(p-q) c.append(q-p) elif k == 2: b.append(p*q) else: if q == 0: continue b.append(p/q) if p == 0: continue c.append(q/p) if p24(b) == 1 or p24(c)== 1: return 1 return 0 while True: try: a = list(map(int,input().split(&#39; &#39;))) if p24(a)==1: print(&#39;true&#39;) else: print(&#39;false&#39;) except: break]]></content>
+    <content type="text"><![CDATA[一些有意思的题24点游戏题目描述问题描述：给出4个1-10的数字，通过加减乘除，得到数字为24就算胜利输入：4个1-10的数字。[数字允许重复，但每个数字仅允许使用一次，测试用例保证无异常数字]输出：true or false 输入描述: 输入4个int整数 输出描述: 返回能否得到24点，能输出true，不能输出false 示例1输入 7 2 1 10 输出 true 解答 def p24(a): #返回条件 if len(a)== 1: if sum(a)== 24: return 1 else: return 0 #递归 for i in range(0,len(a)): for j in range(i+1,len(a)): p,q = a[i],a[j] for k in range(4): b = a[::] del b[j] del b[i] c = b[::] if k == 0: b.append(p+q) elif k == 1: b.append(p-q) c.append(q-p) elif k == 2: b.append(p*q) else: if q == 0: continue b.append(p/q) if p == 0: continue c.append(q/p) if p24(b) == 1 or p24(c)== 1: return 1 return 0 while True: try: a = list(map(int,input().split(&#39; &#39;))) if p24(a)==1: print(&#39;true&#39;) else: print(&#39;false&#39;) except: break]]></content>
       <categories>
         <category>Coding</category>
       </categories>
